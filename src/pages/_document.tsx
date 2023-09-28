@@ -15,7 +15,6 @@ export default function Document() {
         <meta name="author" content="miaslls" />
 
         <link rel="shortcut icon" href="img/logo.svg" type="image/svg+xml" />
-        <link rel="manifest" href="manifest.json" />
       </Head>
       <body>
         <Main />

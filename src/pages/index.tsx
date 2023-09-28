@@ -8,8 +8,6 @@ export default function Home() {
           MiaTask - Simple Task Management | Organize, Update, and Complete Tasks Effortlessly
         </title>
       </Head>
-
-      <p>Hello, Next.js!</p>
     </>
   );
 }

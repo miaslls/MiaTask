@@ -5,8 +5,6 @@
   --gray-medium: #9f9f9f;
   --gray-dark: #555555;
 
-  /* TODO: 🐞 font var definitions */
-
   --landscape-width: 20%;
 }
 
@@ -16,8 +14,6 @@ html * {
   user-select: none;
   scrollbar-width: thin;
   scrollbar-color: var(--gray-medium) var(--white);
-
-  /* border: 1px dotted var(--gray-medium); 👩‍💻🐞 */
 }
 
 *::-webkit-scrollbar {
