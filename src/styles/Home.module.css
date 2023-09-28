@@ -1,1 +1,14 @@
+.title {
+  display: flex;
+  gap: 0.5rem;
+}
 
+.title_logo {
+  width: 2rem;
+}
+
+.add_icon {
+  width: 2rem;
+  font-size: 1.75rem;
+  color: var(--gray-dark);
+}
