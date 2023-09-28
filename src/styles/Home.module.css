@@ -8,7 +8,12 @@
 }
 
 .add_icon {
-  width: 2rem;
-  font-size: 1.75rem;
+  width: 1.7rem;
+  font-size: smaller;
   color: var(--gray-dark);
+}
+
+.separator_icon {
+  width: 0.65rem;
+  font-size: x-small;
 }

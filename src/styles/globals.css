@@ -19,7 +19,7 @@ html * {
   border: 0;
   line-height: 1;
 
-  border: 1px dotted var(--gray-medium);
+  /* border: 1px dotted var(--gray-medium); */
 }
 
 button {
@@ -54,11 +54,6 @@ html {
 }
 
 body {
-  width: 100svw;
-  min-height: 100svh;
-  padding: 1rem;
-
-  background-image: linear-gradient(var(--white), var(--gray-light));
   font-family: var(--default-font);
   font-weight: var(--default-regular);
   color: var(--black);
@@ -66,7 +61,14 @@ body {
 
   scrollbar-width: thin;
   scrollbar-color: var(--gray-medium) var(--white);
+}
 
+.outer_container {
+  width: 100svw;
+  min-height: 100svh;
+  padding: 1rem;
+
+  background-image: linear-gradient(var(--white), var(--gray-light));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,11 +82,6 @@ footer {
   display: flex;
 }
 
-header {
-  justify-content: space-between;
-  font-size: 2rem;
-}
-
 h1 {
   font-size: inherit;
   font-weight: var(--default-light);
@@ -94,13 +91,26 @@ h1 span {
   font-weight: var(--default-bold);
 }
 
-a.text-link {
+a.text_link {
   color: var(--gray-dark);
   text-decoration: underline solid var(--gray-medium) 1px;
 }
 
+header {
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 2rem;
+}
+
+footer {
+  margin-top: 1rem;
+  justify-content: end;
+  font-size: smaller;
+  gap: 0.5rem;
+}
+
 @media screen and (orientation: landscape) {
-  a.text-link:hover {
+  a.text_link:hover {
     color: var(--gray-medium);
     cursor: default;
   }
