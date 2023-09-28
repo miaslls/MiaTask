@@ -14,8 +14,24 @@ html * {
   outline: none;
   box-sizing: border-box;
   user-select: none;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gray-medium) var(--white);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  line-height: 1;
+
+  border: 1px dotted var(--gray-medium);
+}
+
+button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 *::-webkit-scrollbar {
@@ -33,6 +49,10 @@ html * {
   border: 0.25rem solid var(--white);
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   width: 100svw;
   min-height: 100svh;
@@ -44,10 +64,34 @@ body {
   color: var(--black);
   font-size: 0.9rem;
 
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-medium) var(--white);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
+}
+
+header,
+main,
+footer {
+  width: 100%;
+  display: flex;
+}
+
+header {
+  justify-content: space-between;
+  font-size: 2rem;
+}
+
+h1 {
+  font-size: inherit;
+  font-weight: var(--default-light);
+}
+
+h1 span {
+  font-weight: var(--default-bold);
 }
 
 a.text-link {
@@ -59,5 +103,12 @@ a.text-link {
   a.text-link:hover {
     color: var(--gray-medium);
     cursor: default;
+  }
+
+  header,
+  main,
+  footer {
+    min-width: 20rem;
+    width: var(--landscape-width);
   }
 }
