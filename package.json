@@ -9,6 +9,9 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.3.1",
     "next": "latest",
@@ -17,11 +20,12 @@
     "react-dom": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
+    "@types/node": "^20.7.2",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
-    "typescript": "latest"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }
