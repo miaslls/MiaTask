@@ -47,7 +47,7 @@
   color: var(--gray-medium);
 }
 
-.task_completed > .task_title {
+.task_completed > .task_text {
   text-decoration: line-through solid var(--gray-medium) 1px;
 }
 

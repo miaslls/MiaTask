@@ -51,7 +51,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={styles.task_title}>twinkle twinkle little star</div>
+              <div className={styles.task_text}>twinkle twinkle little star</div>
 
               <div className={styles.task_icon}>
                 <i className="ri-star-fill"></i>
@@ -80,7 +80,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={styles.task_title}>task with options open</div>
+              <div className={styles.task_text}>task with options open</div>
             </li>
 
             <li className={styles.task}>
@@ -93,7 +93,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={styles.task_title}>plain ol&apos; regular task</div>
+              <div className={styles.task_text}>plain ol&apos; regular task</div>
             </li>
 
             <li className={`${styles.task} ${styles.task_completed}`}>
@@ -106,7 +106,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={styles.task_title}>completed task, good job!</div>
+              <div className={styles.task_text}>completed task, good job!</div>
             </li>
           </ul>
         </main>
