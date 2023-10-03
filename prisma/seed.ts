@@ -1,29 +1,39 @@
+// ❗ npx prisma db seed
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const taskData = [
+  {
+    text: 'To create a task, click +',
+    createdAt: new Date('2000-01-01T00:00:02'),
+    updatedAt: new Date('2000-01-01T00:00:02'),
+  },
+  {
+    text: 'To update/remove a task, click ⫶',
+    createdAt: new Date('2000-01-01T00:00:01'),
+    updatedAt: new Date('2000-01-01T00:00:01'),
+  },
+  {
+    text: 'To complete a task, click ◻',
+    createdAt: new Date('2000-01-01T00:00:00'),
+    updatedAt: new Date('2000-01-01T00:00:00'),
+  },
+];
+
 async function main() {
-  const tasks = [
-    {
-      text: 'To create a task, click +',
-      createdAt: new Date('2000-01-01T00:00:02'),
-      updatedAt: new Date('2000-01-01T00:00:02'),
-    },
-    {
-      text: 'To edit/remove/star a task, click ⫶',
-      createdAt: new Date('2000-01-01T00:00:01'),
-      updatedAt: new Date('2000-01-01T00:00:01'),
-    },
-    {
-      text: 'To complete a task, click ◻',
-      createdAt: new Date('2000-01-01T00:00:00'),
-      updatedAt: new Date('2000-01-01T00:00:00'),
-    },
-  ];
+  console.log(`Start seeding ...`);
 
-  const createArr = tasks.map((task) => prisma.task.create({ data: task }));
+  await prisma.$transaction(async (tx) => {
+    for (const t of taskData) {
+      const task = await tx.task.create({ data: t });
 
-  await prisma.$transaction(createArr);
+      console.log(`Created task with id: ${task.id}`);
+    }
+
+    console.log(`Seeding finished.`);
+  });
 }
 
 main()
