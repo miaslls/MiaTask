@@ -1,8 +1,22 @@
 import styles from '@/styles/home.module.css';
+
 import Head from 'next/head';
 import Link from 'next/link';
+import { GetServerSideProps } from 'next';
 
-export default function Home() {
+import prisma from '@/lib/prisma';
+import { Task } from '@prisma/client';
+import TaskItem from '@/components/task-item';
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const tasks = await prisma.task.findMany({
+    orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
+  });
+
+  return { props: { tasks: JSON.parse(JSON.stringify(tasks)) } };
+};
+
+export default function Home({ tasks }: { tasks: Task[] }) {
   return (
     <>
       <Head>
@@ -29,7 +43,7 @@ export default function Home() {
 
         <main>
           <ul className={styles.tasklist}>
-            <li className={`${styles.task} ${styles.task_input_wrapper}`}>
+            <li className={styles.task_input_wrapper}>
               <input
                 type="text"
                 name="title"
@@ -41,73 +55,9 @@ export default function Home() {
               </span>
             </li>
 
-            <li className={`${styles.task} ${styles.task_starred}`}>
-              <div className={styles.task_icons}>
-                <div className={styles.task_icon}>
-                  <i className="ri-checkbox-blank-line"></i>
-                </div>
-                <div className={styles.task_icon}>
-                  <i className="ri-more-2-fill"></i>
-                </div>
-              </div>
-
-              <div className={styles.task_text}>twinkle twinkle little star</div>
-
-              <div className={styles.task_icon}>
-                <i className="ri-star-fill"></i>
-              </div>
-            </li>
-
-            <li className={styles.task}>
-              <div className={styles.task_icons}>
-                <div className={styles.task_icon}>
-                  <i className="ri-checkbox-blank-line"></i>
-                </div>
-                <div className={styles.task_icon}>
-                  <i className="ri-more-2-fill"></i>
-                </div>
-              </div>
-
-              <div className={styles.task_options}>
-                <div className={styles.task_icon}>
-                  <i className="ri-edit-line"></i>
-                </div>
-                <div className={styles.task_icon}>
-                  <i className="ri-delete-bin-2-line"></i>
-                </div>
-                <div className={styles.task_icon}>
-                  <i className="ri-star-line"></i>
-                </div>
-              </div>
-
-              <div className={styles.task_text}>task with options open</div>
-            </li>
-
-            <li className={styles.task}>
-              <div className={styles.task_icons}>
-                <div className={styles.task_icon}>
-                  <i className="ri-checkbox-blank-line"></i>
-                </div>
-                <div className={styles.task_icon}>
-                  <i className="ri-more-2-fill"></i>
-                </div>
-              </div>
-
-              <div className={styles.task_text}>plain ol&apos; regular task</div>
-            </li>
-
-            <li className={`${styles.task} ${styles.task_completed}`}>
-              <div className={styles.task_icons}>
-                <div className={styles.task_icon}>
-                  <i className="ri-checkbox-line"></i>
-                </div>
-                <div className={styles.task_icon}>
-                  <i className="ri-more-2-fill"></i>
-                </div>
-              </div>
-
-              <div className={styles.task_text}>completed task, good job!</div>
-            </li>
+            {tasks.map((task) => (
+              <TaskItem task={task} key={`task-item-${task.id}`} />
+            ))}
           </ul>
         </main>
 
