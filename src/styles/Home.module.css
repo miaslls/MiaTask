@@ -13,8 +13,7 @@
   color: var(--gray-dark);
 }
 
-.tasklist,
-.task {
+.tasklist {
   width: 100%;
   display: flex;
 }
@@ -24,36 +23,12 @@
   gap: 0.5rem;
 }
 
-.task {
-  gap: 0.5rem;
-}
-
-.task_icons,
-.task_options {
-  display: flex;
-  gap: 0.1rem;
-}
-
-.task_icon {
-  width: 0.9rem;
-  color: var(--gray-dark);
-}
-
-.task_starred {
-  font-weight: var(--default-bold);
-}
-
-.task_completed * {
-  color: var(--gray-medium);
-}
-
-.task_completed > .task_text {
-  text-decoration: line-through solid var(--gray-medium) 1px;
-}
-
 /*  */
 
 .task_input_wrapper {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
   margin-bottom: 0.25rem;
 }
 
@@ -82,8 +57,7 @@
 
 @media screen and (orientation: landscape) {
   .add_icon:hover,
-  .task_input_icon:hover,
-  .task_icon:hover {
+  .task_input_icon:hover {
     color: var(--gray-medium);
     cursor: default;
   }

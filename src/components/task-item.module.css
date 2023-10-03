@@ -1,0 +1,35 @@
+.task {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.task_icons,
+.task_options {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.task_icon {
+  width: 0.9rem;
+  color: var(--gray-dark);
+}
+
+.task_starred {
+  font-weight: var(--default-bold);
+}
+
+.task_completed * {
+  color: var(--gray-medium);
+}
+
+.task_completed > .task_text {
+  text-decoration: line-through solid var(--gray-medium) 1px;
+}
+
+@media screen and (orientation: landscape) {
+  .task_icon:hover {
+    color: var(--gray-medium);
+    cursor: default;
+  }
+}
