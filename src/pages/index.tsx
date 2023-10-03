@@ -1,13 +1,13 @@
 import styles from '@/styles/home.module.css';
 
 import Head from 'next/head';
-import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import { FormEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import { Task } from '@prisma/client';
 import TaskItem from '@/components/task-item';
+import Footer from '@/components/footer';
 
 export default function Home({ tasks }: { tasks: Task[] }) {
   const [tasklist, setTasklist] = useState(tasks);
@@ -28,6 +28,7 @@ export default function Home({ tasks }: { tasks: Task[] }) {
       const data = await response.json();
       const indexToInsert = tasklist.findLastIndex((task) => task.starred) + 1;
 
+      // FIXME: swr
       setTasklist(tasklist.toSpliced(indexToInsert, 0, data.task));
       setInputText('');
     } catch (e) {
@@ -85,32 +86,7 @@ export default function Home({ tasks }: { tasks: Task[] }) {
           </ul>
         </main>
 
-        <footer>
-          <Link className="text_link" href="https://github.com/miaslls" target="_blank">
-            @miaslls
-          </Link>
-          <span>2023</span>
-
-          <span className={styles.separator_icon}>
-            <i className="ri-infinity-line"></i>
-          </span>
-
-          <Link
-            className="text_link"
-            href="https://fonts.google.com/specimen/Roboto+Mono"
-            target="_blank"
-          >
-            font
-          </Link>
-
-          <span className={styles.separator_icon}>
-            <i className="ri-infinity-line"></i>
-          </span>
-
-          <Link className="text_link" href="https://remixicon.com" target="_blank">
-            icons
-          </Link>
-        </footer>
+        <Footer />
       </div>
     </>
   );
