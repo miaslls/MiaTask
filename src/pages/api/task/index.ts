@@ -1,16 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
 import { Prisma, Task } from '@prisma/client';
+import getErrorMessage from '@api/lib/getErrorMessage';
 
-type GetResponseData = {
-  tasks: Task[];
-};
-
-type PostResponseData = {
-  task: Task;
-};
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       return handleGET(res);
@@ -26,26 +19,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-async function handleGET(res: NextApiResponse<GetResponseData>) {
+async function handleGET(res: NextApiResponse<{ tasks: Task[] } | { message: string }>) {
   try {
     const tasks = await prisma.task.findMany({
       orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
     });
 
     res.status(201).send({ tasks });
-  } catch (error) {
-    console.error(error);
-    res.status(500);
+  } catch (err) {
+    console.error(err);
+    const message = getErrorMessage(err);
+
+    res.status(500).send({ message });
   }
 }
 
-async function handlePOST(data: Prisma.TaskCreateInput, res: NextApiResponse<PostResponseData>) {
+async function handlePOST(
+  data: Prisma.TaskCreateInput,
+  res: NextApiResponse<{ task: Task } | { message: string }>,
+) {
   try {
     const task = await prisma.task.create({ data });
 
     res.status(201).send({ task });
-  } catch (error) {
-    console.error(error);
-    res.status(500);
+  } catch (err) {
+    console.error(err);
+    const message = getErrorMessage(err);
+
+    res.status(500).send({ message });
   }
 }
