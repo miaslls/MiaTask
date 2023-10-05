@@ -3,9 +3,12 @@
 :root {
   --white: #ececec;
   --black: #0c0c0c;
+  --red: #a81c24;
+  --green: #4fb34b;
   --gray-light: #e1e1e1;
   --gray-medium: #9f9f9f;
   --gray-dark: #555555;
+  --white-transluscent: #ecececec;
 
   --landscape-width: 20%;
 }

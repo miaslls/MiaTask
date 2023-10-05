@@ -14,17 +14,24 @@ import Footer from '@/components/footer';
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [inputText, setInputText] = useState('');
+
   const toastOptions: DefaultToastOptions = {
     style: {
-      background: '#ecececec',
-      borderRadius: 0,
+      background: 'var(--white-transluscent)',
       color: 'var(--black)',
+      borderRadius: 0,
     },
     success: {
-      duration: 1500,
+      iconTheme: {
+        primary: 'var(--green)',
+        secondary: 'var(--white-transluscent)',
+      },
     },
     error: {
-      duration: 4000,
+      iconTheme: {
+        primary: 'var(--red)',
+        secondary: 'var(--white-transluscent)',
+      },
     },
   };
 
@@ -51,8 +58,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       toast.success('Task created!');
       mutate(key);
     } else {
-      const data = await response.json();
-      toast.error(data.message);
+      const error = await response.json();
+      toast.error(error.message);
     }
   }
 
