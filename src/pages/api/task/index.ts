@@ -10,10 +10,6 @@ type PostResponseData = {
   task: Task;
 };
 
-type CustomError = {
-  message: string;
-};
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
@@ -30,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-async function handleGET(res: NextApiResponse<GetResponseData | CustomError>) {
+async function handleGET(res: NextApiResponse<GetResponseData>) {
   try {
     const tasks = await prisma.task.findMany({
       orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
@@ -39,20 +35,17 @@ async function handleGET(res: NextApiResponse<GetResponseData | CustomError>) {
     res.status(201).send({ tasks });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: 'Internal Server Error' });
+    res.status(500);
   }
 }
 
-async function handlePOST(
-  data: Prisma.TaskCreateInput,
-  res: NextApiResponse<PostResponseData | CustomError>,
-) {
+async function handlePOST(data: Prisma.TaskCreateInput, res: NextApiResponse<PostResponseData>) {
   try {
     const task = await prisma.task.create({ data });
 
     res.status(201).send({ task });
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: 'Internal Server Error' });
+    res.status(500);
   }
 }
