@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma';
 import { FormEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig, mutate } from 'swr';
+import { Toaster, toast } from 'react-hot-toast';
 
 import { Task } from '@prisma/client';
 import TaskList from '@/components/task-list';
@@ -33,12 +34,12 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       body: JSON.stringify({ text: inputText }),
     });
 
-    // TODO: 🔻
-    if (!response.ok) {
-      console.log({ status: response.status });
+    if (response.ok) {
+      toast.success('Task created!');
+      mutate(key);
+    } else {
+      toast.error('Something happened...');
     }
-
-    mutate(key);
   }
 
   return (
@@ -49,6 +50,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         </title>
       </Head>
       <div className="outer_container">
+        <Toaster position="top-center" reverseOrder={false} />
         <header>
           <div className={styles.title}>
             <div className={styles.title_logo}>
