@@ -83,10 +83,6 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
             <SWRConfig value={{ fallback }}>
               <TaskList />
             </SWRConfig>
-
-            {/* {tasks.map((task) => (
-              <TaskItem task={task} key={`task-item-${task.id}`} />
-            ))} */}
           </ul>
         </main>
 
