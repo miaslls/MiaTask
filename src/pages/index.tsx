@@ -4,37 +4,37 @@ import Head from 'next/head';
 import prisma from '@/lib/prisma';
 import { FormEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
+import { SWRConfig } from 'swr';
 
 import { Task } from '@prisma/client';
-import TaskItem from '@/components/task-item';
+import TaskList from '@/components/task-list';
 import Footer from '@/components/footer';
 
-export default function Home({ tasks }: { tasks: Task[] }) {
-  const [tasklist, setTasklist] = useState(tasks);
+export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [inputText, setInputText] = useState('');
 
-  async function submitCreateData(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setShowCreateForm(false);
-
-    try {
-      const response = await fetch('/api/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: inputText }),
-      });
-
-      const data = await response.json();
-      const indexToInsert = tasklist.findLastIndex((task) => task.starred) + 1;
-
-      // FIXME: swr
-      setTasklist(tasklist.toSpliced(indexToInsert, 0, data.task));
-      setInputText('');
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  //   async function submitCreateData(e: FormEvent<HTMLFormElement>) {
+  //     e.preventDefault();
+  //     setShowCreateForm(false);
+  //
+  //     try {
+  //       const response = await fetch('/api/create', {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify({ text: inputText }),
+  //       });
+  //
+  //       const data = await response.json();
+  //       const indexToInsert = tasklist.findLastIndex((task) => task.starred) + 1;
+  //
+  //       // FIXME: swr
+  //       setTasklist(tasklist.toSpliced(indexToInsert, 0, data.task));
+  //       setInputText('');
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //   }
 
   return (
     <>
@@ -63,7 +63,8 @@ export default function Home({ tasks }: { tasks: Task[] }) {
         <main>
           <ul className={styles.tasklist}>
             {showCreateForm && (
-              <form className={styles.task_input_wrapper} onSubmit={submitCreateData}>
+              // <form className={styles.task_input_wrapper} onSubmit={submitCreateData}>
+              <form className={styles.task_input_wrapper}>
                 <input
                   autoFocus
                   required
@@ -79,10 +80,13 @@ export default function Home({ tasks }: { tasks: Task[] }) {
                 </button>
               </form>
             )}
+            <SWRConfig value={{ fallback }}>
+              <TaskList />
+            </SWRConfig>
 
-            {tasklist.map((task) => (
+            {/* {tasks.map((task) => (
               <TaskItem task={task} key={`task-item-${task.id}`} />
-            ))}
+            ))} */}
           </ul>
         </main>
 
@@ -97,5 +101,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
     orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
   });
 
-  return { props: { tasks: JSON.parse(JSON.stringify(tasks)) } };
+  return {
+    props: {
+      fallback: {
+        '/api/task': JSON.parse(JSON.stringify(tasks)),
+      },
+    },
+  };
 };
