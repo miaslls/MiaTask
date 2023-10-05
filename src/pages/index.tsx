@@ -4,7 +4,7 @@ import Head from 'next/head';
 import prisma from '@/lib/prisma';
 import { FormEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { SWRConfig } from 'swr';
+import { SWRConfig, mutate } from 'swr';
 
 import { Task } from '@prisma/client';
 import TaskList from '@/components/task-list';
@@ -14,27 +14,32 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [inputText, setInputText] = useState('');
 
-  //   async function submitCreateData(e: FormEvent<HTMLFormElement>) {
-  //     e.preventDefault();
-  //     setShowCreateForm(false);
-  //
-  //     try {
-  //       const response = await fetch('/api/create', {
-  //         method: 'POST',
-  //         headers: { 'Content-Type': 'application/json' },
-  //         body: JSON.stringify({ text: inputText }),
-  //       });
-  //
-  //       const data = await response.json();
-  //       const indexToInsert = tasklist.findLastIndex((task) => task.starred) + 1;
-  //
-  //       // FIXME: swr
-  //       setTasklist(tasklist.toSpliced(indexToInsert, 0, data.task));
-  //       setInputText('');
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //   }
+  function handleCreateForm() {
+    if (showCreateForm) {
+      setInputText('');
+    }
+    setShowCreateForm(!showCreateForm);
+  }
+
+  async function submitCreateData(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    handleCreateForm();
+
+    const key = '/api/task';
+
+    const response = await fetch(key, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: inputText }),
+    });
+
+    // TODO: 🔻
+    if (!response.ok) {
+      console.log({ status: response.status });
+    }
+
+    mutate(key);
+  }
 
   return (
     <>
@@ -55,7 +60,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
             </h1>
           </div>
 
-          <div className={styles.add_icon} onClick={() => setShowCreateForm(!showCreateForm)}>
+          <div className={styles.add_icon} onClick={handleCreateForm}>
             <i className={showCreateForm ? 'ri-close-circle-line' : 'ri-add-circle-line'}></i>
           </div>
         </header>
@@ -63,8 +68,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <main>
           <ul className={styles.tasklist}>
             {showCreateForm && (
-              // <form className={styles.task_input_wrapper} onSubmit={submitCreateData}>
-              <form className={styles.task_input_wrapper}>
+              <form className={styles.task_input_wrapper} onSubmit={submitCreateData}>
                 <input
                   autoFocus
                   required
@@ -75,11 +79,13 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
                   placeholder="Type your task here..."
                   onChange={(e) => setInputText(e.target.value)}
                 />
+
                 <button className={styles.task_input_icon} type="submit">
                   <i className="ri-arrow-right-s-line"></i>
                 </button>
               </form>
             )}
+
             <SWRConfig value={{ fallback }}>
               <TaskList />
             </SWRConfig>
