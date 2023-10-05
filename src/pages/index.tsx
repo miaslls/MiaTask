@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma';
 import { FormEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig, mutate } from 'swr';
-import { Toaster, toast } from 'react-hot-toast';
+import { Toaster, toast, DefaultToastOptions } from 'react-hot-toast';
 
 import { Task } from '@prisma/client';
 import TaskList from '@/components/task-list';
@@ -14,6 +14,19 @@ import Footer from '@/components/footer';
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [inputText, setInputText] = useState('');
+  const toastOptions: DefaultToastOptions = {
+    style: {
+      background: '#ecececec',
+      borderRadius: 0,
+      color: 'var(--black)',
+    },
+    success: {
+      duration: 1500,
+    },
+    error: {
+      duration: 4000,
+    },
+  };
 
   function handleCreateForm() {
     if (showCreateForm) {
@@ -38,7 +51,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       toast.success('Task created!');
       mutate(key);
     } else {
-      toast.error('Something happened...');
+      const data = await response.json();
+      toast.error(data.message);
     }
   }
 
@@ -50,7 +64,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         </title>
       </Head>
       <div className="outer_container">
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} toastOptions={toastOptions} />
+
         <header>
           <div className={styles.title}>
             <div className={styles.title_logo}>
