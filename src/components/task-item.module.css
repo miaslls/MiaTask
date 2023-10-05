@@ -32,4 +32,13 @@
     color: var(--gray-medium);
     cursor: default;
   }
+
+  .task_text {
+    user-select: text;
+  }
+
+  .task_text::selection {
+    background: var(--gray-dark);
+    color: var(--gray-light);
+  }
 }
