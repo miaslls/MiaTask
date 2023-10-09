@@ -1,8 +1,9 @@
 import styles from '@/styles/home.module.css';
 
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
+import { dismissableErrorToast } from '@/lib/toastUtils';
 
 export default function TaskForm({
   inputText,
@@ -17,6 +18,8 @@ export default function TaskForm({
     e.preventDefault();
     handleCreateForm();
 
+    const toastId = toast.loading('Loading...', { duration: Infinity });
+
     const key = '/api/task';
 
     const response = await fetch(key, {
@@ -25,12 +28,14 @@ export default function TaskForm({
       body: JSON.stringify({ text: inputText }),
     });
 
+    toast.dismiss(toastId);
+
     if (response.ok) {
       toast.success('Task created!');
       mutate(key);
     } else {
       const error = await response.json();
-      toast.error(error.message);
+      dismissableErrorToast(error.message);
     }
   }
 

@@ -6,7 +6,8 @@ import { Task } from '@prisma/client';
 import { ChangeEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
-import { Toaster, DefaultToastOptions } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import { toastOptions } from '@/lib/toastUtils';
 
 import TaskList from '@/components/task-list';
 import TaskForm from '@/components/task-form';
@@ -29,26 +30,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [inputText, setInputText] = useState('');
-
-  const toastOptions: DefaultToastOptions = {
-    style: {
-      background: 'var(--white-transluscent)',
-      color: 'var(--black)',
-      borderRadius: 0,
-    },
-    success: {
-      iconTheme: {
-        primary: 'var(--green)',
-        secondary: 'var(--white-transluscent)',
-      },
-    },
-    error: {
-      iconTheme: {
-        primary: 'var(--red)',
-        secondary: 'var(--white-transluscent)',
-      },
-    },
-  };
 
   function handleCreateForm() {
     if (showCreateForm) {

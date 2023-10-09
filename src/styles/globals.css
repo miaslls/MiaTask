@@ -112,8 +112,19 @@ footer {
   gap: 0.5rem;
 }
 
+.toast_dismissable {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.toast_dismissable > i {
+  color: var(--gray-dark);
+}
+
 @media screen and (orientation: landscape) {
-  a.text_link:hover {
+  a.text_link:hover,
+  .toast_dismissable > i:hover {
     color: var(--gray-medium);
     cursor: default;
   }
