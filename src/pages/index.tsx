@@ -2,14 +2,29 @@ import styles from '@/styles/home.module.css';
 
 import Head from 'next/head';
 import prisma from '@/lib/prisma';
-import { FormEvent, useState } from 'react';
-import { GetServerSideProps } from 'next';
-import { SWRConfig, mutate } from 'swr';
-import { Toaster, toast, DefaultToastOptions } from 'react-hot-toast';
-
 import { Task } from '@prisma/client';
+import { ChangeEvent, useState } from 'react';
+import { GetServerSideProps } from 'next';
+import { SWRConfig } from 'swr';
+import { Toaster, DefaultToastOptions } from 'react-hot-toast';
+
 import TaskList from '@/components/task-list';
+import TaskForm from '@/components/task-form';
 import Footer from '@/components/footer';
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const tasks = await prisma.task.findMany({
+    orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
+  });
+
+  return {
+    props: {
+      fallback: {
+        '/api/task': JSON.parse(JSON.stringify(tasks)),
+      },
+    },
+  };
+};
 
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -42,25 +57,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
     setShowCreateForm(!showCreateForm);
   }
 
-  async function submitCreateData(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    handleCreateForm();
-
-    const key = '/api/task';
-
-    const response = await fetch(key, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: inputText }),
-    });
-
-    if (response.ok) {
-      toast.success('Task created!');
-      mutate(key);
-    } else {
-      const error = await response.json();
-      toast.error(error.message);
-    }
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setInputText(e.target.value);
   }
 
   return (
@@ -70,6 +68,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
           MiaTask - Simple Task Management | Organize, Update, and Complete Tasks Effortlessly
         </title>
       </Head>
+
       <div className="outer_container">
         <Toaster position="top-center" reverseOrder={false} toastOptions={toastOptions} />
 
@@ -92,22 +91,11 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <main>
           <ul className={styles.tasklist}>
             {showCreateForm && (
-              <form className={styles.task_input_wrapper} onSubmit={submitCreateData}>
-                <input
-                  autoFocus
-                  required
-                  type="text"
-                  name="text"
-                  value={inputText}
-                  className={styles.task_input}
-                  placeholder="Type your task here..."
-                  onChange={(e) => setInputText(e.target.value)}
-                />
-
-                <button className={styles.task_input_icon} type="submit">
-                  <i className="ri-arrow-right-s-line"></i>
-                </button>
-              </form>
+              <TaskForm
+                inputText={inputText}
+                handleChange={handleChange}
+                handleCreateForm={handleCreateForm}
+              />
             )}
 
             <SWRConfig value={{ fallback }}>
@@ -121,17 +109,3 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const tasks = await prisma.task.findMany({
-    orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
-  });
-
-  return {
-    props: {
-      fallback: {
-        '/api/task': JSON.parse(JSON.stringify(tasks)),
-      },
-    },
-  };
-};
