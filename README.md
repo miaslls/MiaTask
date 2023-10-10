@@ -3,6 +3,7 @@
 ## 📃 backlog
 
 - ⬛ component function types
+- ⬛ task overflow (... / expand 🔻)
 
   ### completed
 

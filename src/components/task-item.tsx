@@ -1,7 +1,16 @@
 import styles from './styles/task-item.module.css';
+
 import { Task } from '@prisma/client';
 
-export default function TaskItem({ task }: { task: Task }) {
+export default function TaskItem({
+  task,
+  activeTaskId,
+  handleActiveTask,
+}: {
+  task: Task;
+  activeTaskId: string | null;
+  handleActiveTask(taskId: string): void;
+}) {
   return (
     <li
       className={`${styles.task} ${task.starred && styles.task_starred} ${
@@ -12,12 +21,13 @@ export default function TaskItem({ task }: { task: Task }) {
         <div className={styles.task_icon}>
           <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
         </div>
-        <div className={styles.task_icon}>
+        <div className={styles.task_icon} onClick={() => handleActiveTask(task.id)}>
           <i className="ri-more-2-fill"></i>
         </div>
       </div>
 
-      {/* <div className={styles.task_options}>
+      {activeTaskId === task.id && (
+        <div className={styles.task_options}>
           <div className={styles.task_icon}>
             <i className="ri-edit-line"></i>
           </div>
@@ -27,7 +37,8 @@ export default function TaskItem({ task }: { task: Task }) {
           <div className={styles.task_icon}>
             <i className="ri-star-line"></i>
           </div>
-        </div> */}
+        </div>
+      )}
 
       <div className={styles.task_text}>{task.text}</div>
 
