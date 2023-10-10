@@ -13,9 +13,8 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.3.1",
-    "next": "latest",
-    "prisma": "^5.3.1",
+    "@prisma/client": "^5.4.2",
+    "next": "^13.5.4",
     "react": "latest",
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
@@ -27,6 +26,7 @@
     "@types/react-dom": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
+    "prisma": "^5.4.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }
