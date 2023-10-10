@@ -24,7 +24,9 @@ export const dismissableErrorToast = (message: string) => {
   return toast.error(
     (t) => (
       <div className="toast_dismissable">
-        {message}
+        <span>
+          <strong>Error:</strong> {message}
+        </span>
         <i className="ri-close-line" onClick={() => toast.dismiss(t.id)}></i>
       </div>
     ),

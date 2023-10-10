@@ -18,7 +18,7 @@ export default function TaskForm({
     e.preventDefault();
     handleCreateForm();
 
-    const toastId = toast.loading('Loading...', { duration: Infinity });
+    const toastId = toast.loading('Loading...');
 
     const key = '/api/task';
 
@@ -28,14 +28,13 @@ export default function TaskForm({
       body: JSON.stringify({ text: inputText }),
     });
 
-    toast.dismiss(toastId);
-
     if (response.ok) {
-      toast.success('Task created!');
+      toast.success('Task created!', { id: toastId });
       mutate(key);
     } else {
       const error = await response.json();
       dismissableErrorToast(error.message);
+      toast.dismiss(toastId);
     }
   }
 
