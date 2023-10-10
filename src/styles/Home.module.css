@@ -1,18 +1,3 @@
-.title {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.title_logo {
-  width: 2rem;
-}
-
-.add_icon {
-  width: 1.7rem;
-  font-size: smaller;
-  color: var(--gray-dark);
-}
-
 .tasklist {
   width: 100%;
   display: flex;

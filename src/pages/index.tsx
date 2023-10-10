@@ -9,6 +9,7 @@ import { SWRConfig } from 'swr';
 import { Toaster } from 'react-hot-toast';
 import { toastOptions } from '@/lib/toastUtils';
 
+import Header from '@/components/header';
 import TaskList from '@/components/task-list';
 import TaskForm from '@/components/task-form';
 import Footer from '@/components/footer';
@@ -53,21 +54,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       <div className="outer_container">
         <Toaster position="top-center" reverseOrder={false} toastOptions={toastOptions} />
 
-        <header>
-          <div className={styles.title}>
-            <div className={styles.title_logo}>
-              <i className="ri-list-check-3"></i>
-            </div>
-
-            <h1>
-              Mia<span>Task</span>
-            </h1>
-          </div>
-
-          <div className={styles.add_icon} onClick={handleCreateForm}>
-            <i className={showCreateForm ? 'ri-close-circle-line' : 'ri-add-circle-line'}></i>
-          </div>
-        </header>
+        <Header showForm={showCreateForm} handleForm={handleCreateForm} />
 
         <main>
           <ul className={styles.tasklist}>
