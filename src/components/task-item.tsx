@@ -5,19 +5,24 @@ import { toast } from 'react-hot-toast';
 import { Task } from '@prisma/client';
 import { dismissableErrorToast } from '@/lib/toastUtils';
 
-async function toggleCompleteTask(id: string) {
+async function toggleTaskProperty(
+  id: string,
+  property: 'complete' | 'star',
+  handleActiveTask: CallableFunction,
+) {
+  handleActiveTask(null);
   const toastId = toast.loading('Loading...');
 
-  const key_task = '/api/task';
-  const key_complete = `/api/complete/${id}`;
+  const tasklist = '/api/task';
+  const key = `/api/${property}/${id}`;
 
-  const response = await fetch(key_complete, {
+  const response = await fetch(key, {
     method: 'PATCH',
   });
 
   if (response.ok) {
     toast.success('Done!', { id: toastId });
-    mutate(key_task);
+    mutate(tasklist);
   } else {
     const error = await response.json();
     dismissableErrorToast(error.message);
@@ -41,7 +46,10 @@ export default function TaskItem({
       }`}
     >
       <div className={styles.task_icons}>
-        <div className={styles.task_icon} onClick={() => toggleCompleteTask(task.id)}>
+        <div
+          className={styles.task_icon}
+          onClick={() => toggleTaskProperty(task.id, 'complete', handleActiveTask)}
+        >
           <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
         </div>
         <div className={styles.task_icon} onClick={() => handleActiveTask(task.id)}>
@@ -57,16 +65,24 @@ export default function TaskItem({
           <div className={styles.task_icon}>
             <i className="ri-delete-bin-2-line"></i>
           </div>
-          <div className={styles.task_icon}>
-            <i className="ri-star-line"></i>
-          </div>
+          {!task.starred && (
+            <div
+              className={styles.task_icon}
+              onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
+            >
+              <i className="ri-star-line"></i>
+            </div>
+          )}
         </div>
       )}
 
       <div className={styles.task_text}>{task.text}</div>
 
       {task.starred && (
-        <div className={styles.task_icon}>
+        <div
+          className={styles.task_icon}
+          onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
+        >
           <i className="ri-star-fill"></i>
         </div>
       )}

@@ -6,7 +6,7 @@ import { useState } from 'react';
 export default function TaskList() {
   const [activeTaskId, setActiveTaskId] = useState<string | null>(null);
 
-  const handleActiveTask = (taskId: string) => {
+  const handleActiveTask = (taskId: string | null) => {
     if (activeTaskId === taskId) {
       setActiveTaskId(null);
     } else {

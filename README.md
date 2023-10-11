@@ -4,6 +4,7 @@
 
 - ⬛ component function types
 - ⬛ task overflow (... / expand 🔻)
+- ⬛ extract repository (prisma functions)
 
   ### completed
 
