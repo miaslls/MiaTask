@@ -30,7 +30,7 @@ async function removeTask(id: string, handleShowModal: CallableFunction) {
 }
 
 export type ShowModal = {
-  type: 'detail' | 'edit' | 'delete';
+  type: 'detail' | 'delete';
   task: Task;
 } | null;
 
@@ -84,7 +84,8 @@ export default function TaskList() {
       {showModal && (
         <Modal closeModal={() => handleShowModal(null)}>
           <div className={styles.container}>
-            {showModal.type !== 'edit' && <div className={styles.text}>{showModal.task.text}</div>}
+            <div className={styles.text}>{showModal.task.text}</div>
+
             {showModal.type === 'delete' && (
               <>
                 <div className={styles.confirm_delete}>

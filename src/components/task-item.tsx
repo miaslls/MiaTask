@@ -68,15 +68,14 @@ export default function TaskItem({
           >
             <i className="ri-eye-2-line"></i>
           </div>
-          <div className={styles.task_icon}>
-            <i className="ri-edit-line"></i>
-          </div>
+
           <div
             className={styles.task_icon}
             onClick={() => handleShowModal({ type: 'delete', task })}
           >
             <i className="ri-delete-bin-2-line"></i>
           </div>
+
           {!task.starred && (
             <div
               className={styles.task_icon}
