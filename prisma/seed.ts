@@ -11,12 +11,12 @@ const taskData = [
     updatedAt: new Date('2000-01-01T00:00:02'),
   },
   {
-    text: 'To update/remove a task, click ⫶',
+    text: 'To complete a task, click ◻',
     createdAt: new Date('2000-01-01T00:00:01'),
     updatedAt: new Date('2000-01-01T00:00:01'),
   },
   {
-    text: 'To complete a task, click ◻',
+    text: 'To view more options, click ⫶',
     createdAt: new Date('2000-01-01T00:00:00'),
     updatedAt: new Date('2000-01-01T00:00:00'),
   },
