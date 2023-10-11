@@ -3,6 +3,7 @@ import { DefaultToastOptions, toast } from 'react-hot-toast';
 export const toastOptions: DefaultToastOptions = {
   style: {
     background: 'var(--white-translucent)',
+    boxShadow: '0.175rem 0.175rem var(--gray-translucent)',
     color: 'var(--black)',
     borderRadius: 0,
   },
