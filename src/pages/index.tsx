@@ -1,4 +1,4 @@
-import styles from '@/styles/home.module.css';
+import styles from '../styles/home.module.css';
 
 import Head from 'next/head';
 import prisma from '@/lib/prisma';
