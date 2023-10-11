@@ -34,7 +34,6 @@
 }
 
 @media screen and (orientation: landscape) {
-  .add_icon:hover,
   .task_input_icon:hover {
     color: var(--gray-medium);
     cursor: default;

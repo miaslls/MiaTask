@@ -12,3 +12,10 @@
   font-size: smaller;
   color: var(--gray-dark);
 }
+
+@media screen and (orientation: landscape) {
+  .add_icon:hover {
+    color: var(--gray-medium);
+    cursor: default;
+  }
+}

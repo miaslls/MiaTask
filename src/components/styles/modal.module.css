@@ -40,6 +40,6 @@
 
   .close:hover {
     color: var(--gray-medium);
-    cursor: pointer;
+    cursor: default;
   }
 }
