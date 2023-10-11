@@ -8,7 +8,9 @@
   --gray-light: #e1e1e1;
   --gray-medium: #9f9f9f;
   --gray-dark: #555555;
-  --white-transluscent: #ecececec;
+  --white-translucent: #ecececec;
+  --black-translucent: #0c0c0c50;
+  --gray-translucent: #9f9f9f9f;
 
   --landscape-width: 20%;
 }
