@@ -16,7 +16,7 @@ import Footer from '@/components/footer';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const tasks = await prisma.task.findMany({
-    orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
+    orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { updatedAt: 'desc' }],
   });
 
   return {

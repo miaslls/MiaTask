@@ -22,7 +22,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 async function handleGET(res: NextApiResponse<{ tasks: Task[] } | { message: string }>) {
   try {
     const tasks = await prisma.task.findMany({
-      orderBy: [{ starred: 'desc' }, { completed: 'asc' }, { updatedAt: 'desc' }],
+      orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { updatedAt: 'desc' }],
     });
 
     res.status(201).send({ tasks });
