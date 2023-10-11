@@ -71,15 +71,19 @@ export default function TaskList() {
 
   return (
     <>
-      {data.tasks.map((task: Task) => (
-        <TaskItem
-          task={task}
-          activeTaskId={activeTaskId}
-          handleActiveTask={handleActiveTask}
-          handleShowModal={handleShowModal}
-          key={`task-item-${task.id}`}
-        />
-      ))}
+      {data.tasks.length === 0 ? (
+        <>Tasklist empty!</>
+      ) : (
+        data.tasks.map((task: Task) => (
+          <TaskItem
+            task={task}
+            activeTaskId={activeTaskId}
+            handleActiveTask={handleActiveTask}
+            handleShowModal={handleShowModal}
+            key={`task-item-${task.id}`}
+          />
+        ))
+      )}
 
       {showModal && (
         <Modal closeModal={() => handleShowModal(null)}>

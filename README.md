@@ -4,10 +4,10 @@
 
 - ⬛ component function types
 - ⬛ extract repository (prisma functions)
-- ⬛ tasklist empty
 
   ### completed
 
+- ✅ tasklist empty
 - ✅ task overflow (... / view 👁️)
 - ✅ loading
 - ✅ error - dismiss toast
