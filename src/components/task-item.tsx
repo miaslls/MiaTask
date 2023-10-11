@@ -3,6 +3,7 @@ import styles from './styles/task-item.module.css';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
 import { Task } from '@prisma/client';
+import { ShowModal } from './task-list';
 import { dismissableErrorToast } from '@/lib/toastUtils';
 
 async function toggleTaskProperty(
@@ -34,10 +35,12 @@ export default function TaskItem({
   task,
   activeTaskId,
   handleActiveTask,
+  handleShowModal,
 }: {
   task: Task;
   activeTaskId: string | null;
   handleActiveTask(taskId: string): void;
+  handleShowModal(showModal: ShowModal): void;
 }) {
   return (
     <li
@@ -59,6 +62,12 @@ export default function TaskItem({
 
       {activeTaskId === task.id && (
         <div className={styles.task_options}>
+          <div
+            className={styles.task_icon}
+            onClick={() => handleShowModal({ type: 'detail', task })}
+          >
+            <i className="ri-eye-2-line"></i>
+          </div>
           <div className={styles.task_icon}>
             <i className="ri-edit-line"></i>
           </div>

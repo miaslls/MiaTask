@@ -2,9 +2,20 @@ import useSWR from 'swr';
 import TaskItem from './task-item';
 import { Task } from '@prisma/client';
 import { useState } from 'react';
+import Modal from './modal';
+
+export type ShowModal = {
+  type: 'detail' | 'edit' | 'delete';
+  task: Task;
+} | null;
 
 export default function TaskList() {
   const [activeTaskId, setActiveTaskId] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState<ShowModal>(null);
+
+  const handleShowModal = (showModal: ShowModal) => {
+    setShowModal(showModal);
+  };
 
   const handleActiveTask = (taskId: string | null) => {
     if (activeTaskId === taskId) {
@@ -39,9 +50,16 @@ export default function TaskList() {
           task={task}
           activeTaskId={activeTaskId}
           handleActiveTask={handleActiveTask}
+          handleShowModal={handleShowModal}
           key={`task-item-${task.id}`}
         />
       ))}
+
+      {showModal && (
+        <Modal closeModal={() => handleShowModal(null)}>
+          <>{showModal.type === 'detail' && <div>{showModal.task.text}</div>}</>
+        </Modal>
+      )}
     </>
   );
 }

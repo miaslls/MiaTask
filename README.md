@@ -3,11 +3,11 @@
 ## 📃 backlog
 
 - ⬛ component function types
-- ⬛ task overflow (... / expand 🔻)
 - ⬛ extract repository (prisma functions)
 
   ### completed
 
+- ✅ task overflow (... / view 👁️)
 - ✅ loading
 - ✅ error - dismiss toast
 - ✅ create task confirmation/error message (toast?)
