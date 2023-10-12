@@ -16,9 +16,11 @@ function Overlay({
 }
 
 export default function Modal({
+  title,
   children,
   closeModal,
 }: {
+  title: string;
   children: React.JSX.Element;
   closeModal(): void;
 }) {
@@ -35,6 +37,8 @@ export default function Modal({
   return (
     <Overlay overlayClick={closeModal}>
       <div className={styles.container} onClick={(e) => handleClick(e, { canClose: false })}>
+        <div className={styles.title}>{title}</div>
+
         <div className={styles.close} onClick={(e) => handleClick(e, { canClose: true })}>
           <i className="ri-close-line"></i>
         </div>

@@ -30,7 +30,7 @@ async function removeTask(id: string, handleShowModal: CallableFunction) {
 }
 
 export type ShowModal = {
-  type: 'detail' | 'delete';
+  type: 'details' | 'delete';
   task: Task;
 } | null;
 
@@ -57,14 +57,14 @@ export default function TaskList() {
 
   if (error)
     return (
-      <div>
-        <i className="ri-error-warning-line"></i> Failed to load
+      <div className="tasklist_alert">
+        <i className="ri-alert-line"></i> Failed to load
       </div>
     );
 
   if (isLoading)
     return (
-      <div>
+      <div className="tasklist_alert">
         <i className="ri-loop-right-fill"></i> Loading...
       </div>
     );
@@ -72,7 +72,9 @@ export default function TaskList() {
   return (
     <>
       {data.tasks.length === 0 ? (
-        <>Tasklist empty!</>
+        <div className="tasklist_alert">
+          <i className="ri-alert-line"></i> Tasklist empty
+        </div>
       ) : (
         data.tasks.map((task: Task) => (
           <TaskItem
@@ -86,21 +88,31 @@ export default function TaskList() {
       )}
 
       {showModal && (
-        <Modal closeModal={() => handleShowModal(null)}>
+        <Modal closeModal={() => handleShowModal(null)} title={showModal.type}>
           <div className={styles.container}>
-            <div className={styles.text}>{showModal.task.text}</div>
+            <div className={styles.text}>
+              <div className={styles.quote}>
+                <i className="ri-double-quotes-l"></i>
+              </div>
+              {showModal.task.text}
+              <div className={styles.quote}>
+                <i className="ri-double-quotes-r"></i>
+              </div>
+            </div>
 
             {showModal.type === 'delete' && (
               <>
                 <div className={styles.confirm_delete}>
-                  confirm delete?
-                  <span className={styles.delete_icons}>
+                  <div className={styles.delete_text}>confirm delete?</div>
+
+                  <div className={styles.delete_icons}>
                     <i className="ri-close-line" onClick={() => setShowModal(null)}></i>
+
                     <i
                       className="ri-check-line"
                       onClick={() => removeTask(showModal.task.id, handleShowModal)}
                     ></i>
-                  </span>
+                  </div>
                 </div>
               </>
             )}

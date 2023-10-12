@@ -1,4 +1,4 @@
-import styles from './styles/task-form.module.css';
+import styles from '@/styles/index.module.css';
 
 import { ChangeEvent, FormEvent } from 'react';
 import { mutate } from 'swr';
