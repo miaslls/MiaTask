@@ -9,13 +9,21 @@
   width: 100%;
   display: flex;
   align-items: center;
-  text-align: justify;
+  text-align: left;
   gap: 0.5rem;
 }
 
 .quote {
   color: var(--gray-medium);
   font-size: 1.25rem;
+}
+
+.quote:first-of-type {
+  align-self: flex-start;
+}
+
+.quote:last-of-type {
+  align-self: flex-end;
 }
 
 .confirm_delete {

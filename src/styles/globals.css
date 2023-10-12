@@ -22,7 +22,7 @@ html * {
   margin: 0;
   padding: 0;
   border: 0;
-  line-height: 1;
+  /* line-height: 1; */
 
   /* border: 1px dotted var(--gray-medium); */
 }
