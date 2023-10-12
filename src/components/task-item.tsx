@@ -64,13 +64,6 @@ export default function TaskItem({
         <div className={styles.task_options}>
           <div
             className={styles.task_icon}
-            onClick={() => handleShowModal({ type: 'detail', task })}
-          >
-            <i className="ri-eye-2-line"></i>
-          </div>
-
-          <div
-            className={styles.task_icon}
             onClick={() => handleShowModal({ type: 'delete', task })}
           >
             <i className="ri-delete-bin-2-line"></i>
@@ -87,7 +80,9 @@ export default function TaskItem({
         </div>
       )}
 
-      <div className={styles.task_text}>{task.text}</div>
+      <div className={styles.task_text} onClick={() => handleShowModal({ type: 'details', task })}>
+        {task.text}
+      </div>
 
       {task.starred && (
         <div
