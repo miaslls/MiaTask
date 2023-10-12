@@ -1,4 +1,4 @@
-import styles from '../styles/home.module.css';
+import styles from '@/styles/home.module.css';
 
 import { ChangeEvent, FormEvent } from 'react';
 import { mutate } from 'swr';
