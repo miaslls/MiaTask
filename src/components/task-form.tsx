@@ -19,7 +19,7 @@ async function submitPostData(
 
   const response = await fetch(key, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Content-Language': 'en' },
     body: JSON.stringify({ text: inputText }),
   });
 
