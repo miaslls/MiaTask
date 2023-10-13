@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer>
-      <Link className="text_link" href="https://github.com/miaslls" target="_blank">
+      <Link className="text_link" href="https://github.com/miaslls" target="_blank" tabIndex={0}>
         @miaslls
       </Link>
       <span>2023</span>
@@ -17,6 +17,7 @@ export default function Footer() {
         className="text_link"
         href="https://fonts.google.com/specimen/Roboto+Mono"
         target="_blank"
+        tabIndex={0}
       >
         font
       </Link>
@@ -25,7 +26,7 @@ export default function Footer() {
         <i className="ri-infinity-line"></i>
       </span>
 
-      <Link className="text_link" href="https://remixicon.com" target="_blank">
+      <Link className="text_link" href="https://remixicon.com" target="_blank" tabIndex={0}>
         icons
       </Link>
     </footer>

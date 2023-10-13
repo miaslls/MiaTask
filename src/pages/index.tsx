@@ -68,8 +68,9 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
             )}
 
             {!showCreateForm && (
-              <li
-                className={taskStyles.task}
+              <button
+                type="button"
+                className={taskStyles.task + ' ' + styles.add_button}
                 onClick={handleCreateForm}
                 aria-label="Open create task form"
               >
@@ -79,8 +80,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
                   </div>
                 </div>
 
-                <div className={taskStyles.task_text + ' ' + styles.add_task}>Add task</div>
-              </li>
+                <div className={taskStyles.task_text + ' ' + styles.add_text}>Add task</div>
+              </button>
             )}
 
             <SWRConfig value={{ fallback }}>

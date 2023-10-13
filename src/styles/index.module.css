@@ -1,5 +1,8 @@
-.add_task {
-  width: fit-content;
+.add_button {
+  max-width: fit-content;
+}
+
+.add_text {
   padding: 0 0.2rem;
   background: var(--gray-medium);
   color: var(--gray-dark);
@@ -18,7 +21,7 @@
 }
 
 @media screen and (orientation: landscape) {
-  .add_task:hover {
+  .add_text:hover {
     font-weight: var(--default-regular);
     color: var(--gray-light);
   }

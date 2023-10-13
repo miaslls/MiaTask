@@ -49,18 +49,25 @@ export default function TaskModal({
           <div className={styles.confirm_delete}>
             <div className={styles.delete_text}>confirm delete?</div>
 
-            <div className={styles.delete_icons}>
-              <i
-                className="ri-close-line"
+            <div className={styles.delete_buttons}>
+              <button
+                type="button"
+                className={styles.delete_button + ' force_focus'}
                 onClick={() => handleShowModal(null)}
                 aria-label="Cancel delete"
-              ></i>
+                autoFocus
+              >
+                <i className="ri-close-line"></i>
+              </button>
 
-              <i
-                className="ri-check-line"
+              <button
+                type="button"
+                className={styles.delete_button}
                 onClick={() => removeTask(showModal.task.id, handleShowModal)}
                 aria-label="Confirm delete"
-              ></i>
+              >
+                <i className="ri-check-line"></i>
+              </button>
             </div>
           </div>
         </>

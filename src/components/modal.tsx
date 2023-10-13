@@ -1,5 +1,5 @@
 import styles from './styles/modal.module.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 function Overlay({
   children,
@@ -24,8 +24,25 @@ export default function Modal({
   children: React.JSX.Element;
   closeModal(): void;
 }) {
+  useEffect(() => {
+    const keyDownHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+
+    document.addEventListener('keydown', (e) => keyDownHandler(e));
+
+    return () => {
+      document.removeEventListener('keydown', (e) => keyDownHandler(e));
+    };
+  }, []);
+
   const handleClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>,
     { canClose }: { canClose: boolean },
   ) => {
     e.stopPropagation();
@@ -39,13 +56,13 @@ export default function Modal({
       <div className={styles.container} onClick={(e) => handleClick(e, { canClose: false })}>
         <div className={styles.title}>{title}</div>
 
-        <div
+        <button
           className={styles.close}
           onClick={(e) => handleClick(e, { canClose: true })}
           aria-label="Close modal"
         >
           <i className="ri-close-line"></i>
-        </div>
+        </button>
 
         <div className={styles.content}>{children}</div>
       </div>

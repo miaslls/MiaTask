@@ -34,6 +34,9 @@ button {
   background: transparent;
   cursor: pointer;
   appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -137,5 +140,18 @@ footer {
   footer {
     min-width: 20rem;
     width: var(--landscape-width);
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    background: var(--gray-translucent);
+  }
+
+  input:focus-visible {
+    background: var(--gray-light);
+  }
+
+  .force_focus:focus {
+    background: var(--gray-translucent);
   }
 }

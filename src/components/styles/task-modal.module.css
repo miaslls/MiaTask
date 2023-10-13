@@ -39,14 +39,17 @@
   gap: 0.25rem;
 }
 
-.delete_icons {
+.delete_buttons {
   display: flex;
+}
+
+.delete_button {
   color: var(--gray-dark);
   font-size: 1.25rem;
 }
 
 @media screen and (orientation: landscape) {
-  .delete_icons > i:hover {
+  .delete_button:hover {
     color: var(--gray-medium);
     cursor: default;
   }

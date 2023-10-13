@@ -1,6 +1,6 @@
 import styles from './styles/task-form.module.css';
 
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useEffect } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
 import { dismissableErrorToast } from '@/lib/toastUtils';
@@ -42,6 +42,21 @@ export default function TaskForm({
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
   handleCreateForm(): void;
 }) {
+  useEffect(() => {
+    const keyDownHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        handleCreateForm();
+      }
+    };
+
+    document.addEventListener('keydown', (e) => keyDownHandler(e));
+
+    return () => {
+      document.removeEventListener('keydown', (e) => keyDownHandler(e));
+    };
+  }, []);
+
   return (
     <form
       className={styles.task_input_wrapper}
@@ -51,14 +66,16 @@ export default function TaskForm({
         autoFocus
         required
         type="text"
-        name="New task text"
+        name="text"
         value={inputText}
         className={styles.task_input}
         placeholder="Type your task here..."
         onChange={handleChange}
+        aria-label="New task text"
       />
 
       <button
+        type="button"
         className={styles.task_input_icon}
         onClick={handleCreateForm}
         aria-label="Close create task form"
