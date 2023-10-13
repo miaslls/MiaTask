@@ -68,7 +68,11 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
             )}
 
             {!showCreateForm && (
-              <li className={taskStyles.task} onClick={handleCreateForm}>
+              <li
+                className={taskStyles.task}
+                onClick={handleCreateForm}
+                aria-label="Open create task form"
+              >
                 <div className={taskStyles.task_icons}>
                   <div className={taskStyles.task_icon}>
                     <i className="ri-add-box-line"></i>

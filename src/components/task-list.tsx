@@ -106,11 +106,16 @@ export default function TaskList() {
                   <div className={styles.delete_text}>confirm delete?</div>
 
                   <div className={styles.delete_icons}>
-                    <i className="ri-close-line" onClick={() => setShowModal(null)}></i>
+                    <i
+                      className="ri-close-line"
+                      onClick={() => handleShowModal(null)}
+                      aria-label="Cancel delete"
+                    ></i>
 
                     <i
                       className="ri-check-line"
                       onClick={() => removeTask(showModal.task.id, handleShowModal)}
+                      aria-label="Confirm delete"
                     ></i>
                   </div>
                 </div>

@@ -52,11 +52,16 @@ export default function TaskItem({
         <div
           className={styles.task_icon}
           onClick={() => toggleTaskProperty(task.id, 'complete', handleActiveTask)}
+          aria-label="Toggle task completed"
         >
           <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
         </div>
 
-        <div className={styles.task_icon} onClick={() => handleActiveTask(task.id)}>
+        <div
+          className={styles.task_icon}
+          onClick={() => handleActiveTask(task.id)}
+          aria-label="Show/hide task options"
+        >
           <i className="ri-more-2-fill"></i>
         </div>
       </div>
@@ -66,6 +71,7 @@ export default function TaskItem({
           <div
             className={styles.task_icon}
             onClick={() => handleShowModal({ type: 'delete', task })}
+            aria-label="Delete task"
           >
             <i className="ri-delete-bin-2-line"></i>
           </div>
@@ -74,6 +80,7 @@ export default function TaskItem({
             <div
               className={styles.task_icon}
               onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
+              aria-label="Star task"
             >
               <i className="ri-star-line"></i>
             </div>
@@ -81,7 +88,11 @@ export default function TaskItem({
         </div>
       )}
 
-      <div className={styles.task_text} onClick={() => handleShowModal({ type: 'details', task })}>
+      <div
+        className={styles.task_text}
+        onClick={() => handleShowModal({ type: 'details', task })}
+        aria-label="Show task details"
+      >
         {task.text}
       </div>
 
@@ -89,6 +100,7 @@ export default function TaskItem({
         <div
           className={styles.task_icon}
           onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
+          aria-label="Unstar task"
         >
           <i className="ri-star-fill"></i>
         </div>

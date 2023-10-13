@@ -39,7 +39,11 @@ export default function Modal({
       <div className={styles.container} onClick={(e) => handleClick(e, { canClose: false })}>
         <div className={styles.title}>{title}</div>
 
-        <div className={styles.close} onClick={(e) => handleClick(e, { canClose: true })}>
+        <div
+          className={styles.close}
+          onClick={(e) => handleClick(e, { canClose: true })}
+          aria-label="Close modal"
+        >
           <i className="ri-close-line"></i>
         </div>
 

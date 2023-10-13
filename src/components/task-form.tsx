@@ -51,14 +51,18 @@ export default function TaskForm({
         autoFocus
         required
         type="text"
-        name="text"
+        name="New task text"
         value={inputText}
         className={styles.task_input}
         placeholder="Type your task here..."
         onChange={handleChange}
       />
 
-      <button className={styles.task_input_icon} onClick={handleCreateForm}>
+      <button
+        className={styles.task_input_icon}
+        onClick={handleCreateForm}
+        aria-label="Close create task form"
+      >
         <i className="ri-close-line"></i>
       </button>
 
