@@ -55,6 +55,7 @@ export default function TaskItem({
         >
           <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
         </div>
+
         <div className={styles.task_icon} onClick={() => handleActiveTask(task.id)}>
           <i className="ri-more-2-fill"></i>
         </div>

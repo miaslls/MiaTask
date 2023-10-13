@@ -1,4 +1,4 @@
-import styles from '@/styles/index.module.css';
+import styles from './styles/task-form.module.css';
 
 import { ChangeEvent, FormEvent } from 'react';
 import { mutate } from 'swr';
@@ -57,6 +57,10 @@ export default function TaskForm({
         placeholder="Type your task here..."
         onChange={handleChange}
       />
+
+      <button className={styles.task_input_icon} onClick={handleCreateForm}>
+        <i className="ri-close-line"></i>
+      </button>
 
       <button className={styles.task_input_icon} type="submit">
         <i className="ri-arrow-right-s-line"></i>

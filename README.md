@@ -3,12 +3,12 @@
 ## 📃 backlog
 
 - ⬛ best accessibility practices (research ⚠️)
-- ⬛ add task from header to tasklist - icon: `'ri-add-box-line'`
 - ⬛ component function types ❓
 - ⬛ extract repository (prisma functions) ❓
 
   ### completed
 
+- ✅ add task from header to tasklist - icon: `'ri-add-box-line'`
 - ✅ debatable -- better error messages
 - ✅ open task details on click task
 - ✅ tasklist empty

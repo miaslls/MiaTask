@@ -1,12 +1,6 @@
 import styles from './styles/header.module.css';
 
-export default function Header({
-  showForm,
-  handleForm,
-}: {
-  showForm: boolean;
-  handleForm(): void;
-}) {
+export default function Header() {
   return (
     <header>
       <div className={styles.title}>
@@ -17,10 +11,6 @@ export default function Header({
         <h1>
           Mia<span>Task</span>
         </h1>
-      </div>
-
-      <div className={styles.add_icon} onClick={handleForm}>
-        <i className={showForm ? 'ri-close-circle-line' : 'ri-add-circle-line'}></i>
       </div>
     </header>
   );

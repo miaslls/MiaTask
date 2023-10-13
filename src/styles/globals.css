@@ -22,7 +22,6 @@ html * {
   margin: 0;
   padding: 0;
   border: 0;
-  /* line-height: 1; */
 
   /* border: 1px dotted var(--gray-medium); */
 }
@@ -101,10 +100,8 @@ a.text_link {
   text-decoration: underline solid var(--gray-medium) 1px;
 }
 
-header {
-  align-items: baseline;
-  justify-content: space-between;
-  font-size: 2rem;
+main {
+  flex-direction: column;
 }
 
 footer {

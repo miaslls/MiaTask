@@ -36,7 +36,6 @@
 .delete_text {
   display: flex;
   font-weight: var(--default-bold);
-  font-size: 1rem;
   gap: 0.25rem;
 }
 

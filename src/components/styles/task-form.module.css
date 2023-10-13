@@ -1,0 +1,30 @@
+.task_input_wrapper {
+  width: 100%;
+  display: flex;
+  gap: 0.25rem;
+  margin-top: -2px;
+}
+
+.task_input {
+  flex: 1;
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--gray-medium);
+  font-family: var(--default-font);
+  font-weight: var(--default-regular);
+  color: var(--gray-dark);
+}
+
+.task_input_icon {
+  width: 1.1rem;
+  font-size: larger;
+  color: var(--gray-dark);
+}
+
+@media screen and (orientation: landscape) {
+  .task_input_icon:hover {
+    color: var(--gray-medium);
+    cursor: default;
+  }
+}

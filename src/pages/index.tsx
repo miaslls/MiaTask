@@ -1,4 +1,5 @@
 import styles from '@/styles/index.module.css';
+import taskStyles from '@/components/styles/task-item.module.css';
 
 import Head from 'next/head';
 import prisma from '@/lib/prisma';
@@ -54,7 +55,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       <div className="outer_container">
         <Toaster position="top-center" reverseOrder={false} toastOptions={toastOptions} />
 
-        <Header showForm={showCreateForm} handleForm={handleCreateForm} />
+        <Header />
 
         <main>
           <ul className={styles.tasklist}>
@@ -64,6 +65,18 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
                 handleChange={handleChange}
                 handleCreateForm={handleCreateForm}
               />
+            )}
+
+            {!showCreateForm && (
+              <li className={taskStyles.task} onClick={handleCreateForm}>
+                <div className={taskStyles.task_icons}>
+                  <div className={taskStyles.task_icon}>
+                    <i className="ri-add-box-line"></i>
+                  </div>
+                </div>
+
+                <div className={taskStyles.task_text + ' ' + styles.add_task}>Add task</div>
+              </li>
             )}
 
             <SWRConfig value={{ fallback }}>

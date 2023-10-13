@@ -1,21 +1,9 @@
 .title {
   display: flex;
   gap: 0.5rem;
+  font-size: 2rem;
 }
 
 .title_logo {
   width: 2rem;
-}
-
-.add_icon {
-  width: 1.7rem;
-  font-size: smaller;
-  color: var(--gray-dark);
-}
-
-@media screen and (orientation: landscape) {
-  .add_icon:hover {
-    color: var(--gray-medium);
-    cursor: default;
-  }
 }
