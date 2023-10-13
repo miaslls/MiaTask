@@ -1,5 +1,5 @@
 import styles from './styles/modal.module.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function Overlay({
   children,
@@ -24,20 +24,54 @@ export default function Modal({
   children: React.JSX.Element;
   closeModal(): void;
 }) {
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    const keyDownHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeModal();
-      }
-    };
+    const modalElement = modalRef.current;
 
-    document.addEventListener('keydown', (e) => keyDownHandler(e));
+    if (modalElement) {
+      // const queryString =
+      // 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"], [contenteditable]'; // NOT FUNCTIONAL (needs type mapping maybe?)
 
-    return () => {
-      document.removeEventListener('keydown', (e) => keyDownHandler(e));
-    };
-  }, []);
+      const focusableElements = modalElement.querySelectorAll('button');
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      const handleTabKeyPress = (e: KeyboardEvent) => {
+        if (e.key === 'Tab') {
+          // SHIFT + TAB
+          if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+              e.preventDefault();
+              lastFocusable.focus();
+            }
+
+            // TAB
+          } else {
+            if (document.activeElement === lastFocusable) {
+              e.preventDefault();
+              firstFocusable.focus();
+            }
+          }
+        }
+      };
+
+      const handleEscapeKeyPress = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          closeModal();
+        }
+      };
+
+      modalElement.addEventListener('keydown', handleTabKeyPress);
+      modalElement.addEventListener('keydown', handleEscapeKeyPress);
+
+      return () => {
+        modalElement.removeEventListener('keydown', handleTabKeyPress);
+        modalElement.removeEventListener('keydown', handleEscapeKeyPress);
+      };
+    }
+  }, [closeModal]);
 
   const handleClick = (
     e:
@@ -53,7 +87,11 @@ export default function Modal({
 
   return (
     <Overlay overlayClick={closeModal}>
-      <div className={styles.container} onClick={(e) => handleClick(e, { canClose: false })}>
+      <div
+        className={styles.container}
+        onClick={(e) => handleClick(e, { canClose: false })}
+        ref={modalRef}
+      >
         <div className={styles.title}>{title}</div>
 
         <button
