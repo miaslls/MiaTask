@@ -3,6 +3,9 @@
 ## 📃 backlog
 
 - ⬛ best accessibility practices (research ⚠️)
+  - A ✔️
+  - AA
+  - AAA
 - ⬛ component function types ❓
 - ⬛ extract repository (prisma functions) ❓
 

@@ -72,6 +72,7 @@ export default function TaskForm({
         placeholder="Type new task..."
         onChange={handleChange}
         aria-label="Type new task"
+        title="New task text"
       />
 
       <button
@@ -79,11 +80,12 @@ export default function TaskForm({
         className={styles.task_input_icon}
         onClick={handleCreateForm}
         aria-label="Close create task form"
+        title="Close"
       >
         <i className="ri-close-line"></i>
       </button>
 
-      <button className={styles.task_input_icon} type="submit">
+      <button className={styles.task_input_icon} type="submit" title="Submit data">
         <i className="ri-arrow-right-s-line"></i>
       </button>
     </form>

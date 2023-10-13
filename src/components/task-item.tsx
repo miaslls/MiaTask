@@ -54,6 +54,7 @@ export default function TaskItem({
           className={styles.task_icon}
           onClick={() => toggleTaskProperty(task.id, 'complete', handleActiveTask)}
           aria-label="Toggle complete task"
+          title="Toggle complete"
         >
           <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
         </button>
@@ -63,6 +64,7 @@ export default function TaskItem({
           className={styles.task_icon}
           onClick={() => handleActiveTask(task.id)}
           aria-label="Show/hide task options"
+          title="Options"
         >
           <i className="ri-more-2-fill"></i>
         </button>
@@ -75,6 +77,7 @@ export default function TaskItem({
             className={styles.task_icon}
             onClick={() => handleShowModal({ type: 'delete', task })}
             aria-label="Delete task"
+            title="Delete"
           >
             <i className="ri-delete-bin-2-line"></i>
           </button>
@@ -85,6 +88,7 @@ export default function TaskItem({
               className={styles.task_icon}
               onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
               aria-label="Star task"
+              title="Star"
             >
               <i className="ri-star-line"></i>
             </button>
@@ -106,6 +110,7 @@ export default function TaskItem({
           className={styles.task_icon}
           onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
           aria-label="Unstar task"
+          title="Unstar"
         >
           <i className="ri-star-fill"></i>
         </button>

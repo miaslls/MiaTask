@@ -55,6 +55,7 @@ export default function TaskModal({
                 className={styles.delete_button + ' force_focus'}
                 onClick={() => handleShowModal(null)}
                 aria-label="Cancel delete"
+                title="Cancel"
                 autoFocus
               >
                 <i className="ri-close-line"></i>
@@ -65,6 +66,7 @@ export default function TaskModal({
                 className={styles.delete_button}
                 onClick={() => removeTask(showModal.task.id, handleShowModal)}
                 aria-label="Confirm delete"
+                title="Confirm"
               >
                 <i className="ri-check-line"></i>
               </button>

@@ -73,6 +73,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
                 className={taskStyles.task + ' ' + styles.add_button}
                 onClick={handleCreateForm}
                 aria-label="Open create task form"
+                title="Add"
               >
                 <div className={taskStyles.task_icons}>
                   <div className={taskStyles.task_icon}>

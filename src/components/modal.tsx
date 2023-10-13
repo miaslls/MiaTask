@@ -60,6 +60,7 @@ export default function Modal({
           className={styles.close}
           onClick={(e) => handleClick(e, { canClose: true })}
           aria-label="Close modal"
+          title="Close"
         >
           <i className="ri-close-line"></i>
         </button>
