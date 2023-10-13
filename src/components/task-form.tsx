@@ -85,7 +85,7 @@ export default function TaskForm({
         <i className="ri-close-line"></i>
       </button>
 
-      <button className={styles.task_input_icon} type="submit" title="Submit data">
+      <button className={styles.task_input_icon} type="submit" title="Submit">
         <i className="ri-arrow-right-s-line"></i>
       </button>
     </form>
