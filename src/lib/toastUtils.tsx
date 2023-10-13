@@ -28,13 +28,11 @@ export const dismissableErrorToast = (message: string) => {
         <span>
           <strong>Error:</strong> {message}
         </span>
-        <i
-          className="ri-close-line"
-          onClick={() => toast.dismiss(t.id)}
-          aria-label="Close alert"
-        ></i>
+        <button onClick={() => toast.dismiss(t.id)} aria-label="Close alert" autoFocus>
+          <i className="ri-close-line"></i>
+        </button>
       </div>
     ),
-    { duration: Infinity },
+    { duration: 5000 },
   );
 };

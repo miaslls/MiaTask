@@ -120,8 +120,10 @@ footer {
   gap: 0.5rem;
 }
 
-.toast_dismissable > i {
+.toast_dismissable > button {
+  margin-right: -0.5rem;
   color: var(--gray-dark);
+  cursor: default;
 }
 
 .tasklist_alert {
@@ -130,7 +132,7 @@ footer {
 
 @media screen and (orientation: landscape) {
   a.text_link:hover,
-  .toast_dismissable > i:hover {
+  .toast_dismissable > button:hover {
     color: var(--gray-medium);
     cursor: default;
   }
