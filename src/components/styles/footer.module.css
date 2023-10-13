@@ -1,4 +1,6 @@
-.separator_icon {
-  width: 0.65rem;
-  font-size: x-small;
+.footer_link {
+  display: flex;
+  align-items: baseline;
+
+  gap: 0.25rem;
 }
