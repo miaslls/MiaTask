@@ -24,7 +24,7 @@ export const toastOptions: DefaultToastOptions = {
 export const dismissableErrorToast = (message: string) => {
   return toast.error(
     (t) => (
-      <div className="toast_dismissable">
+      <div className="toast_dismissable" role="alertdialog" aria-label="Error">
         <span>
           <strong>Error:</strong> {message}
         </span>

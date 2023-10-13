@@ -21,11 +21,11 @@ export default function getErrorMessage(error: unknown) {
 
       // PRISMA CLIENT (Query Engine)
       case 'P2000':
-        return 'One of the values provided is too long.';
+        return 'The value provided is too long.'; // ⚠️ One of the values provided is too long.
       case 'P2001':
         return 'The record searched for does not exist.';
       case 'P2002':
-        return 'Unique constraint failed. (Duplicate task)'; // ⚠️
+        return 'Task text should NOT be duplicate.'; // ⚠️ Unique constraint failed.
       case 'P2003':
         return 'Foreign key constraint failed.';
       case 'P2004':
@@ -50,5 +50,5 @@ export default function getErrorMessage(error: unknown) {
     return 'Prisma Client Validation Error';
   }
 
-  return 'Internal Server Error';
+  return 'Internal Server Error. Please try again in a few moments.';
 }
