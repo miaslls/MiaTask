@@ -105,6 +105,7 @@ a.text_link {
 
 main {
   flex-direction: column;
+  gap: 0.25rem;
 }
 
 footer {

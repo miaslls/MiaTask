@@ -8,6 +8,7 @@
   - AAA
 - ⬛ component function types ❓
 - ⬛ extract repository (prisma functions) ❓
+- ⬛ edit task
 
   ### completed
 

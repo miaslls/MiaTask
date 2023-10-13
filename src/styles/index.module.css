@@ -13,9 +13,6 @@
 .tasklist {
   width: 100%;
   display: flex;
-}
-
-.tasklist {
   flex-direction: column;
   gap: 0.25rem;
 }

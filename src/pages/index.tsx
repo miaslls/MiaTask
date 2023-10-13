@@ -58,33 +58,33 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <Header />
 
         <main>
-          <ul className={styles.tasklist}>
-            {showCreateForm && (
-              <TaskForm
-                inputText={inputText}
-                handleChange={handleChange}
-                handleCreateForm={handleCreateForm}
-              />
-            )}
+          {showCreateForm && (
+            <TaskForm
+              inputText={inputText}
+              handleChange={handleChange}
+              handleCreateForm={handleCreateForm}
+            />
+          )}
 
-            {!showCreateForm && (
-              <button
-                type="button"
-                className={taskStyles.task + ' ' + styles.add_button}
-                onClick={handleCreateForm}
-                aria-label="Open create task form"
-                title="Add"
-              >
-                <div className={taskStyles.task_icons}>
-                  <div className={taskStyles.task_icon}>
-                    <i className="ri-add-box-line"></i>
-                  </div>
+          {!showCreateForm && (
+            <button
+              type="button"
+              className={taskStyles.task + ' ' + styles.add_button}
+              onClick={handleCreateForm}
+              aria-label="Open create task form"
+              title="Add"
+            >
+              <div className={taskStyles.task_icons}>
+                <div className={taskStyles.task_icon}>
+                  <i className="ri-add-box-line"></i>
                 </div>
+              </div>
 
-                <div className={taskStyles.task_text + ' ' + styles.add_text}>Add task</div>
-              </button>
-            )}
+              <div className={taskStyles.task_text + ' ' + styles.add_text}>Add task</div>
+            </button>
+          )}
 
+          <ul className={styles.tasklist}>
             <SWRConfig value={{ fallback }}>
               <TaskList />
             </SWRConfig>
