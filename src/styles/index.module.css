@@ -4,8 +4,8 @@
 
 .add_text {
   padding: 0 0.2rem;
-  background: var(--gray-medium);
-  color: var(--gray-dark);
+  background: var(--gray-lighter);
+  color: var(--gray-darker);
   font-weight: var(--default-bold);
   cursor: default;
 }
@@ -20,6 +20,6 @@
 @media screen and (orientation: landscape) {
   .add_text:hover {
     font-weight: var(--default-regular);
-    color: var(--gray-light);
+    color: var(--gray-medium);
   }
 }

@@ -6,8 +6,10 @@
   --red: #a81c24;
   --green: #4fb34b;
   --gray-light: #e1e1e1;
+  --gray-lighter: #c9c9c9;
   --gray-medium: #9f9f9f;
-  --gray-dark: #555555;
+  --gray-dark: #4d4d4d;
+  --gray-darker: #383838;
   --white-translucent: #ecececec;
   --black-translucent: #0c0c0c50;
   --gray-translucent: #9f9f9f9f;
@@ -146,15 +148,12 @@ footer {
   }
 
   button:focus-visible,
-  a:focus-visible {
-    background: var(--gray-translucent);
+  a:focus-visible,
+  .force_focus:focus {
+    background: var(--gray-lighter);
   }
 
   input:focus-visible {
     background: var(--gray-light);
-  }
-
-  .force_focus:focus {
-    background: var(--gray-translucent);
   }
 }
