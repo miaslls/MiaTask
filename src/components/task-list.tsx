@@ -1,44 +1,21 @@
-import styles from './styles/task-modal.module.css';
-
-import useSWR, { mutate } from 'swr';
-import toast from 'react-hot-toast';
+import useSWR from 'swr';
 import { useState } from 'react';
 import { Task } from '@prisma/client';
-import { dismissableErrorToast } from '@/lib/toastUtils';
 
 import TaskItem from './task-item';
 import Modal from './modal';
-
-async function removeTask(id: string, handleShowModal: CallableFunction) {
-  handleShowModal(null);
-
-  const toastId = toast.loading('Loading...');
-
-  const tasklist = '/api/task';
-  const key = `/api/task/${id}`;
-
-  const response = await fetch(key, { method: 'DELETE' });
-
-  if (response.ok) {
-    toast.success('Task removed.', { id: toastId });
-    mutate(tasklist);
-  } else {
-    const error = await response.json();
-    dismissableErrorToast(error.message);
-    toast.dismiss(toastId);
-  }
-}
+import TaskModal from './task-modal';
 
 export type ShowModal = {
   type: 'details' | 'delete';
   task: Task;
-} | null;
+};
 
 export default function TaskList() {
   const [activeTaskId, setActiveTaskId] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState<ShowModal>(null);
+  const [showModal, setShowModal] = useState<ShowModal | null>(null);
 
-  const handleShowModal = (showModal: ShowModal) => {
+  const handleShowModal = (showModal: ShowModal | null) => {
     setActiveTaskId(null);
     setShowModal(showModal);
   };
@@ -89,39 +66,7 @@ export default function TaskList() {
 
       {showModal && (
         <Modal closeModal={() => handleShowModal(null)} title={showModal.type}>
-          <div className={styles.container}>
-            <div className={styles.text}>
-              <div className={styles.quote}>
-                <i className="ri-double-quotes-l"></i>
-              </div>
-              {showModal.task.text}
-              <div className={styles.quote}>
-                <i className="ri-double-quotes-r"></i>
-              </div>
-            </div>
-
-            {showModal.type === 'delete' && (
-              <>
-                <div className={styles.confirm_delete}>
-                  <div className={styles.delete_text}>confirm delete?</div>
-
-                  <div className={styles.delete_icons}>
-                    <i
-                      className="ri-close-line"
-                      onClick={() => handleShowModal(null)}
-                      aria-label="Cancel delete"
-                    ></i>
-
-                    <i
-                      className="ri-check-line"
-                      onClick={() => removeTask(showModal.task.id, handleShowModal)}
-                      aria-label="Confirm delete"
-                    ></i>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
+          <TaskModal showModal={showModal} handleShowModal={handleShowModal} />
         </Modal>
       )}
     </>
