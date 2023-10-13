@@ -69,9 +69,9 @@ export default function TaskForm({
         name="text"
         value={inputText}
         className={styles.task_input}
-        placeholder="Type your task here..."
+        placeholder="Type your new task..."
         onChange={handleChange}
-        aria-label="New task text"
+        aria-label="Type your new task"
       />
 
       <button

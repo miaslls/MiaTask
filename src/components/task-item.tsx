@@ -53,7 +53,7 @@ export default function TaskItem({
           type="button"
           className={styles.task_icon}
           onClick={() => toggleTaskProperty(task.id, 'complete', handleActiveTask)}
-          aria-label="Toggle task completed"
+          aria-label="Toggle complete task"
         >
           <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
         </button>
