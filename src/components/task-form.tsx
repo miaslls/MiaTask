@@ -1,9 +1,10 @@
 import styles from './styles/task-form.module.css';
 
-import { ChangeEvent, FormEvent, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useRef } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
 import { dismissableErrorToast } from '@/lib/toastUtils';
+import { useFocusTrapping } from '@/hooks/useFocusTrapping';
 
 async function submitPostData(
   e: FormEvent<HTMLFormElement>,
@@ -42,25 +43,15 @@ export default function TaskForm({
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
   handleCreateForm(): void;
 }) {
-  useEffect(() => {
-    const keyDownHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        handleCreateForm();
-      }
-    };
+  const formRef = useRef<HTMLFormElement | null>(null);
 
-    document.addEventListener('keydown', (e) => keyDownHandler(e));
-
-    return () => {
-      document.removeEventListener('keydown', (e) => keyDownHandler(e));
-    };
-  }, []);
+  useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleCreateForm });
 
   return (
     <form
-      className={styles.task_input_wrapper}
+      className={styles.task_form}
       onSubmit={(e) => submitPostData(e, inputText, handleCreateForm)}
+      ref={formRef}
     >
       <input
         autoFocus

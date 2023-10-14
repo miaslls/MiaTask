@@ -2,15 +2,22 @@
 
 ## 📃 backlog
 
-- ⬛ best accessibility practices (research ⚠️)
-  - A ✔️
-  - AA
-  - AAA
-- ⬛ component function types ❓
-- ⬛ extract repository (prisma functions) ❓
 - ⬛ edit task
+- ⬛ useTask() ❓
+- ⬛ extract repository (prisma functions) ❓
+- ⬛ ⚠️ PHAPHA - `44  initialPageFocus && initialPageFocus.focus();` @[useFocusTrapping.ts]('./src/hooks/useFocusTrapping.ts')
+- ⬛ ⚠️ PHAPHA - component function types
 
-  ### completed
+- ⬛ FIXME: remove ALL markers: ❗ ❓ ⚠️ 🐞
+
+---
+
+- ⬛ best accessibility practices
+
+  - dark mode
+  - i18n
+
+  ### ✔️ COMPLETED
 
 - ✅ add task from header to tasklist - icon: `'ri-add-box-line'`
 - ✅ debatable -- better error messages

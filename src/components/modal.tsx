@@ -1,5 +1,6 @@
 import styles from './styles/modal.module.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import { useFocusTrapping } from '@/hooks/useFocusTrapping';
 
 function Overlay({
   children,
@@ -26,52 +27,7 @@ export default function Modal({
 }) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const modalElement = modalRef.current;
-
-    if (modalElement) {
-      // const queryString =
-      // 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex]:not([tabindex="-1"], [contenteditable]'; // NOT FUNCTIONAL (needs type mapping maybe?)
-
-      const focusableElements = modalElement.querySelectorAll('button');
-
-      const firstFocusable = focusableElements[0];
-      const lastFocusable = focusableElements[focusableElements.length - 1];
-
-      const handleTabKeyPress = (e: KeyboardEvent) => {
-        if (e.key === 'Tab') {
-          // SHIFT + TAB
-          if (e.shiftKey) {
-            if (document.activeElement === firstFocusable) {
-              e.preventDefault();
-              lastFocusable.focus();
-            }
-
-            // TAB
-          } else {
-            if (document.activeElement === lastFocusable) {
-              e.preventDefault();
-              firstFocusable.focus();
-            }
-          }
-        }
-      };
-
-      const handleEscapeKeyPress = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          closeModal();
-        }
-      };
-
-      modalElement.addEventListener('keydown', handleTabKeyPress);
-      modalElement.addEventListener('keydown', handleEscapeKeyPress);
-
-      return () => {
-        modalElement.removeEventListener('keydown', handleTabKeyPress);
-        modalElement.removeEventListener('keydown', handleEscapeKeyPress);
-      };
-    }
-  }, [closeModal]);
+  useFocusTrapping({ elementRef: modalRef, escapeHatchFunc: closeModal });
 
   const handleClick = (
     e:
