@@ -12,7 +12,7 @@ import { toastOptions } from '@/lib/toastUtils';
 
 import Header from '@/components/header';
 import TaskList from '@/components/task-list';
-import TaskForm from '@/components/task-form';
+import CreateTaskForm from '@/components/create-task-form';
 import Footer from '@/components/footer';
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -31,17 +31,17 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [inputText, setInputText] = useState('');
+  const [createInputText, setCreateInputText] = useState('');
 
   function handleCreateForm() {
     if (showCreateForm) {
-      setInputText('');
+      setCreateInputText('');
     }
     setShowCreateForm(!showCreateForm);
   }
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setInputText(e.target.value);
+    setCreateInputText(e.target.value);
   }
 
   return (
@@ -59,10 +59,10 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
 
         <main>
           {showCreateForm && (
-            <TaskForm
-              inputText={inputText}
+            <CreateTaskForm
+              inputText={createInputText}
               handleChange={handleChange}
-              handleCreateForm={handleCreateForm}
+              handleForm={handleCreateForm}
             />
           )}
 

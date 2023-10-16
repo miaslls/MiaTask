@@ -1,4 +1,4 @@
-import styles from './styles/task-form.module.css';
+import styles from './styles/create-task-form.module.css';
 
 import { ChangeEvent, FormEvent, useRef } from 'react';
 import { mutate } from 'swr';
@@ -9,10 +9,10 @@ import { useFocusTrapping } from '@/hooks/useFocusTrapping';
 async function submitPostData(
   e: FormEvent<HTMLFormElement>,
   inputText: string,
-  handleCreateForm: CallableFunction,
+  handleForm: CallableFunction,
 ) {
   e.preventDefault();
-  handleCreateForm();
+  handleForm();
 
   const toastId = toast.loading('Loading...');
 
@@ -34,23 +34,23 @@ async function submitPostData(
   }
 }
 
-export default function TaskForm({
+export default function CreateTaskForm({
   inputText,
   handleChange,
-  handleCreateForm,
+  handleForm,
 }: {
   inputText: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleCreateForm(): void;
+  handleForm(): void;
 }) {
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleCreateForm });
+  useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleForm });
 
   return (
     <form
       className={styles.task_form}
-      onSubmit={(e) => submitPostData(e, inputText, handleCreateForm)}
+      onSubmit={(e) => submitPostData(e, inputText, handleForm)}
       ref={formRef}
     >
       <input
@@ -59,17 +59,18 @@ export default function TaskForm({
         type="text"
         name="text"
         value={inputText}
+        autoComplete="off"
         className={styles.task_input}
-        placeholder="Type new task..."
+        placeholder="Enter new task..."
         onChange={handleChange}
-        aria-label="Type new task"
+        aria-label="Enter new task"
         title="New task text"
       />
 
       <button
         type="button"
         className={styles.task_input_icon}
-        onClick={handleCreateForm}
+        onClick={handleForm}
         aria-label="Close create task form"
         title="Close"
       >
