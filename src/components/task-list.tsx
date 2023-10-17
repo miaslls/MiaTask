@@ -1,10 +1,10 @@
 import useSWR from 'swr';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Task } from '@prisma/client';
 
-import TaskItem from './task-item';
 import Modal from './modal';
 import TaskModal from './task-modal';
+import TaskItem from './task-item';
 
 export type ShowModal = {
   type: 'details' | 'delete';
@@ -12,19 +12,37 @@ export type ShowModal = {
 };
 
 export default function TaskList() {
-  const [activeTaskId, setActiveTaskId] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<ShowModal | null>(null);
+  const [showTaskOptions, setshowTaskOptions] = useState<Task | null>(null);
+
+  const [taskToUpdate, setTaskToUpdate] = useState<string | null>(null);
+  const [updateInputText, setUpdateInputText] = useState<string>('');
+
+  function handleUpdateForm(task?: Task) {
+    if (task) {
+      setTaskToUpdate(task.id);
+      setUpdateInputText(task.text);
+    } else {
+      setTaskToUpdate(null);
+      setUpdateInputText('');
+    }
+    setshowTaskOptions(null);
+  }
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setUpdateInputText(e.target.value);
+  }
 
   const handleShowModal = (showModal: ShowModal | null) => {
-    setActiveTaskId(null);
+    setshowTaskOptions(null);
     setShowModal(showModal);
   };
 
-  const handleActiveTask = (taskId: string | null) => {
-    if (activeTaskId === taskId) {
-      setActiveTaskId(null);
+  const handleShowOptions = (task: Task | null) => {
+    if (showTaskOptions === task) {
+      setshowTaskOptions(null);
     } else {
-      setActiveTaskId(taskId);
+      setshowTaskOptions(task);
     }
   };
 
@@ -56,9 +74,13 @@ export default function TaskList() {
         data.tasks.map((task: Task) => (
           <TaskItem
             task={task}
-            activeTaskId={activeTaskId}
-            handleActiveTask={handleActiveTask}
+            showTaskOptions={showTaskOptions}
+            handleShowOptions={handleShowOptions}
             handleShowModal={handleShowModal}
+            inputText={updateInputText}
+            taskToUpdate={taskToUpdate}
+            handleChange={handleChange}
+            handleForm={handleUpdateForm}
             key={`task-item-${task.id}`}
           />
         ))

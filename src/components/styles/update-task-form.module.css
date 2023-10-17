@@ -1,24 +1,38 @@
 .task_form {
   width: 100%;
   display: flex;
-  gap: 0.25rem;
-  margin-top: -4px;
+  gap: 0.5rem;
+}
+
+.task_edit_icons {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.task_edit_icon {
+  width: 0.9rem;
+  color: var(--gray-medium);
 }
 
 .task_input {
   flex: 1;
-  border-bottom: 1px solid var(--gray-medium);
+  background: var(--gray-light);
   font-family: var(--default-font);
   font-weight: var(--default-regular);
   color: var(--gray-dark);
 }
 
 .task_input_icon {
+  height: 1.1rem;
   font-size: larger;
   color: var(--gray-dark);
 }
 
 @media screen and (orientation: landscape) {
+  .task_edit_icon:hover {
+    cursor: not-allowed;
+  }
+
   .task_input:hover {
     cursor: text;
   }

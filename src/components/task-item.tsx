@@ -1,17 +1,19 @@
 import styles from './styles/task-item.module.css';
 
 import { mutate } from 'swr';
+import { ChangeEvent } from 'react';
 import { toast } from 'react-hot-toast';
 import { Task } from '@prisma/client';
 import { ShowModal } from './task-list';
 import { dismissableErrorToast } from '@/lib/toastUtils';
+import UpdateTaskForm from './update-task-form';
 
 async function toggleTaskProperty(
   id: string,
   property: 'complete' | 'star',
-  handleActiveTask: CallableFunction,
+  handleShowOptions: CallableFunction,
 ) {
-  handleActiveTask(null);
+  handleShowOptions(null);
   const toastId = toast.loading('Loading...');
 
   const tasklist = '/api/task';
@@ -33,15 +35,36 @@ async function toggleTaskProperty(
 
 export default function TaskItem({
   task,
-  activeTaskId,
-  handleActiveTask,
+  showTaskOptions,
+  handleShowOptions,
   handleShowModal,
+
+  inputText,
+  taskToUpdate,
+  handleChange,
+  handleForm,
 }: {
   task: Task;
-  activeTaskId: string | null;
-  handleActiveTask(taskId: string): void;
+  showTaskOptions: Task | null;
+  handleShowOptions(task: Task): void;
   handleShowModal(showModal: ShowModal): void;
+
+  inputText: string;
+  taskToUpdate: string | null;
+  handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleForm(task?: Task): void;
 }) {
+  if (task.id === taskToUpdate) {
+    return (
+      <UpdateTaskForm
+        taskId={task.id}
+        inputText={inputText}
+        handleChange={handleChange}
+        handleForm={handleForm}
+      />
+    );
+  }
+
   return (
     <li
       className={`${styles.task} ${task.starred && styles.task_starred} ${
@@ -52,7 +75,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => toggleTaskProperty(task.id, 'complete', handleActiveTask)}
+          onClick={() => toggleTaskProperty(task.id, 'complete', handleShowOptions)}
           aria-label="Toggle complete task"
           title="Toggle complete"
         >
@@ -62,7 +85,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => handleActiveTask(task.id)}
+          onClick={() => handleShowOptions(task)}
           aria-label="Show/hide task options"
           title="Options"
         >
@@ -70,8 +93,18 @@ export default function TaskItem({
         </button>
       </div>
 
-      {activeTaskId === task.id && (
+      {showTaskOptions === task && (
         <div className={styles.task_options}>
+          <button
+            type="button"
+            className={styles.task_icon}
+            onClick={() => handleForm(task)}
+            aria-label="Edit task"
+            title="Edit"
+          >
+            <i className="ri-edit-line"></i>
+          </button>
+
           <button
             type="button"
             className={styles.task_icon}
@@ -86,7 +119,7 @@ export default function TaskItem({
             <button
               type="button"
               className={styles.task_icon}
-              onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
+              onClick={() => toggleTaskProperty(task.id, 'star', handleShowOptions)}
               aria-label="Star task"
               title="Star"
             >
@@ -108,7 +141,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => toggleTaskProperty(task.id, 'star', handleActiveTask)}
+          onClick={() => toggleTaskProperty(task.id, 'star', handleShowOptions)}
           aria-label="Unstar task"
           title="Unstar"
         >
