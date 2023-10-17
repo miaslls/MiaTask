@@ -1,10 +1,10 @@
 import styles from './styles/task-item.module.css';
 
+import type { ShowModal } from '@/pages';
 import { mutate } from 'swr';
 import { ChangeEvent } from 'react';
 import { toast } from 'react-hot-toast';
 import { Task } from '@prisma/client';
-import { ShowModal } from './task-list';
 import { dismissableErrorToast } from '@/lib/toastUtils';
 import UpdateTaskForm from './update-task-form';
 
@@ -13,7 +13,7 @@ async function toggleTaskProperty(
   property: 'complete' | 'star',
   handleShowOptions: CallableFunction,
 ) {
-  handleShowOptions(null);
+  handleShowOptions();
   const toastId = toast.loading('Loading...');
 
   const tasklist = '/api/task';
@@ -46,7 +46,7 @@ export default function TaskItem({
 }: {
   task: Task;
   showTaskOptions: Task | null;
-  handleShowOptions(task: Task): void;
+  handleShowOptions(task?: Task): void;
   handleShowModal(showModal: ShowModal): void;
 
   inputText: string;

@@ -1,51 +1,31 @@
 import useSWR from 'swr';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
+import type { ShowModal } from '@/pages';
 
 import Modal from './modal';
 import TaskModal from './task-modal';
 import TaskItem from './task-item';
 
-export type ShowModal = {
-  type: 'details' | 'delete';
-  task: Task;
-};
-
-export default function TaskList() {
-  const [showModal, setShowModal] = useState<ShowModal | null>(null);
-  const [showTaskOptions, setshowTaskOptions] = useState<Task | null>(null);
-
-  const [taskToUpdate, setTaskToUpdate] = useState<string | null>(null);
-  const [updateInputText, setUpdateInputText] = useState<string>('');
-
-  function handleUpdateForm(task?: Task) {
-    if (task) {
-      setTaskToUpdate(task.id);
-      setUpdateInputText(task.text);
-    } else {
-      setTaskToUpdate(null);
-      setUpdateInputText('');
-    }
-    setshowTaskOptions(null);
-  }
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setUpdateInputText(e.target.value);
-  }
-
-  const handleShowModal = (showModal: ShowModal | null) => {
-    setshowTaskOptions(null);
-    setShowModal(showModal);
-  };
-
-  const handleShowOptions = (task: Task | null) => {
-    if (showTaskOptions === task) {
-      setshowTaskOptions(null);
-    } else {
-      setshowTaskOptions(task);
-    }
-  };
-
+export default function TaskList({
+  showModal,
+  showTaskOptions,
+  taskToUpdate,
+  updateInputText,
+  handleShowModal,
+  handleShowOptions,
+  handleUpdateChange,
+  handleUpdateForm,
+}: {
+  showModal: ShowModal;
+  showTaskOptions: Task | null;
+  taskToUpdate: string | null;
+  updateInputText: string;
+  handleShowModal(showmodal: ShowModal): void;
+  handleShowOptions(task?: Task): void;
+  handleUpdateChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleUpdateForm(task?: Task): void;
+}) {
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
 
   const { data, error, isLoading } = useSWR('/api/task', fetcher);
@@ -79,7 +59,7 @@ export default function TaskList() {
             handleShowModal={handleShowModal}
             inputText={updateInputText}
             taskToUpdate={taskToUpdate}
-            handleChange={handleChange}
+            handleChange={handleUpdateChange}
             handleForm={handleUpdateForm}
             key={`task-item-${task.id}`}
           />

@@ -15,6 +15,11 @@ import TaskList from '@/components/task-list';
 import CreateTaskForm from '@/components/create-task-form';
 import Footer from '@/components/footer';
 
+export type ShowModal = {
+  type: 'details' | 'delete';
+  task: Task;
+} | null;
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const tasks = await prisma.task.findMany({
     orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { createdAt: 'desc' }],
@@ -30,18 +35,66 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
+  const [showModal, setShowModal] = useState<ShowModal>(null);
+  const [showTaskOptions, setshowTaskOptions] = useState<Task | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [createInputText, setCreateInputText] = useState('');
+  const [taskToUpdate, setTaskToUpdate] = useState<string | null>(null);
+  const [updateInputText, setUpdateInputText] = useState<string>('');
+
+  const handleShowModal = (showModal: ShowModal) => {
+    handleShowOptions();
+    setShowModal(showModal);
+  };
+
+  const handleShowOptions = (task?: Task) => {
+    if (task && task !== showTaskOptions) {
+      setshowTaskOptions(task);
+
+      if (showCreateForm) {
+        handleCreateForm();
+      }
+
+      if (taskToUpdate) {
+        handleUpdateForm();
+      }
+    } else {
+      setshowTaskOptions(null);
+    }
+  };
 
   function handleCreateForm() {
+    if (showTaskOptions) {
+      handleShowOptions();
+    }
+
     if (showCreateForm) {
       setCreateInputText('');
     }
+
     setShowCreateForm(!showCreateForm);
   }
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+  function handleCreateChange(e: ChangeEvent<HTMLInputElement>) {
     setCreateInputText(e.target.value);
+  }
+
+  function handleUpdateForm(task?: Task) {
+    if (showTaskOptions) {
+      handleShowOptions();
+    }
+
+    if (task) {
+      setTaskToUpdate(task.id);
+      setUpdateInputText(task.text);
+    } else {
+      setTaskToUpdate(null);
+      setUpdateInputText('');
+    }
+  }
+
+  function handleUpdateChange(e: ChangeEvent<HTMLInputElement>) {
+    setUpdateInputText(e.target.value);
   }
 
   return (
@@ -61,7 +114,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
           {showCreateForm && (
             <CreateTaskForm
               inputText={createInputText}
-              handleChange={handleChange}
+              handleChange={handleCreateChange}
               handleForm={handleCreateForm}
             />
           )}
@@ -86,7 +139,16 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
 
           <ul className={styles.tasklist}>
             <SWRConfig value={{ fallback }}>
-              <TaskList />
+              <TaskList
+                showModal={showModal}
+                showTaskOptions={showTaskOptions}
+                taskToUpdate={taskToUpdate}
+                updateInputText={updateInputText}
+                handleShowModal={handleShowModal}
+                handleShowOptions={handleShowOptions}
+                handleUpdateChange={handleUpdateChange}
+                handleUpdateForm={handleUpdateForm}
+              />
             </SWRConfig>
           </ul>
         </main>
