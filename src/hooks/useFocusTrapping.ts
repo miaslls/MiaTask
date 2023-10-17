@@ -45,8 +45,6 @@ export function useFocusTrapping({
 
       const handleEscapeKeyPress = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
-          // initialPageFocus && initialPageFocus.focus(); // ❗
-
           if (initialPageFocus) {
             initialPageFocus.focus();
           }

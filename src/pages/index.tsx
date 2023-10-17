@@ -4,7 +4,7 @@ import taskStyles from '@/components/styles/task-item.module.css';
 import Head from 'next/head';
 import prisma from '@/lib/prisma';
 import { Task } from '@prisma/client';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
 import { Toaster } from 'react-hot-toast';
@@ -43,6 +43,14 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [updateInputText, setUpdateInputText] = useState<string>('');
 
   const handleShowModal = (showModal: ShowModal) => {
+    if (showCreateForm) {
+      handleCreateForm();
+    }
+
+    if (taskToUpdate) {
+      handleUpdateForm();
+    }
+
     handleShowOptions();
     setShowModal(showModal);
   };
@@ -96,6 +104,22 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   function handleUpdateChange(e: ChangeEvent<HTMLInputElement>) {
     setUpdateInputText(e.target.value);
   }
+
+  useEffect(() => {
+    const handleEscapeKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (showTaskOptions) {
+          handleShowOptions();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyPress);
+    };
+  }, [handleShowOptions]);
 
   return (
     <>

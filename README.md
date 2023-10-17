@@ -4,12 +4,7 @@
 
 ### FIXME: remove ALL markers: ❗ ❓ ⚠️ 🐞 + `//` or `/* */`)
 
-- ⬛ esc closes task options (task-item)
-- ⬛ opening create-form closes update-form (and vice-versa)
-  - from tasklist to index: showModal, taskToUpdate and all related
 - ⬛ component function types
-
-- ⬛ PHAPHA - `44  initialPageFocus && initialPageFocus.focus();` @[useFocusTrapping.ts]('./src/hooks/useFocusTrapping.ts')
 
 ---
 
@@ -29,6 +24,8 @@
 
 ### ✔️ COMPLETED
 
+- ✅ esc closes task options (task-item)
+- ✅ manage open/close forms
 - ✅ update task
 - ✅ add task from header to tasklist
 - ✅ debatable -- better error messages
