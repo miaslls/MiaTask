@@ -76,6 +76,10 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       handleShowOptions();
     }
 
+    if (taskToUpdate) {
+      handleUpdateForm();
+    }
+
     if (showCreateForm) {
       setCreateInputText('');
     }
