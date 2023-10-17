@@ -20,6 +20,10 @@ export function useFocusTrapping({
       const lastFocusable = focusableElements[focusableElements.length - 1];
       const initialPageFocus: any = document.querySelector(queryString); // ❗
 
+      if (firstFocusable === lastFocusable) {
+        firstFocusable.focus();
+      }
+
       const handleTabKeyPress = (e: KeyboardEvent) => {
         if (e.key === 'Tab') {
           // SHIFT + TAB
