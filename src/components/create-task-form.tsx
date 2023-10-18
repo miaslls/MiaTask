@@ -34,15 +34,17 @@ async function submitPostData(
   }
 }
 
+export type CreateTaskFormProps = {
+  inputText: string;
+  handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleForm(): void;
+};
+
 export default function CreateTaskForm({
   inputText,
   handleChange,
   handleForm,
-}: {
-  inputText: string;
-  handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleForm(): void;
-}) {
+}: CreateTaskFormProps) {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleForm });

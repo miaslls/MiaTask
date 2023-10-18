@@ -16,7 +16,7 @@ async function removeTask(id: string, handleShowModal: CallableFunction) {
   const response = await fetch(key, { method: 'DELETE' });
 
   if (response.ok) {
-    toast.success('Task removed.', { id: toastId });
+    toast.success('Task removed', { id: toastId });
     mutate(tasklist);
   } else {
     const error = await response.json();
@@ -25,13 +25,12 @@ async function removeTask(id: string, handleShowModal: CallableFunction) {
   }
 }
 
-export default function TaskModal({
-  showModal,
-  handleShowModal,
-}: {
+type TaskModalProps = {
   showModal: ShowModal;
   handleShowModal(showModal: ShowModal): void;
-}) {
+};
+
+export default function TaskModal({ showModal, handleShowModal }: TaskModalProps) {
   return (
     <>
       {showModal && (

@@ -4,8 +4,6 @@
 
 ### FIXME: remove ALL markers: ❗ ❓ ⚠️ 🐞 + `//` or `/* */`)
 
-- ⬛ component function types
-
 ---
 
 - ⬛ redo color scheme:
@@ -24,6 +22,7 @@
 
 ### ✔️ COMPLETED
 
+- ✅ component prop types
 - ✅ esc closes task options (task-item)
 - ✅ manage open/close forms
 - ✅ update task

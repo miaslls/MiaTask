@@ -36,17 +36,19 @@ async function submitPatchData(
   }
 }
 
+export type UpdateTaskFormProps = {
+  taskId: string;
+  inputText: string;
+  handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleForm(): void;
+};
+
 export default function UpdateTaskForm({
   taskId,
   inputText,
   handleChange,
   handleForm,
-}: {
-  taskId: string;
-  inputText: string;
-  handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleForm(): void;
-}) {
+}: UpdateTaskFormProps) {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleForm });

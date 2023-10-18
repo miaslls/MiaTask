@@ -7,6 +7,17 @@ import Modal from './modal';
 import TaskModal from './task-modal';
 import TaskItem from './task-item';
 
+export type TaskListProps = {
+  showModal: ShowModal;
+  showTaskOptions: Task | null;
+  taskToUpdate: string | null;
+  updateInputText: string;
+  handleShowModal(showmodal: ShowModal): void;
+  handleShowOptions(task?: Task): void;
+  handleUpdateChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleUpdateForm(task?: Task): void;
+};
+
 export default function TaskList({
   showModal,
   showTaskOptions,
@@ -16,16 +27,7 @@ export default function TaskList({
   handleShowOptions,
   handleUpdateChange,
   handleUpdateForm,
-}: {
-  showModal: ShowModal;
-  showTaskOptions: Task | null;
-  taskToUpdate: string | null;
-  updateInputText: string;
-  handleShowModal(showmodal: ShowModal): void;
-  handleShowOptions(task?: Task): void;
-  handleUpdateChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleUpdateForm(task?: Task): void;
-}) {
+}: TaskListProps) {
   const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
 
   const { data, error, isLoading } = useSWR('/api/task', fetcher);

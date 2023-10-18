@@ -33,27 +33,27 @@ async function toggleTaskProperty(
   }
 }
 
+export type TaskItemProps = {
+  task: Task;
+  showTaskOptions: Task | null;
+  handleShowOptions(task?: Task): void;
+  handleShowModal(showModal: ShowModal): void;
+  inputText: string;
+  taskToUpdate: string | null;
+  handleChange(e: ChangeEvent<HTMLInputElement>): void;
+  handleForm(task?: Task): void;
+};
+
 export default function TaskItem({
   task,
   showTaskOptions,
   handleShowOptions,
   handleShowModal,
-
   inputText,
   taskToUpdate,
   handleChange,
   handleForm,
-}: {
-  task: Task;
-  showTaskOptions: Task | null;
-  handleShowOptions(task?: Task): void;
-  handleShowModal(showModal: ShowModal): void;
-
-  inputText: string;
-  taskToUpdate: string | null;
-  handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleForm(task?: Task): void;
-}) {
+}: TaskItemProps) {
   if (task.id === taskToUpdate) {
     return (
       <UpdateTaskForm

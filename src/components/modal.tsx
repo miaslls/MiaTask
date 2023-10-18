@@ -16,15 +16,13 @@ function Overlay({
   );
 }
 
-export default function Modal({
-  title,
-  children,
-  closeModal,
-}: {
+export type ModalProps = {
   title: string;
   children: React.JSX.Element;
   closeModal(): void;
-}) {
+};
+
+export default function Modal({ title, children, closeModal }: ModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useFocusTrapping({ elementRef: modalRef, escapeHatchFunc: closeModal });
