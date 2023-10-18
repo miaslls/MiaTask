@@ -130,10 +130,6 @@ footer {
   cursor: default;
 }
 
-.tasklist_alert {
-  font-size: 1rem;
-}
-
 @media screen and (orientation: landscape) {
   a.text_link:hover,
   .toast_dismissable > button:hover {

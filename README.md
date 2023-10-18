@@ -6,19 +6,10 @@
 
 ---
 
-- ⬛ redo color scheme:
-  - black, white, gray:
-    - light, medium, dark
-  - green, red
-  - white-translucent (light-gray?)
-  - black-translucent (medium-light-gray?)
-
----
-
 - ⬛ best accessibility practices (+)
 
   - dark mode
-  - i18n
+  - i18n ❓
 
 ### ✔️ COMPLETED
 
@@ -37,4 +28,5 @@
 - ✅ client-side fetching
 - ✅ API error handling
 - ❎ extract repository (prisma functions) ❌
+- ❎ redo color scheme ❌
 - ❎ useTask() ❌
