@@ -11,21 +11,21 @@
 
 .task_edit_icon {
   width: 0.9rem;
-  color: var(--gray-medium);
+  color: var(--gray-03);
 }
 
 .task_input {
   flex: 1;
-  background: var(--gray-light);
+  background: var(--gray-01);
   font-family: var(--default-font);
   font-weight: var(--default-regular);
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 .task_input_icon {
   height: 1.1rem;
   font-size: larger;
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 @media screen and (orientation: landscape) {
@@ -38,7 +38,7 @@
   }
 
   .task_input_icon:hover {
-    color: var(--gray-medium);
+    color: var(--gray-03);
     cursor: default;
   }
 }

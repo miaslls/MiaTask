@@ -2,21 +2,21 @@ import { DefaultToastOptions, toast } from 'react-hot-toast';
 
 export const toastOptions: DefaultToastOptions = {
   style: {
-    background: 'var(--white-translucent)',
+    background: 'var(--bg-color-translucent)',
     boxShadow: '0.175rem 0.175rem var(--gray-translucent)',
-    color: 'var(--black)',
+    color: 'var(--fg-color)',
     borderRadius: 0,
   },
   success: {
     iconTheme: {
       primary: 'var(--green)',
-      secondary: 'var(--white-translucent)',
+      secondary: 'var(--bg-color-translucent)',
     },
   },
   error: {
     iconTheme: {
       primary: 'var(--red)',
-      secondary: 'var(--white-translucent)',
+      secondary: 'var(--bg-color-translucent)',
     },
   },
 };

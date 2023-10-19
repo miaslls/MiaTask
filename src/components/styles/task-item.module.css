@@ -12,7 +12,7 @@
 
 .task_icon {
   width: 0.9rem;
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 .task_text {
@@ -26,16 +26,16 @@
 }
 
 .task_completed * {
-  color: var(--gray-medium);
+  color: var(--gray-03);
 }
 
 .task_completed > .task_text {
-  text-decoration: line-through solid var(--gray-medium) 1px;
+  text-decoration: line-through solid var(--gray-03) 1px;
 }
 
 @media screen and (orientation: landscape) {
   .task_icon:hover {
-    color: var(--gray-medium);
+    color: var(--gray-03);
     cursor: default;
   }
 }

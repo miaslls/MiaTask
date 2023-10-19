@@ -16,8 +16,8 @@
   width: 90%;
   padding: 3rem 1rem 1rem 1rem;
   position: relative;
-  background: var(--white-translucent);
-  box-shadow: 0.25rem 0.25rem var(--black-translucent);
+  background: var(--bg-color-translucent);
+  box-shadow: 0.25rem 0.25rem var(--fg-color-translucent);
 }
 
 .title {
@@ -25,14 +25,14 @@
   top: 0.5rem;
   left: 1rem;
   font-size: 0.75rem;
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 .close {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 .content {
@@ -47,7 +47,7 @@
   }
 
   .close:hover {
-    color: var(--gray-medium);
+    color: var(--gray-03);
     cursor: default;
   }
 }

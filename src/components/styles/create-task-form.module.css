@@ -7,15 +7,15 @@
 
 .task_input {
   flex: 1;
-  border-bottom: 1px solid var(--gray-medium);
+  border-bottom: 1px solid var(--gray-03);
   font-family: var(--default-font);
   font-weight: var(--default-regular);
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 .task_input_icon {
   font-size: larger;
-  color: var(--gray-dark);
+  color: var(--gray-04);
 }
 
 @media screen and (orientation: landscape) {
@@ -24,7 +24,7 @@
   }
 
   .task_input_icon:hover {
-    color: var(--gray-medium);
+    color: var(--gray-03);
     cursor: default;
   }
 }

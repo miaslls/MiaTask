@@ -14,7 +14,7 @@
 }
 
 .quote {
-  color: var(--gray-medium);
+  color: var(--gray-03);
   font-size: 1.25rem;
 }
 
@@ -44,13 +44,13 @@
 }
 
 .delete_button {
-  color: var(--gray-dark);
+  color: var(--gray-04);
   font-size: 1.25rem;
 }
 
 @media screen and (orientation: landscape) {
   .delete_button:hover {
-    color: var(--gray-medium);
+    color: var(--gray-03);
     cursor: default;
   }
 }
