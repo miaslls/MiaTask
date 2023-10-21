@@ -120,6 +120,11 @@ a.text_link {
   text-decoration: underline solid var(--gray-03) 1px;
 }
 
+header {
+  align-items: baseline;
+  justify-content: space-between;
+}
+
 main {
   flex-direction: column;
   gap: 0.25rem;
