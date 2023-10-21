@@ -35,7 +35,7 @@ export default function TaskList({
   if (error)
     return (
       <div className="tasklist_alert">
-        <i className="ri-alert-line"></i> Failed to load
+        <i className="ri-alert-line"></i> Failed to load tasklist
       </div>
     );
 
