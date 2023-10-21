@@ -2,6 +2,8 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Roboto_Mono } from 'next/font/google';
 
+import ThemeProvider from '@/components/context/theme-provider';
+
 const roboto_mono = Roboto_Mono({ subsets: ['latin'] });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,8 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
           --default-bold: 500;
         }
       `}</style>
-
-      <Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }
