@@ -61,5 +61,5 @@ export function useFocusTrapping({
         element.removeEventListener('keydown', handleEscapeKeyPress);
       };
     }
-  }, [escapeHatchFunc]);
+  }, [escapeHatchFunc, elementRef]);
 }

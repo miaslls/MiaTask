@@ -111,8 +111,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
 
   useEffect(() => {
     const handleEscapeKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (showTaskOptions) {
+      if (showTaskOptions) {
+        if (e.key === 'Escape') {
           handleShowOptions();
         }
       }
@@ -123,7 +123,9 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
     return () => {
       document.removeEventListener('keydown', handleEscapeKeyPress);
     };
-  }, [handleShowOptions]);
+    // ❗
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showTaskOptions]);
 
   return (
     <>
