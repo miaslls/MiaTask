@@ -8,8 +8,8 @@
 
 - ⬛ best accessibility practices (+)
 
-  - dark mode
-  - i18n ❓
+  - dark mode ✔️
+  - i18n
 
 ### ✔️ COMPLETED
 

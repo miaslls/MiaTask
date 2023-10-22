@@ -37,7 +37,7 @@
 
 .content {
   width: 100%;
-  min-height: 0.9rem;
+  min-height: 1rem;
 }
 
 @media screen and (orientation: landscape) {
