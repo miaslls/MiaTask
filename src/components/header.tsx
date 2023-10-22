@@ -1,9 +1,7 @@
 import styles from './styles/header.module.css';
-import { useTheme } from './context/theme-provider';
+import ToggleThemeButton from './toggle-theme-button';
 
 export default function Header() {
-  const { theme, toggleTheme } = useTheme();
-
   return (
     <header>
       <div className={styles.title}>
@@ -16,15 +14,7 @@ export default function Header() {
         </h1>
       </div>
 
-      {/* 🔻 component and styles adapted from https://webtips.dev/toggle-buttons-in-react ❗ */}
-
-      <label className={styles.toggle_theme_button}>
-        <input type="checkbox" defaultChecked={theme === 'dark'} onClick={toggleTheme} />
-        <span></span>
-        <strong>
-          <i className="ri-moon-line"></i>
-        </strong>
-      </label>
+      <ToggleThemeButton />
     </header>
   );
 }
