@@ -7,7 +7,11 @@ export default function ToggleThemeButton() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <label className={styles.toggle_theme_button}>
+    <label
+      className={styles.toggle_theme_button}
+      aria-label="Toggle dark mode"
+      title="Toggle dark mode"
+    >
       <input type="checkbox" defaultChecked={theme === 'dark'} onClick={toggleTheme} />
       <span></span>
       <strong>

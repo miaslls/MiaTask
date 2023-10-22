@@ -7,7 +7,6 @@
   background: var(--gray-02);
   color: var(--gray-05);
   font-weight: var(--default-bold);
-  cursor: default;
 }
 
 .tasklist {

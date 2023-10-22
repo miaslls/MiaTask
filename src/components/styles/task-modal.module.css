@@ -51,6 +51,5 @@
 @media screen and (orientation: landscape) {
   .delete_button:hover {
     color: var(--gray-03);
-    cursor: default;
   }
 }

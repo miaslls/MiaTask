@@ -39,6 +39,5 @@
 
   .task_input_icon:hover {
     color: var(--gray-03);
-    cursor: default;
   }
 }

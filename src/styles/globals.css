@@ -28,7 +28,8 @@ html * {
 }
 
 button,
-input {
+input,
+a {
   border: none;
   padding: 0;
   margin: 0;
@@ -117,7 +118,6 @@ h1 span {
 
 a.text_link {
   color: var(--gray-04);
-  text-decoration: underline solid var(--gray-03) 1px;
 }
 
 header {
@@ -146,14 +146,12 @@ footer {
 .toast_dismissable > button {
   margin-right: -0.5rem;
   color: var(--gray-04);
-  cursor: default;
 }
 
 @media screen and (orientation: landscape) {
   a.text_link:hover,
   .toast_dismissable > button:hover {
     color: var(--gray-03);
-    cursor: default;
   }
 
   header,

@@ -36,6 +36,5 @@
 @media screen and (orientation: landscape) {
   .task_icon:hover {
     color: var(--gray-03);
-    cursor: default;
   }
 }

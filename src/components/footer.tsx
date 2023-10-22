@@ -12,9 +12,8 @@ export default function Footer() {
           title="External link: Author's Github page"
         >
           @miaslls
+          <i className="ri-external-link-line"></i>
         </Link>
-
-        <i className="ri-external-link-line"></i>
       </span>
       ৹
       <span className={styles.footer_link}>
@@ -22,12 +21,11 @@ export default function Footer() {
           className="text_link"
           href="https://fonts.google.com/specimen/Roboto+Mono"
           target="_blank"
-          title="External link: Font-family used in the project: Google's Roboto Mono"
+          title="External link: Roboto Mono"
         >
           font
+          <i className="ri-external-link-line"></i>
         </Link>
-
-        <i className="ri-external-link-line"></i>
       </span>
       ৹
       <span className={styles.footer_link}>
@@ -35,12 +33,11 @@ export default function Footer() {
           className="text_link"
           href="https://remixicon.com"
           target="_blank"
-          title="External link: Icon system used in the project: Remix Icon"
+          title="External link: Remix Icon"
         >
           icons
+          <i className="ri-external-link-line"></i>
         </Link>
-
-        <i className="ri-external-link-line"></i>
       </span>
     </footer>
   );
