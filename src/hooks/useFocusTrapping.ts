@@ -4,7 +4,7 @@ export function useFocusTrapping({
   elementRef,
   escapeHatchFunc,
 }: {
-  elementRef: React.MutableRefObject<any>; // ❗
+  elementRef: React.MutableRefObject<HTMLElement | null>;
   escapeHatchFunc(): void;
 }) {
   useEffect(() => {
@@ -18,7 +18,17 @@ export function useFocusTrapping({
 
       const firstFocusable = focusableElements[0];
       const lastFocusable = focusableElements[focusableElements.length - 1];
-      const initialPageFocus: any = document.querySelector(queryString); // ❗
+      const initialPageFocus = document.querySelector(queryString);
+
+      if (
+        !(firstFocusable instanceof HTMLElement) ||
+        !(lastFocusable instanceof HTMLElement) ||
+        !(initialPageFocus instanceof HTMLElement)
+      ) {
+        console.error('Found element(s) not HTML Element(s)');
+
+        return;
+      }
 
       if (firstFocusable === lastFocusable) {
         firstFocusable.focus();
