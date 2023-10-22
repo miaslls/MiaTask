@@ -32,19 +32,21 @@ export default function TaskList({
 
   const { data, error, isLoading } = useSWR('/api/task', fetcher);
 
-  if (error)
+  if (error) {
     return (
       <div className="tasklist_alert">
         <i className="ri-alert-line"></i> Failed to load tasklist
       </div>
     );
+  }
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <div className="tasklist_alert">
         <i className="ri-loop-right-fill"></i> Loading...
       </div>
     );
+  }
 
   return (
     <>

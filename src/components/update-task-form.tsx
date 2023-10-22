@@ -18,9 +18,9 @@ async function submitPatchData(
   const toastId = toast.loading('Loading...');
 
   const tasklist = '/api/task';
-  const key = `/api/task/${id}`;
+  const url = `/api/task/${id}`;
 
-  const response = await fetch(key, {
+  const response = await fetch(url, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', 'Content-Language': 'en' },
     body: JSON.stringify({ text: inputText }),

@@ -16,9 +16,9 @@ async function submitPostData(
 
   const toastId = toast.loading('Loading...');
 
-  const key = '/api/task';
+  const tasklist = '/api/task';
 
-  const response = await fetch(key, {
+  const response = await fetch(tasklist, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Content-Language': 'en' },
     body: JSON.stringify({ text: inputText }),
@@ -26,7 +26,7 @@ async function submitPostData(
 
   if (response.ok) {
     toast.success('Task created!', { id: toastId });
-    mutate(key);
+    mutate(tasklist);
   } else {
     const error = await response.json();
     dismissableErrorToast(error.message);

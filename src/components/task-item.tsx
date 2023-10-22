@@ -67,9 +67,13 @@ export default function TaskItem({
 
   return (
     <li
-      className={`${styles.task} ${task.starred && styles.task_starred} ${
-        task.completed && styles.task_completed
-      }`}
+      className={
+        styles.task +
+        ' ' +
+        (task.starred && styles.task_starred) +
+        ' ' +
+        (task.completed && styles.task_completed)
+      }
     >
       <div className={styles.task_icons}>
         <button

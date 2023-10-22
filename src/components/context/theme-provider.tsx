@@ -26,7 +26,7 @@ export default function ThemeProvider(props: PropsWithChildren) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     if (mediaQuery.matches) {
-      console.log('User prefers Dark Mode'); // ❗
+      console.log('User prefers Dark Mode');
 
       setTheme('dark');
     } else {
@@ -36,29 +36,25 @@ export default function ThemeProvider(props: PropsWithChildren) {
     mediaQuery.addEventListener('change', (e) => {
       setTheme(e.matches ? 'dark' : 'light');
 
-      console.log('Theme changed to match system'); // ❗
+      console.log('Theme changed to match system');
     });
   }, []);
 
   useEffect(() => {
     if (theme) {
-      applyTheme();
+      const body = document.querySelector('body') as HTMLBodyElement;
+
+      if (theme === 'dark') {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
+
+      console.log(`Theme set to "${theme}"`);
     }
-    // ❗
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [theme]);
 
-  const applyTheme = () => {
-    const body = document.querySelector('body') as HTMLBodyElement;
-
-    theme === 'dark' ? body.classList.add('dark') : body.classList.remove('dark');
-
-    console.log(`Theme set to "${theme}"`); // ❗
-  };
-
   const toggleTheme = () => {
-    console.log('Toggle method called'); // 🐞
-
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
