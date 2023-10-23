@@ -7,9 +7,9 @@
 ---
 
 - ⬛ best accessibility practices (+)
-
   - dark mode ✔️
   - i18n
+    - update sitemap (`/pt`)
 
 ### ✔️ COMPLETED
 
