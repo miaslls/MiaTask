@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
+import { fetcher } from '@/lib/fetcher';
 import type { ShowModal } from '@/pages';
 
 import Modal from './modal';
@@ -28,8 +29,6 @@ export default function TaskList({
   handleUpdateChange,
   handleUpdateForm,
 }: TaskListProps) {
-  const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
-
   const { data, error, isLoading } = useSWR('/api/task', fetcher);
 
   if (error) {

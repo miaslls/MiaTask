@@ -109,24 +109,6 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
     setUpdateInputText(e.target.value);
   }
 
-  useEffect(() => {
-    const handleEscapeKeyPress = (e: KeyboardEvent) => {
-      if (showTaskOptions) {
-        if (e.key === 'Escape') {
-          handleShowOptions();
-        }
-      }
-    };
-
-    document.addEventListener('keydown', handleEscapeKeyPress);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKeyPress);
-    };
-    // ❗
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showTaskOptions]);
-
   return (
     <>
       <Head>
@@ -141,15 +123,13 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <Header />
 
         <main>
-          {showCreateForm && (
+          {showCreateForm ? (
             <CreateTaskForm
               inputText={createInputText}
               handleChange={handleCreateChange}
               handleForm={handleCreateForm}
             />
-          )}
-
-          {!showCreateForm && (
+          ) : (
             <button
               type="button"
               className={taskStyles.task + ' ' + styles.add_button}
