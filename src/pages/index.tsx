@@ -9,6 +9,7 @@ import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
 import { Toaster } from 'react-hot-toast';
 import { toastOptions } from '@/lib/toastUtils';
+import useTranslation from 'next-translate/useTranslation';
 
 import Header from '@/components/header';
 import TaskList from '@/components/task-list';
@@ -41,6 +42,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const [createInputText, setCreateInputText] = useState('');
   const [taskToUpdate, setTaskToUpdate] = useState<string | null>(null);
   const [updateInputText, setUpdateInputText] = useState<string>('');
+
+  const { t } = useTranslation('common');
 
   const handleShowModal = (showModal: ShowModal) => {
     if (showCreateForm) {
@@ -123,6 +126,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <Header />
 
         <main>
+          {t('test')}
+
           {showCreateForm ? (
             <CreateTaskForm
               inputText={createInputText}
