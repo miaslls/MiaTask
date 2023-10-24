@@ -2,8 +2,6 @@ import '../styles/globals.css';
 
 import type { AppProps } from 'next/app';
 import { Roboto_Mono } from 'next/font/google';
-import { appWithTranslation } from 'next-i18next';
-
 import ThemeProvider from '@/components/context/theme-provider';
 
 const roboto_mono = Roboto_Mono({ subsets: ['latin'] });
@@ -26,4 +24,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default appWithTranslation(App);
+export default App;

@@ -4,7 +4,7 @@ import taskStyles from '@/components/styles/task-item.module.css';
 import Head from 'next/head';
 import prisma from '@/lib/prisma';
 import { Task } from '@prisma/client';
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
 import { Toaster } from 'react-hot-toast';
@@ -135,7 +135,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
               className={taskStyles.task + ' ' + styles.add_button}
               onClick={handleCreateForm}
               aria-label="Open create task form"
-              title="Add"
+              title="Add task"
             >
               <div className={taskStyles.task_icons}>
                 <div className={taskStyles.task_icon}>
