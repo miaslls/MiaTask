@@ -1,3 +1,19 @@
 {
-  "test": "abobrinha"
+  "page-title": "MiaTask - Gerenciamento de Tarefas Simplificado | Organize e complete tarefas sem complicação!",
+  "add-button": "Nova tarefa",
+  "loading": "Carregando",
+  "error": "Erro",
+  "tasklist-fail": "Falha ao carregar lista de tarefas",
+  "tasklist-empty": "Lista de tarefas vazia",
+  "modal-details": "detalhes",
+  "modal-delete": "remover",
+  "confirm-delete": "remover?",
+  "done": "Pronto!",
+  "removed": "Tarefa removida",
+  "created": "Tarefa criada!",
+  "updated": "Tarefa atualizada!",
+  "create-placeholder": "Digite a nova tarefa...",
+  "update-placeholder": "Digite a tarefa atualizada...",
+  "font": "fonte",
+  "icons": "ícones"
 }

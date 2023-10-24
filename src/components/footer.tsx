@@ -1,7 +1,11 @@
 import styles from './styles/footer.module.css';
+
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 export default function Footer() {
+  const { t } = useTranslation('common');
+
   return (
     <footer>
       <span className={styles.footer_link}>
@@ -9,7 +13,7 @@ export default function Footer() {
           className="text_link"
           href="https://github.com/miaslls"
           target="_blank"
-          title="External link: Author's Github page"
+          title={t('a11y:title.link-github')}
         >
           @miaslls
           <i className="ri-external-link-line"></i>
@@ -21,9 +25,9 @@ export default function Footer() {
           className="text_link"
           href="https://fonts.google.com/specimen/Roboto+Mono"
           target="_blank"
-          title="External link: Roboto Mono"
+          title={t('a11y:title.link-font')}
         >
-          font
+          {t('font')}
           <i className="ri-external-link-line"></i>
         </Link>
       </span>
@@ -33,9 +37,9 @@ export default function Footer() {
           className="text_link"
           href="https://remixicon.com"
           target="_blank"
-          title="External link: Remix Icon"
+          title={t('a11y:title.link-icon')}
         >
-          icons
+          {t('icons')}
           <i className="ri-external-link-line"></i>
         </Link>
       </span>

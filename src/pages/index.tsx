@@ -8,7 +8,7 @@ import { ChangeEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
 import { Toaster } from 'react-hot-toast';
-import { toastOptions } from '@/lib/toastUtils';
+import { toastOptions } from '@/lib/toast';
 import useTranslation from 'next-translate/useTranslation';
 
 import Header from '@/components/header';
@@ -115,9 +115,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   return (
     <>
       <Head>
-        <title>
-          MiaTask - Simple Task Management | Organize, Update, and Complete Tasks Effortlessly
-        </title>
+        <title>{t('page-title')}</title>
       </Head>
 
       <div className="outer_container">
@@ -126,8 +124,6 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <Header />
 
         <main>
-          {t('test')}
-
           {showCreateForm ? (
             <CreateTaskForm
               inputText={createInputText}
@@ -139,8 +135,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
               type="button"
               className={taskStyles.task + ' ' + styles.add_button}
               onClick={handleCreateForm}
-              aria-label="Open create task form"
-              title="Add task"
+              aria-label={t('a11y:aria.label.open-create')}
+              title={t('a11y:title.add')}
             >
               <div className={taskStyles.task_icons}>
                 <div className={taskStyles.task_icon}>
@@ -148,7 +144,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
                 </div>
               </div>
 
-              <div className={taskStyles.task_text + ' ' + styles.add_text}>Add task</div>
+              <div className={taskStyles.task_text + ' ' + styles.add_text}>{t('add-button')}</div>
             </button>
           )}
 

@@ -1,0 +1,44 @@
+{
+  "aria": {
+    "label": {
+      "open-create": "Criar tarefa",
+      "close-create": "Fechar",
+      "toggle-complete": "Completar tarefa",
+      "options": "Mostrar/Ocultar opções",
+      "edit": "Editar tarefa",
+      "delete": "Remover tarefa",
+      "star": "Favoritar tarefa",
+      "unstar": "Remover favorito",
+      "details": "Ver detalhes",
+      "modal-close": "Fechar",
+      "cancel-delete": "Cencelar",
+      "confirm-delete": "Remover",
+      "create-input": "Digite a nova tarefa",
+      "update-input": "Digite a tarefa atualizada",
+      "close-update": "Fechar",
+      "error-alert": "Alerta de erro",
+      "close-alert": "Fechar alerta"
+    }
+  },
+  "title": {
+    "add": "Nova tarefa",
+    "toggle-dark": "Ativar/Desativar modo noturno",
+    "toggle-complete": "Completar",
+    "error": "Erro",
+    "options": "Opções",
+    "edit": "Editar",
+    "delete": "Remover",
+    "star": "Favoritar",
+    "unstar": "Remover dos favoritos",
+    "details": "Detalhes",
+    "close": "Fechar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "submit": "Enviar",
+    "create-input": "Nova tarefa",
+    "update-input": "Tarefa atualizada",
+    "link-github": "Link externo: Github de miaslls",
+    "link-font": "Link externo: Roboto Mono",
+    "link-icon": "Link externo: Remix Icon"
+  }
+}

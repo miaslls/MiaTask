@@ -3,18 +3,20 @@ import styles from './styles/create-task-form.module.css';
 import { ChangeEvent, FormEvent, useRef } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
-import { dismissableErrorToast } from '@/lib/toastUtils';
+import { dismissableErrorToast } from '@/components/dismissable-error-toast';
 import { useFocusTrapping } from '@/hooks/useFocusTrapping';
+import useTranslation from 'next-translate/useTranslation';
 
 async function submitPostData(
   e: FormEvent<HTMLFormElement>,
   inputText: string,
   handleForm: CallableFunction,
+  translate: CallableFunction,
 ) {
   e.preventDefault();
   handleForm();
 
-  const toastId = toast.loading('Loading...');
+  const toastId = toast.loading(translate('loading'));
 
   const tasklist = '/api/task';
 
@@ -25,7 +27,7 @@ async function submitPostData(
   });
 
   if (response.ok) {
-    toast.success('Task created!', { id: toastId });
+    toast.success(translate('created'), { id: toastId });
     mutate(tasklist);
   } else {
     const error = await response.json();
@@ -45,6 +47,8 @@ export default function CreateTaskForm({
   handleChange,
   handleForm,
 }: CreateTaskFormProps) {
+  const { t } = useTranslation('common');
+
   const formRef = useRef<HTMLFormElement | null>(null);
 
   useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleForm });
@@ -52,7 +56,7 @@ export default function CreateTaskForm({
   return (
     <form
       className={styles.task_form}
-      onSubmit={(e) => submitPostData(e, inputText, handleForm)}
+      onSubmit={(e) => submitPostData(e, inputText, handleForm, t)}
       ref={formRef}
     >
       <input
@@ -63,23 +67,23 @@ export default function CreateTaskForm({
         value={inputText}
         autoComplete="off"
         className={styles.task_input}
-        placeholder="Enter new task..."
+        placeholder={t('create-placeholder')}
         onChange={handleChange}
-        aria-label="Enter new task"
-        title="New task text"
+        aria-label={t('a11y:aria.label.create-input')}
+        title={t('a11y:title.create-input')}
       />
 
       <button
         type="button"
         className={styles.task_input_icon}
         onClick={handleForm}
-        aria-label="Close create task form"
-        title="Close"
+        aria-label={t('a11y:aria.label.close-create')}
+        title={t('a11y:title.close')}
       >
         <i className="ri-close-line"></i>
       </button>
 
-      <button className={styles.task_input_icon} type="submit" title="Submit">
+      <button className={styles.task_input_icon} type="submit" title={t('a11y:title.submit')}>
         <i className="ri-arrow-right-s-line"></i>
       </button>
     </form>

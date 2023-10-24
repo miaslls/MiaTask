@@ -3,19 +3,21 @@ import styles from './styles/update-task-form.module.css';
 import { ChangeEvent, FormEvent, useRef } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
-import { dismissableErrorToast } from '@/lib/toastUtils';
+import { dismissableErrorToast } from '@/components/dismissable-error-toast';
 import { useFocusTrapping } from '@/hooks/useFocusTrapping';
+import useTranslation from 'next-translate/useTranslation';
 
 async function submitPatchData(
   e: FormEvent<HTMLFormElement>,
   id: string,
   inputText: string,
   handleUpdateForm: CallableFunction,
+  translate: CallableFunction,
 ) {
   e.preventDefault();
   handleUpdateForm();
 
-  const toastId = toast.loading('Loading...');
+  const toastId = toast.loading(translate('loading'));
 
   const tasklist = '/api/task';
   const url = `/api/task/${id}`;
@@ -27,7 +29,7 @@ async function submitPatchData(
   });
 
   if (response.ok) {
-    toast.success('Task updated!', { id: toastId });
+    toast.success(translate('updated'), { id: toastId });
     mutate(tasklist);
   } else {
     const error = await response.json();
@@ -49,6 +51,8 @@ export default function UpdateTaskForm({
   handleChange,
   handleForm,
 }: UpdateTaskFormProps) {
+  const { t } = useTranslation('common');
+
   const formRef = useRef<HTMLFormElement | null>(null);
 
   useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleForm });
@@ -56,7 +60,7 @@ export default function UpdateTaskForm({
   return (
     <form
       className={styles.task_form}
-      onSubmit={(e) => submitPatchData(e, taskId, inputText, handleForm)}
+      onSubmit={(e) => submitPatchData(e, taskId, inputText, handleForm, t)}
       ref={formRef}
     >
       <div className={styles.task_edit_icons}>
@@ -77,23 +81,23 @@ export default function UpdateTaskForm({
         value={inputText}
         autoComplete="off"
         className={styles.task_input}
-        placeholder="Enter updated task..."
+        placeholder={t('update-placeholder')}
         onChange={handleChange}
-        aria-label="Enter updated task"
-        title="Updated task text"
+        aria-label={t('a11y:aria.label.update-input')}
+        title={t('a11y:title.update-input')}
       />
 
       <button
         type="button"
         className={styles.task_input_icon}
         onClick={handleForm}
-        aria-label="Close update task form"
-        title="Close"
+        aria-label={t('a11y:aria.label.close-update')}
+        title={t('a11y:title.close')}
       >
         <i className="ri-close-line"></i>
       </button>
 
-      <button className={styles.task_input_icon} type="submit" title="Submit">
+      <button className={styles.task_input_icon} type="submit" title={t('a11y:title.submit')}>
         <i className="ri-arrow-right-s-line"></i>
       </button>
     </form>

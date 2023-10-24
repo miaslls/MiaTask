@@ -1,0 +1,44 @@
+{
+  "aria": {
+    "label": {
+      "open-create": "Open create task form",
+      "close-create": "Close create task form",
+      "toggle-complete": "Toggle complete task",
+      "options": "Show/hide task options",
+      "edit": "Edit task",
+      "delete": "Delete task",
+      "star": "Star task",
+      "unstar": "Unstar task",
+      "details": "Show task details",
+      "modal-close": "Close modal",
+      "cancel-delete": "Cancel delete",
+      "confirm-delete": "Confirm delete",
+      "create-input": "Enter new task",
+      "update-input": "Enter updated task",
+      "close-update": "Close update task form",
+      "error-alert": "Error alert",
+      "close-alert": "Close alert"
+    }
+  },
+  "title": {
+    "add": "Add task",
+    "toggle-dark": "Toggle dark mode",
+    "toggle-complete": "Toggle complete",
+    "error": "Error",
+    "options": "Options",
+    "edit": "Edit",
+    "delete": "Delete",
+    "star": "Star",
+    "unstar": "Unstar",
+    "details": "Details",
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "create-input": "New task text",
+    "update-input": "Updated task text",
+    "link-github": "External link: miaslls' Github page",
+    "link-font": "External link: Roboto Mono",
+    "link-icon": "External link: Remix Icon"
+  }
+}

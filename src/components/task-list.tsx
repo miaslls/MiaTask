@@ -3,6 +3,7 @@ import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
 import { fetcher } from '@/lib/fetcher';
 import type { ShowModal } from '@/pages';
+import useTranslation from 'next-translate/useTranslation';
 
 import Modal from './modal';
 import TaskModal from './task-modal';
@@ -29,12 +30,14 @@ export default function TaskList({
   handleUpdateChange,
   handleUpdateForm,
 }: TaskListProps) {
+  const { t } = useTranslation('common');
+
   const { data, error, isLoading } = useSWR('/api/task', fetcher);
 
   if (error) {
     return (
       <div className="tasklist_alert">
-        <i className="ri-alert-line"></i> Failed to load tasklist
+        <i className="ri-alert-line"></i> {t('tasklist-fail')}
       </div>
     );
   }
@@ -42,7 +45,7 @@ export default function TaskList({
   if (isLoading) {
     return (
       <div className="tasklist_alert">
-        <i className="ri-loop-right-fill"></i> Loading...
+        <i className="ri-loop-right-fill"></i> {t('loading')}
       </div>
     );
   }
@@ -51,7 +54,7 @@ export default function TaskList({
     <>
       {data.tasks.length === 0 ? (
         <div className="tasklist_alert">
-          <i className="ri-alert-line"></i> Tasklist empty
+          <i className="ri-alert-line"></i> {t('tasklist-empty')}
         </div>
       ) : (
         data.tasks.map((task: Task) => (

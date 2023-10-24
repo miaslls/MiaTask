@@ -1,5 +1,6 @@
 import styles from './styles/modal.module.css';
 import React, { useRef } from 'react';
+import useTranslation from 'next-translate/useTranslation';
 import { useFocusTrapping } from '@/hooks/useFocusTrapping';
 
 function Overlay({
@@ -23,6 +24,8 @@ export type ModalProps = {
 };
 
 export default function Modal({ title, children, closeModal }: ModalProps) {
+  const { t } = useTranslation('common');
+
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useFocusTrapping({ elementRef: modalRef, escapeHatchFunc: closeModal });
@@ -46,13 +49,13 @@ export default function Modal({ title, children, closeModal }: ModalProps) {
         onClick={(e) => handleClick(e, { canClose: false })}
         ref={modalRef}
       >
-        <div className={styles.title}>{title}</div>
+        <div className={styles.title}>{t(`modal-${title}`)}</div>
 
         <button
           className={styles.close}
           onClick={(e) => handleClick(e, { canClose: true })}
-          aria-label="Close modal"
-          title="Close"
+          aria-label={t('a11y:aria.label.modal-close')}
+          title={t('a11y:title.close')}
         >
           <i className="ri-close-line"></i>
         </button>

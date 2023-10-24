@@ -2,13 +2,18 @@ import styles from './styles/task-modal.module.css';
 
 import toast from 'react-hot-toast';
 import { mutate } from 'swr';
-import { dismissableErrorToast } from '@/lib/toastUtils';
+import { dismissableErrorToast } from '@/components/dismissable-error-toast';
+import useTranslation from 'next-translate/useTranslation';
 import type { ShowModal } from '@/pages';
 
-async function removeTask(id: string, handleShowModal: CallableFunction) {
+async function removeTask(
+  id: string,
+  handleShowModal: CallableFunction,
+  translate: CallableFunction,
+) {
   handleShowModal(null);
 
-  const toastId = toast.loading('Loading...');
+  const toastId = toast.loading(translate('loading'));
 
   const tasklist = '/api/task';
   const url = `/api/task/${id}`;
@@ -16,7 +21,7 @@ async function removeTask(id: string, handleShowModal: CallableFunction) {
   const response = await fetch(url, { method: 'DELETE' });
 
   if (response.ok) {
-    toast.success('Task removed', { id: toastId });
+    toast.success(translate('removed'), { id: toastId });
     mutate(tasklist);
   } else {
     const error = await response.json();
@@ -31,6 +36,8 @@ type TaskModalProps = {
 };
 
 export default function TaskModal({ showModal, handleShowModal }: TaskModalProps) {
+  const { t } = useTranslation('common');
+
   return (
     showModal && (
       <div className={styles.container}>
@@ -47,15 +54,15 @@ export default function TaskModal({ showModal, handleShowModal }: TaskModalProps
         {showModal.type === 'delete' && (
           <>
             <div className={styles.confirm_delete}>
-              <div className={styles.delete_text}>confirm delete?</div>
+              <div className={styles.delete_text}>{t('confirm-delete')}</div>
 
               <div className={styles.delete_buttons}>
                 <button
                   type="button"
                   className={styles.delete_button + ' force_focus'}
                   onClick={() => handleShowModal(null)}
-                  aria-label="Cancel delete"
-                  title="Cancel"
+                  aria-label={t('a11y:aria.label.cancel-delete')}
+                  title={t('a11y:title.cancel')}
                   autoFocus
                 >
                   <i className="ri-close-line"></i>
@@ -64,9 +71,9 @@ export default function TaskModal({ showModal, handleShowModal }: TaskModalProps
                 <button
                   type="button"
                   className={styles.delete_button}
-                  onClick={() => removeTask(showModal.task.id, handleShowModal)}
-                  aria-label="Confirm delete"
-                  title="Confirm"
+                  onClick={() => removeTask(showModal.task.id, handleShowModal, t)}
+                  aria-label={t('a11y:aria.label.confirm-delete')}
+                  title={t('a11y:title.confirm')}
                 >
                   <i className="ri-check-line"></i>
                 </button>
