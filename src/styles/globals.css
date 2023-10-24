@@ -31,6 +31,7 @@ button,
 input,
 a {
   border: none;
+  border-radius: 0;
   padding: 0;
   margin: 0;
   text-decoration: none;
