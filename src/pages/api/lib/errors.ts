@@ -1,6 +1,9 @@
 import { Prisma } from '@prisma/client';
+import getT from 'next-translate/getT';
 
-export default function getErrorMessage(error: unknown) {
+export async function getErrorMessage(error: unknown, lang: string) {
+  const t = await getT(lang, 'errors');
+
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     switch (error.code) {
       // COMMON
@@ -17,38 +20,38 @@ export default function getErrorMessage(error: unknown) {
       case 'P1015':
       case 'P1016':
       case 'P1017':
-        return 'Database Connection Error';
+        return t('db-connection');
 
       // PRISMA CLIENT (Query Engine)
       case 'P2000':
-        return 'The value provided is too long.'; // ⚠️ One of the values provided is too long.
+        return t(error.code); // ⚠️ default: One of the values provided is too long.
       case 'P2001':
-        return 'The record searched for does not exist.';
+        return t('P2001');
       case 'P2002':
-        return 'Task text should NOT be duplicate.'; // ⚠️ Unique constraint failed.
+        return t(error.code); // ⚠️ default: Unique constraint failed.
       case 'P2003':
-        return 'Foreign key constraint failed.';
+        return t(error.code);
       case 'P2004':
-        return 'A constraint failed on the database.';
+        return t(error.code);
       case 'P2012':
-        return 'Missing a required value.';
+        return t(error.code);
 
       default:
-        return 'Prisma Client Request Error';
+        return t('prisma-client.request');
     }
   }
 
   if (error instanceof Prisma.PrismaClientUnknownRequestError) {
-    return 'Prisma Client Unknown Request Error';
+    return t('prisma-client.unknown-request');
   }
 
   if (error instanceof Prisma.PrismaClientInitializationError) {
-    return 'Prisma Client Initialization Error';
+    return t('prisma-client.initialization');
   }
 
   if (error instanceof Prisma.PrismaClientValidationError) {
-    return 'Prisma Client Validation Error';
+    return t('prisma-client.validation');
   }
 
-  return 'Internal Server Error. Please try again in a few moments.';
+  return t('internal-server');
 }

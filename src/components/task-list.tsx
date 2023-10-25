@@ -30,9 +30,13 @@ export default function TaskList({
   handleUpdateChange,
   handleUpdateForm,
 }: TaskListProps) {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
-  const { data, error, isLoading } = useSWR('/api/task', fetcher);
+  const url = '/api/task';
+
+  const { data, error, isLoading } = useSWR([url, lang], ([url, lang]) =>
+    fetcher(url, { headers: { 'Accept-Language': lang } }),
+  );
 
   if (error) {
     return (

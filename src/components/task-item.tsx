@@ -14,6 +14,7 @@ async function toggleTaskAction(
   action: 'complete' | 'star',
   handleShowOptions: CallableFunction,
   translate: CallableFunction,
+  lang: string,
 ) {
   handleShowOptions();
   const toastId = toast.loading(translate('loading'));
@@ -23,6 +24,7 @@ async function toggleTaskAction(
 
   const response = await fetch(key, {
     method: 'PATCH',
+    headers: { 'Accept-Language': lang },
   });
 
   if (response.ok) {
@@ -56,7 +58,7 @@ export default function TaskItem({
   handleChange,
   handleForm,
 }: TaskItemProps) {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   if (task.id === taskToUpdate) {
     return (
@@ -83,7 +85,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => toggleTaskAction(task.id, 'complete', handleShowOptions, t)}
+          onClick={() => toggleTaskAction(task.id, 'complete', handleShowOptions, t, lang)}
           aria-label={t('a11y:aria.label.toggle-complete')}
           title={t('a11y:title.toggle-complete')}
         >
@@ -127,7 +129,7 @@ export default function TaskItem({
             <button
               type="button"
               className={styles.task_icon}
-              onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t)}
+              onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t, lang)}
               aria-label={t('a11y:aria.label.star')}
               title={t('a11y:title.star')}
             >
@@ -150,7 +152,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t)}
+          onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t, lang)}
           aria-label={t('a11y:aria.label.unstar')}
           title={t('a11y:title.unstar')}
         >

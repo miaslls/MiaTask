@@ -10,6 +10,14 @@
   - dark mode ✔️
   - i18n
     - update sitemap (`/pt`)
+    - update metadata
+
+---
+
+- ⬛ rename `data`
+- ⬛ error pages
+  - 404
+  - 500
 
 ### ✔️ COMPLETED
 

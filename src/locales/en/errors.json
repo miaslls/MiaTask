@@ -1,0 +1,18 @@
+{
+  "method-not-supported": "The HTTP '${method}' method is not supported at this route.",
+  "bad-format": "Bad Request: Path incorrect or badly formatted",
+  "internal-server": "Internal Server Error. Please try again in a few moments.",
+  "db-connection": "Database Connection Error",
+  "P2000": "The value provided is too long.",
+  "P2001": "The record searched for does not exist.",
+  "P2002": "Task text should NOT be duplicate.",
+  "P2003": "Foreign key constraint failed.",
+  "P2004": "A constraint failed on the database.",
+  "P2012": "Missing a required value.",
+  "prisma-client": {
+    "request": "Prisma Client Request Error",
+    "unknown-request": "Prisma Client Unknown Request Error",
+    "initialization": "Prisma Client Initialization Error",
+    "validation": "Prisma Client Validation Error"
+  }
+}

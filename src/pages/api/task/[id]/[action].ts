@@ -1,35 +1,32 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma, Task } from '@prisma/client';
 import prisma from '@/lib/prisma';
-import getErrorMessage from '@api/lib/getErrorMessage';
+import getT from 'next-translate/getT';
+import { getRequestLanguage } from '@api/lib/language';
+import { getErrorMessage } from '@api/lib/errors';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+  const lang = getRequestLanguage(req);
+  const t = await getT(lang, 'errors');
+
   if (req.method === 'PATCH') {
     const taskId = req.query.id;
     const action = req.query.action;
 
-    if (!taskId || !action) {
-      return res
-        .status(400)
-        .send({ message: 'Request badly formatted: no id or attribute provided' });
+    const badFormat =
+      !taskId ||
+      !action ||
+      Array.isArray(taskId) ||
+      Array.isArray(action) ||
+      (action !== 'complete' && action !== 'star');
+
+    if (badFormat) {
+      return res.status(400).send({ message: t('bad-format') });
     }
 
-    if (Array.isArray(taskId) || Array.isArray(action)) {
-      return res
-        .status(400)
-        .send({ message: 'Request badly formatted: multiple ids or attributes provided' });
-    }
-
-    if (action !== 'complete' && action !== 'star') {
-      return res
-        .status(400)
-        .send({ message: "Request badly formatted: attribute MUST BE 'complete' or 'star' " });
-    }
-    return handlePATCH(taskId, action, res);
+    return handlePATCH(taskId, action, res, lang);
   } else {
-    return res
-      .status(405)
-      .send({ message: `The HTTP ${req.method} method is not supported at this route.` });
+    return res.status(405).send({ message: t('method-not-supported', { method: req.method }) });
   }
 }
 
@@ -37,6 +34,7 @@ async function handlePATCH(
   id: string,
   action: 'complete' | 'star',
   res: NextApiResponse<{ task: Task } | { message: string }>,
+  lang: string,
 ) {
   try {
     const taskInDb = await prisma.task.findUniqueOrThrow({ where: { id } });
@@ -51,7 +49,7 @@ async function handlePATCH(
     res.status(200).send({ task });
   } catch (err) {
     console.error(err);
-    const message = getErrorMessage(err);
+    const message = await getErrorMessage(err, lang);
 
     res.status(500).send({ message });
   }

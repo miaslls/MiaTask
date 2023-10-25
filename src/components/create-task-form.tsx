@@ -12,6 +12,7 @@ async function submitPostData(
   inputText: string,
   handleForm: CallableFunction,
   translate: CallableFunction,
+  lang: string,
 ) {
   e.preventDefault();
   handleForm();
@@ -22,7 +23,7 @@ async function submitPostData(
 
   const response = await fetch(tasklist, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Content-Language': 'en' },
+    headers: { 'Content-Type': 'application/json', 'Accept-Language': lang },
     body: JSON.stringify({ text: inputText }),
   });
 
@@ -47,7 +48,7 @@ export default function CreateTaskForm({
   handleChange,
   handleForm,
 }: CreateTaskFormProps) {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -56,7 +57,7 @@ export default function CreateTaskForm({
   return (
     <form
       className={styles.task_form}
-      onSubmit={(e) => submitPostData(e, inputText, handleForm, t)}
+      onSubmit={(e) => submitPostData(e, inputText, handleForm, t, lang)}
       ref={formRef}
     >
       <input

@@ -10,6 +10,7 @@ async function removeTask(
   id: string,
   handleShowModal: CallableFunction,
   translate: CallableFunction,
+  lang: string,
 ) {
   handleShowModal(null);
 
@@ -18,7 +19,7 @@ async function removeTask(
   const tasklist = '/api/task';
   const url = `/api/task/${id}`;
 
-  const response = await fetch(url, { method: 'DELETE' });
+  const response = await fetch(url, { method: 'DELETE', headers: { 'Accept-Language': lang } });
 
   if (response.ok) {
     toast.success(translate('removed'), { id: toastId });
@@ -36,7 +37,7 @@ type TaskModalProps = {
 };
 
 export default function TaskModal({ showModal, handleShowModal }: TaskModalProps) {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   return (
     showModal && (
@@ -71,7 +72,7 @@ export default function TaskModal({ showModal, handleShowModal }: TaskModalProps
                 <button
                   type="button"
                   className={styles.delete_button}
-                  onClick={() => removeTask(showModal.task.id, handleShowModal, t)}
+                  onClick={() => removeTask(showModal.task.id, handleShowModal, t, lang)}
                   aria-label={t('a11y:aria.label.confirm-delete')}
                   title={t('a11y:title.confirm')}
                 >

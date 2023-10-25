@@ -1,0 +1,18 @@
+{
+  "method-not-supported": "O método HTTP '${method}' não é suportado nesta rota.",
+  "bad-format": "Solicitação incorreta ou mal-formatada",
+  "internal-server": "Erro interno do servidor. Por favor, tente novamente em alguns momentos.",
+  "db-connection": "Erro na conexão com o banco de dados",
+  "P2000": "O valor fornecido é muito longo.",
+  "P2001": "O registro procurado não existe.",
+  "P2002": "O texto da tarefa não pode ser duplicado.",
+  "P2003": "Falha na restrição de chave estrangeira.",
+  "P2004": "Uma restrição falhou no banco de dados.",
+  "P2012": "Um valor obrigatório não foi fornecido.",
+  "prisma-client": {
+    "request": "Erro na Solicitação do Prisma Client",
+    "unknown-request": "Erro Desconhecido na Solicitação do Prisma Client",
+    "initialization": "Erro na Inicialização do Prisma Client",
+    "validation": "Erro de Validação do Prisma Client"
+  }
+}

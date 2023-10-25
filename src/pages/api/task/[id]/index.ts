@@ -1,27 +1,30 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma, Task } from '@prisma/client';
 import prisma from '@/lib/prisma';
-import getErrorMessage from '@api/lib/getErrorMessage';
+import getT from 'next-translate/getT';
+import { getRequestLanguage } from '@api/lib/language';
+import { getErrorMessage } from '@/pages/api/lib/errors';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   const taskId = req.query.id;
 
+  const lang = getRequestLanguage(req);
+  const t = await getT(lang, 'errors');
+
   if (!taskId || Array.isArray(taskId)) {
-    return res.status(400).send({ message: 'Route path badly formatted' });
+    return res.status(400).send({ message: t('bad-format') });
   }
 
   switch (req.method) {
     case 'PATCH':
       const data = req.body;
-      return handlePATCH(taskId, data, res);
+      return handlePATCH(taskId, data, res, lang);
 
     case 'DELETE':
-      return handleDELETE(taskId, res);
+      return handleDELETE(taskId, res, lang);
 
     default:
-      return res
-        .status(405)
-        .send({ message: `The HTTP ${req.method} method is not supported at this route.` });
+      return res.status(405).send({ message: t('method-not-supported', { method: req.method }) });
   }
 }
 
@@ -29,6 +32,7 @@ async function handlePATCH(
   id: string,
   data: Prisma.TaskUpdateInput,
   res: NextApiResponse<{ task: Task } | { message: string }>,
+  lang: string,
 ) {
   try {
     await prisma.task.findUniqueOrThrow({ where: { id } });
@@ -40,7 +44,7 @@ async function handlePATCH(
     res.status(200).send({ task });
   } catch (err) {
     console.error(err);
-    const message = getErrorMessage(err);
+    const message = await getErrorMessage(err, lang);
 
     res.status(500).send({ message });
   }
@@ -49,6 +53,7 @@ async function handlePATCH(
 async function handleDELETE(
   id: string,
   res: NextApiResponse<{ task: Task } | { message: string }>,
+  lang: string,
 ) {
   try {
     await prisma.task.findUniqueOrThrow({ where: { id } });
@@ -57,7 +62,7 @@ async function handleDELETE(
     res.status(200).send({ task });
   } catch (err) {
     console.error(err);
-    const message = getErrorMessage(err);
+    const message = await getErrorMessage(err, lang);
 
     res.status(500).send({ message });
   }

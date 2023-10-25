@@ -13,6 +13,7 @@ async function submitPatchData(
   inputText: string,
   handleUpdateForm: CallableFunction,
   translate: CallableFunction,
+  lang: string,
 ) {
   e.preventDefault();
   handleUpdateForm();
@@ -24,7 +25,7 @@ async function submitPatchData(
 
   const response = await fetch(url, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Content-Language': 'en' },
+    headers: { 'Content-Type': 'application/json', 'Accept-Language': lang },
     body: JSON.stringify({ text: inputText }),
   });
 
@@ -51,7 +52,7 @@ export default function UpdateTaskForm({
   handleChange,
   handleForm,
 }: UpdateTaskFormProps) {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -60,7 +61,7 @@ export default function UpdateTaskForm({
   return (
     <form
       className={styles.task_form}
-      onSubmit={(e) => submitPatchData(e, taskId, inputText, handleForm, t)}
+      onSubmit={(e) => submitPatchData(e, taskId, inputText, handleForm, t, lang)}
       ref={formRef}
     >
       <div className={styles.task_edit_icons}>
