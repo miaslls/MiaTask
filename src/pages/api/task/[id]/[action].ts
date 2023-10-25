@@ -6,26 +6,26 @@ import getErrorMessage from '@api/lib/getErrorMessage';
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PATCH') {
     const taskId = req.query.id;
-    const attribute = req.query.attribute;
+    const action = req.query.action;
 
-    if (!taskId || !attribute) {
+    if (!taskId || !action) {
       return res
         .status(400)
         .send({ message: 'Request badly formatted: no id or attribute provided' });
     }
 
-    if (Array.isArray(taskId) || Array.isArray(attribute)) {
+    if (Array.isArray(taskId) || Array.isArray(action)) {
       return res
         .status(400)
         .send({ message: 'Request badly formatted: multiple ids or attributes provided' });
     }
 
-    if (attribute !== 'complete' && attribute !== 'star') {
+    if (action !== 'complete' && action !== 'star') {
       return res
         .status(400)
         .send({ message: "Request badly formatted: attribute MUST BE 'complete' or 'star' " });
     }
-    return handlePATCH(taskId, attribute, res);
+    return handlePATCH(taskId, action, res);
   } else {
     return res
       .status(405)
@@ -35,12 +35,12 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
 async function handlePATCH(
   id: string,
-  attribute: 'complete' | 'star',
+  action: 'complete' | 'star',
   res: NextApiResponse<{ task: Task } | { message: string }>,
 ) {
   try {
     const taskInDb = await prisma.task.findUniqueOrThrow({ where: { id } });
-    const key = attribute === 'complete' ? 'completed' : 'starred';
+    const key = action === 'complete' ? 'completed' : 'starred';
 
     const data: Prisma.TaskUpdateInput = taskInDb[key]
       ? { [key]: false, [`${key}At`]: null }

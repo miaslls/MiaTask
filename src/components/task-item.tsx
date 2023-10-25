@@ -9,9 +9,9 @@ import { dismissableErrorToast } from '@/components/dismissable-error-toast';
 import UpdateTaskForm from './update-task-form';
 import useTranslation from 'next-translate/useTranslation';
 
-async function toggleTaskProperty(
+async function toggleTaskAction(
   id: string,
-  property: 'complete' | 'star',
+  action: 'complete' | 'star',
   handleShowOptions: CallableFunction,
   translate: CallableFunction,
 ) {
@@ -19,7 +19,7 @@ async function toggleTaskProperty(
   const toastId = toast.loading(translate('loading'));
 
   const tasklist = '/api/task';
-  const key = `/api/${property}/${id}`;
+  const key = `${tasklist}/${id}/${action}`;
 
   const response = await fetch(key, {
     method: 'PATCH',
@@ -83,7 +83,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => toggleTaskProperty(task.id, 'complete', handleShowOptions, t)}
+          onClick={() => toggleTaskAction(task.id, 'complete', handleShowOptions, t)}
           aria-label={t('a11y:aria.label.toggle-complete')}
           title={t('a11y:title.toggle-complete')}
         >
@@ -127,7 +127,7 @@ export default function TaskItem({
             <button
               type="button"
               className={styles.task_icon}
-              onClick={() => toggleTaskProperty(task.id, 'star', handleShowOptions, t)}
+              onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t)}
               aria-label={t('a11y:aria.label.star')}
               title={t('a11y:title.star')}
             >
@@ -150,7 +150,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon}
-          onClick={() => toggleTaskProperty(task.id, 'star', handleShowOptions, t)}
+          onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t)}
           aria-label={t('a11y:aria.label.unstar')}
           title={t('a11y:title.unstar')}
         >
