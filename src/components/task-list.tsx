@@ -34,9 +34,11 @@ export default function TaskList({
 
   const url = '/api/task';
 
-  const { data, error, isLoading } = useSWR([url, lang], ([url, lang]) =>
-    fetcher(url, { headers: { 'Accept-Language': lang } }),
-  );
+  const {
+    data: tasklist,
+    error,
+    isLoading,
+  } = useSWR([url, lang], ([url, lang]) => fetcher(url, { headers: { 'Accept-Language': lang } }));
 
   if (error) {
     return (
@@ -56,12 +58,12 @@ export default function TaskList({
 
   return (
     <>
-      {data.tasks.length === 0 ? (
+      {tasklist.tasks.length === 0 ? (
         <div className="tasklist_alert">
           <i className="ri-alert-line"></i> {t('tasklist-empty')}
         </div>
       ) : (
-        data.tasks.map((task: Task) => (
+        tasklist.tasks.map((task: Task) => (
           <TaskItem
             task={task}
             showTaskOptions={showTaskOptions}

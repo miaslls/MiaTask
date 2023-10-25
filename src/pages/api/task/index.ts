@@ -14,8 +14,8 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
       return handleGET(res, lang);
 
     case 'POST':
-      const data = req.body;
-      return handlePOST(data, res, lang);
+      const newTaskData = req.body;
+      return handlePOST(newTaskData, res, lang);
 
     default:
       return res.status(405).send({ message: t('method-not-supported', { method: req.method }) });

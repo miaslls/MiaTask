@@ -17,8 +17,8 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 
   switch (req.method) {
     case 'PATCH':
-      const data = req.body;
-      return handlePATCH(taskId, data, res, lang);
+      const updatedTaskData = req.body;
+      return handlePATCH(taskId, updatedTaskData, res, lang);
 
     case 'DELETE':
       return handleDELETE(taskId, res, lang);
