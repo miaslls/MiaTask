@@ -1,12 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
-import getT from 'next-translate/getT';
 import { Prisma, Task } from '@prisma/client';
 import { getRequestLanguage } from '@api/lib/language';
-import { getErrorMessage } from '@/pages/api/lib/errors';
+import { getErrorMessage } from '@api/lib/errors';
+import { ensureGetTAvailability } from '@api/lib/monkey-patches';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   const lang = getRequestLanguage(req);
+  const getT = ensureGetTAvailability();
   const t = await getT(lang, 'errors');
 
   switch (req.method) {

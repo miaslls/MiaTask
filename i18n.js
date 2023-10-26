@@ -1,7 +1,6 @@
 module.exports = {
-  locales: ['__default', 'en', 'pt'],
-  defaultLocale: '__default',
-  localesToIgnore: ['__default'],
+  locales: ['en', 'pt'],
+  defaultLocale: 'en',
   pages: {
     '*': ['common', 'a11y'],
   },
@@ -9,6 +8,6 @@ module.exports = {
     prefix: '${',
     suffix: '}',
   },
-  loadLocaleFrom: (locale, namespace) =>
-    import(`./src/locales/${locale}/${namespace}.json`).then((r) => r.default),
+  loadLocaleFrom: async (locale, namespace) =>
+    import(`./src/locales/${locale}/${namespace}`).then((r) => r.default),
 };
