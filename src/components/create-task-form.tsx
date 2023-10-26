@@ -29,7 +29,7 @@ async function submitPostData(
 
   if (response.ok) {
     toast.success(translate('created'), { id: toastId });
-    mutate(tasklist);
+    mutate([tasklist, lang]);
   } else {
     const error = await response.json();
     dismissableErrorToast(error.message);

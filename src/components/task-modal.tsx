@@ -23,7 +23,7 @@ async function removeTask(
 
   if (response.ok) {
     toast.success(translate('removed'), { id: toastId });
-    mutate(tasklist);
+    mutate([tasklist, lang]);
   } else {
     const error = await response.json();
     dismissableErrorToast(error.message);

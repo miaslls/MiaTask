@@ -30,7 +30,7 @@ async function toggleTaskAction(
 
   if (response.ok) {
     toast.success(translate('done'), { id: toastId });
-    mutate(tasklist);
+    mutate([tasklist, lang]);
   } else {
     const error = await response.json();
     dismissableErrorToast(error.message);

@@ -31,7 +31,7 @@ async function submitPatchData(
 
   if (response.ok) {
     toast.success(translate('updated'), { id: toastId });
-    mutate(tasklist);
+    mutate([tasklist, lang]);
   } else {
     const error = await response.json();
     dismissableErrorToast(error.message);
