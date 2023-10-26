@@ -17,7 +17,8 @@
       "update-input": "Digite a tarefa atualizada",
       "close-update": "Fechar",
       "error-alert": "Alerta de erro",
-      "close-alert": "Fechar alerta"
+      "close-alert": "Fechar alerta",
+      "change-locale": "Alterar idioma da página: ${locale}"
     }
   },
   "title": {

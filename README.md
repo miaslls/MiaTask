@@ -4,6 +4,8 @@
 
 ### FIXME: remove ALL markers: ❗ ❓ ⚠️ 🐞 + `//` or `/* */`)
 
+- ⬛ README
+
 ---
 
 - ⬛ error pages
@@ -15,12 +17,16 @@
 - ⬛ a11y best practices
 
   - dark mode ✔️
+  - touch target sizes
 
-  - store lang & theme in cookies ❓ localStorage ❓
+  - store in cookies
+
+    - lang ✔️
+    - theme
 
   - i18n
-    - redirect to / from /unknown (middleware)
-    - change lang button
+    - redirect to / from /unknown (middleware) ❌
+    - change lang button ✔️
     - update sitemap (`/pt`) ✔️
     - update metadata ✔️
 

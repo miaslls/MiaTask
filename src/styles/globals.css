@@ -108,19 +108,6 @@ footer {
   display: flex;
 }
 
-h1 {
-  font-size: inherit;
-  font-weight: var(--default-light);
-}
-
-h1 span {
-  font-weight: var(--default-bold);
-}
-
-a.text_link {
-  color: var(--gray-04);
-}
-
 header {
   align-items: baseline;
   justify-content: space-between;
@@ -132,10 +119,25 @@ main {
 }
 
 footer {
+  display: flex;
+  flex-direction: column;
   margin-top: 1rem;
-  justify-content: end;
+  align-items: flex-end;
+  justify-content: center;
   font-size: smaller;
-  gap: 0.5rem;
+}
+
+h1 {
+  font-size: inherit;
+  font-weight: var(--default-light);
+}
+
+h1 span {
+  font-weight: var(--default-bold);
+}
+
+a {
+  color: var(--gray-04);
 }
 
 .toast_dismissable {
@@ -150,7 +152,7 @@ footer {
 }
 
 @media screen and (orientation: landscape) {
-  a.text_link:hover,
+  a:hover,
   .toast_dismissable > button:hover {
     color: var(--gray-03);
   }

@@ -17,7 +17,8 @@
       "update-input": "Enter updated task",
       "close-update": "Close update task form",
       "error-alert": "Error alert",
-      "close-alert": "Close alert"
+      "close-alert": "Close alert",
+      "change-locale": "Change page language: ${locale}"
     }
   },
   "title": {

@@ -1,6 +1,10 @@
-.footer_link {
+.external_links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link {
   display: flex;
   align-items: baseline;
-
   gap: 0.25rem;
 }

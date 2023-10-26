@@ -1,4 +1,5 @@
 import styles from './styles/footer.module.css';
+import ChangeLocaleNav from './change-locale-nav';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,9 +9,9 @@ export default function Footer() {
 
   return (
     <footer>
-      <span className={styles.footer_link}>
+      <nav className={styles.external_links}>
         <Link
-          className="text_link"
+          className={styles.link}
           href="https://github.com/miaslls"
           target="_blank"
           title={t('a11y:title.link-github')}
@@ -18,11 +19,9 @@ export default function Footer() {
           @miaslls
           <i className="ri-external-link-line"></i>
         </Link>
-      </span>
-      ৹
-      <span className={styles.footer_link}>
+        ৹
         <Link
-          className="text_link"
+          className={styles.link}
           href="https://fonts.google.com/specimen/Roboto+Mono"
           target="_blank"
           title={t('a11y:title.link-font')}
@@ -30,11 +29,9 @@ export default function Footer() {
           {t('font')}
           <i className="ri-external-link-line"></i>
         </Link>
-      </span>
-      ৹
-      <span className={styles.footer_link}>
+        ৹
         <Link
-          className="text_link"
+          className={styles.link}
           href="https://remixicon.com"
           target="_blank"
           title={t('a11y:title.link-icon')}
@@ -42,7 +39,9 @@ export default function Footer() {
           {t('icons')}
           <i className="ri-external-link-line"></i>
         </Link>
-      </span>
+      </nav>
+
+      <ChangeLocaleNav />
     </footer>
   );
 }
