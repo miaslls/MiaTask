@@ -41,11 +41,16 @@
 
 .delete_buttons {
   display: flex;
+  gap: 0.5rem;
 }
 
 .delete_button {
   color: var(--gray-04);
   font-size: 1.25rem;
+}
+
+.delete_button:focus {
+  background: var(--gray-02);
 }
 
 @media screen and (orientation: landscape) {
