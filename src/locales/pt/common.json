@@ -1,5 +1,9 @@
 {
   "page-title": "MiaTask - Gerenciamento de Tarefas Simplificado | Organize e complete tarefas sem complicação!",
+  "meta": {
+    "description": "Gerenciamento de tarefas sem complicação. Mantenha-se organizado e aumente a produtividade com esta simples aplicação de lista de tarefas.",
+    "keywords": "Lista de Tarefas, Gerenciamento de Tarefas, Adicionar Tarefas, Atualizar Tarefas, Excluir Tarefas, Completar Tarefas, Manter-se Organizado, Aumentar a Produtividade, Rastreador de Tarefas, Lista de Afazeres, Organizador de Tarefas, Aplicação Web"
+  },
   "add-button": "Nova tarefa",
   "loading": "Carregando",
   "error": "Erro",

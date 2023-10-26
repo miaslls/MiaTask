@@ -7,20 +7,22 @@
 ---
 
 - ⬛ best accessibility practices (+)
+  - store lang & theme in cookies ❓ localStorage ❓
   - dark mode ✔️
   - i18n
+    - change lang button
     - update sitemap (`/pt`)
-    - update metadata
+    - update metadata ✔️
 
 ---
 
-- ⬛ rename `data`
 - ⬛ error pages
   - 404
   - 500
 
 ### ✔️ COMPLETED
 
+- ✅ rename `data`
 - ✅ component prop types
 - ✅ esc closes task options (task-item)
 - ✅ manage open/close forms
