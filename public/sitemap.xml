@@ -1,9 +1,25 @@
-   <xml version="1.0" encoding="UTF-8">
-   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     <url>
-       <loc>https://miatask.vercel.app/</loc>
-       <!-- 🔻 🐞 -->
-       <lastmod>2023-09-27</lastmod>
-     </url>
-   </urlset>
-   </xml>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://miatask.vercel.app</loc>
+    <lastmod>2023-10-26</lastmod>
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app" hreflang="x-default" />
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app/en" hreflang="en" />
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app/pt" hreflang="pt" />
+  </url>
+  <url>
+    <loc>https://miatask.vercel.app/en</loc>
+    <lastmod>2023-10-26</lastmod>
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app" hreflang="x-default" />
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app/en" hreflang="en" />
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app/pt" hreflang="pt" />
+  </url>
+  <url>
+    <loc>https://miatask.vercel.app/pt</loc>
+    <lastmod>2023-10-26</lastmod>
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app" hreflang="x-default" />
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app/en" hreflang="en" />
+    <xhtml:link rel="alternate" href="https://miatask.vercel.app/pt" hreflang="pt" />
+  </url>
+</urlset>

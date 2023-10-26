@@ -6,19 +6,25 @@
 
 ---
 
-- ⬛ best accessibility practices (+)
-  - store lang & theme in cookies ❓ localStorage ❓
-  - dark mode ✔️
-  - i18n
-    - change lang button
-    - update sitemap (`/pt`)
-    - update metadata ✔️
-
----
-
 - ⬛ error pages
   - 404
   - 500
+
+---
+
+- ⬛ a11y best practices
+
+  - dark mode ✔️
+
+  - store lang & theme in cookies ❓ localStorage ❓
+
+  - i18n
+    - redirect to / from /unknown (middleware)
+    - change lang button
+    - update sitemap (`/pt`) ✔️
+    - update metadata ✔️
+
+---
 
 ### ✔️ COMPLETED
 

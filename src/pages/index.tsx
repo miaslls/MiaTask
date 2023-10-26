@@ -119,8 +119,9 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <meta name="keywords" content={t('meta.keywords')} />
         <meta name="author" content="miaslls" />
 
-        <link rel="alternate" href="https://miatask.vercel.app/" hrefLang="en" />
-        <link rel="alternate" href="https://miatask.vercel.app/pt/" hrefLang="pt-br" />
+        <link rel="alternate" href="https://miatask.vercel.app/" hrefLang="x-default" />
+        <link rel="alternate" href="https://miatask.vercel.app/en/" hrefLang="en" />
+        <link rel="alternate" href="https://miatask.vercel.app/pt/" hrefLang="pt" />
 
         <title>{t('page-title')}</title>
       </Head>
