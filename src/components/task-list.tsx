@@ -1,9 +1,10 @@
 import useSWR from 'swr';
+import useTranslation from 'next-translate/useTranslation';
+import { fetcher } from '@src/lib/fetcher';
+
 import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
-import { fetcher } from '@/lib/fetcher';
-import type { ShowModal } from '@/pages';
-import useTranslation from 'next-translate/useTranslation';
+import type { ShowModal } from '@pages/index';
 
 import Modal from './modal';
 import TaskModal from './task-modal';

@@ -3,9 +3,9 @@ import styles from './styles/create-task-form.module.css';
 import { ChangeEvent, FormEvent, useRef } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
-import { dismissableErrorToast } from '@/components/dismissable-error-toast';
-import { useFocusTrapping } from '@/hooks/useFocusTrapping';
+import { dismissableErrorToast } from '@components/dismissable-error-toast';
 import useTranslation from 'next-translate/useTranslation';
+import useFocusTrapping from '@hooks/useFocusTrapping';
 
 async function submitPostData(
   e: FormEvent<HTMLFormElement>,

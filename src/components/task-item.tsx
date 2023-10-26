@@ -1,13 +1,14 @@
 import styles from './styles/task-item.module.css';
 
-import type { ShowModal } from '@/pages';
 import { mutate } from 'swr';
-import { ChangeEvent } from 'react';
 import { toast } from 'react-hot-toast';
-import { Task } from '@prisma/client';
-import { dismissableErrorToast } from '@/components/dismissable-error-toast';
+import { dismissableErrorToast } from '@components/dismissable-error-toast';
 import UpdateTaskForm from './update-task-form';
 import useTranslation from 'next-translate/useTranslation';
+
+import { ChangeEvent } from 'react';
+import { Task } from '@prisma/client';
+import type { ShowModal } from '@pages/index';
 
 async function toggleTaskAction(
   id: string,

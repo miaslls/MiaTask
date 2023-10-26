@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export function useFocusTrapping({
+export default function useFocusTrapping({
   elementRef,
   escapeHatchFunc,
 }: {

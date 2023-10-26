@@ -1,10 +1,10 @@
 import styles from './styles/task-modal.module.css';
 
-import toast from 'react-hot-toast';
 import { mutate } from 'swr';
-import { dismissableErrorToast } from '@/components/dismissable-error-toast';
+import toast from 'react-hot-toast';
+import { dismissableErrorToast } from '@components/dismissable-error-toast';
 import useTranslation from 'next-translate/useTranslation';
-import type { ShowModal } from '@/pages';
+import type { ShowModal } from '@pages/index';
 
 async function removeTask(
   id: string,

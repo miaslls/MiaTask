@@ -1,6 +1,7 @@
 import styles from './styles/toggle-theme-button.module.css';
-import { useTheme } from './context/theme-provider';
+
 import useTranslation from 'next-translate/useTranslation';
+import { useTheme } from './context/theme-provider';
 
 // html and styles adapted from https://webtips.dev/toggle-buttons-in-react ❗
 

@@ -1,8 +1,8 @@
-import '../styles/globals.css';
+import '@src/styles/globals.css';
 
 import type { AppProps } from 'next/app';
 import { Roboto_Mono } from 'next/font/google';
-import ThemeProvider from '@/components/context/theme-provider';
+import ThemeProvider from '@components/context/theme-provider';
 
 const roboto_mono = Roboto_Mono({ subsets: ['latin'] });
 

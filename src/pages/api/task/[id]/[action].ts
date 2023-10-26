@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Prisma, Task } from '@prisma/client';
-import prisma from '@/lib/prisma';
+import prisma from '@src/lib/prisma';
 import { getRequestLanguage } from '@api/lib/language';
 import { getErrorMessage } from '@api/lib/errors';
 import { ensureGetTAvailability } from '@api/lib/monkey-patches';

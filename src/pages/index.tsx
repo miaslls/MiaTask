@@ -1,20 +1,20 @@
-import styles from '@/styles/index.module.css';
-import taskStyles from '@/components/styles/task-item.module.css';
+import styles from '@src/styles/index.module.css';
+import taskStyles from '@components/styles/task-item.module.css';
 
 import Head from 'next/head';
-import prisma from '@/lib/prisma';
+import prisma from '@src/lib/prisma';
 import { Task } from '@prisma/client';
 import { ChangeEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
 import { Toaster } from 'react-hot-toast';
-import { toastOptions } from '@/lib/toast';
+import { toastOptions } from '@src/lib/toast';
 import useTranslation from 'next-translate/useTranslation';
 
-import Header from '@/components/header';
-import TaskList from '@/components/task-list';
-import CreateTaskForm from '@/components/create-task-form';
-import Footer from '@/components/footer';
+import Header from '@components/header';
+import TaskList from '@components/task-list';
+import CreateTaskForm from '@components/create-task-form';
+import Footer from '@components/footer';
 
 export type ShowModal = {
   type: 'details' | 'delete';
