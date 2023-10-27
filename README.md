@@ -19,13 +19,9 @@
   - dark mode ✔️
   - touch target sizes
 
-  - store in cookies
-
-    - lang ✔️
-    - theme
+  - store in cookies : lang, theme ✔️
 
   - i18n
-    - redirect to / from /unknown (middleware) ❌
     - change lang button ✔️
     - update sitemap (`/pt`) ✔️
     - update metadata ✔️
@@ -49,6 +45,7 @@
 - ✅ create task confirmation/error message (toast?)
 - ✅ client-side fetching
 - ✅ API error handling
+- ❎redirect to / from /unknown (middleware) ❌
 - ❎ extract repository (prisma functions) ❌
 - ❎ redo color scheme ❌
 - ❎ useTask() ❌

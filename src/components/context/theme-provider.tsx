@@ -1,10 +1,12 @@
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import { getThemeCookie } from '@root/src/lib/cookies';
 
 type Theme = 'dark' | 'light' | undefined;
 
 type ThemeState = {
   theme: Theme;
   toggleTheme(): void;
+  setTheme(theme: Theme): void;
 };
 
 const ThemeContext = createContext<ThemeState | null>(null);
@@ -23,14 +25,23 @@ export default function ThemeProvider(props: PropsWithChildren) {
   const [theme, setTheme] = useState<Theme>();
 
   useEffect(() => {
+    const cookieString = document.cookie;
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-    if (mediaQuery.matches) {
-      console.log('User prefers Dark Mode');
+    if (cookieString.includes('theme')) {
+      const themeCookie = getThemeCookie(cookieString);
 
-      setTheme('dark');
+      if (themeCookie.value === 'dark' || themeCookie.value === 'light') {
+        setTheme(themeCookie.value);
+      }
     } else {
-      setTheme('light');
+      if (mediaQuery.matches) {
+        console.log('User prefers Dark Mode');
+
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
     }
 
     mediaQuery.addEventListener('change', (e) => {
@@ -51,6 +62,11 @@ export default function ThemeProvider(props: PropsWithChildren) {
       }
 
       console.log(`Theme set to "${theme}"`);
+
+      const date = new Date();
+      const expireMs = 100 * 24 * 60 * 60 * 1000;
+      date.setTime(date.getTime() + expireMs);
+      document.cookie = `theme=${theme};expires=${date.toUTCString()};path=/`;
     }
   }, [theme]);
 
@@ -59,6 +75,8 @@ export default function ThemeProvider(props: PropsWithChildren) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>{props.children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+      {props.children}
+    </ThemeContext.Provider>
   );
 }
