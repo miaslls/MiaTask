@@ -8,16 +8,18 @@ import useTranslation from 'next-translate/useTranslation';
 
 export default function ChangeLocaleNav() {
   const { t } = useTranslation('a11y');
-  const { locales: availableLocales, locale: currentLocale, defaultLocale } = useRouter();
+  const { locales: availableLocales, locale: currentLocale } = useRouter();
 
   useEffect(() => {
-    if (currentLocale !== defaultLocale) {
+    const setLocaleCookie = (locale: string | undefined) => {
       const date = new Date();
       const expireMs = 100 * 24 * 60 * 60 * 1000;
       date.setTime(date.getTime() + expireMs);
-      document.cookie = `NEXT_LOCALE=${currentLocale};expires=${date.toUTCString()};path=/`;
-    }
-  }, [currentLocale, defaultLocale]);
+      document.cookie = `NEXT_LOCALE=${locale};expires=${date.toUTCString()};path=/`;
+    };
+
+    setLocaleCookie(currentLocale);
+  }, [currentLocale]);
 
   return (
     <nav className={styles.container}>
@@ -26,7 +28,7 @@ export default function ChangeLocaleNav() {
           availableLocales.map((locale) => (
             <Link
               key={`change-lang-link--${locale}`}
-              className={styles.link + (locale === currentLocale && ' ' + styles.current_locale)}
+              className={locale === currentLocale ? styles.current_locale : undefined}
               href="/"
               locale={locale}
               title={ISO6391.getNativeName(locale)}
