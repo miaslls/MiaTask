@@ -3,6 +3,7 @@ import '@src/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Roboto_Mono } from 'next/font/google';
 import ThemeProvider from '@components/context/theme-provider';
+import Layout from '@components/layout';
 
 const roboto_mono = Roboto_Mono({ subsets: ['latin'] });
 
@@ -18,7 +19,9 @@ function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
       <ThemeProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </>
   );

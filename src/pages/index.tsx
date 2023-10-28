@@ -7,14 +7,10 @@ import { Task } from '@prisma/client';
 import { ChangeEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
-import { Toaster } from 'react-hot-toast';
-import { toastOptions } from '@src/lib/toast';
 import useTranslation from 'next-translate/useTranslation';
 
-import Header from '@components/header';
 import TaskList from '@components/task-list';
 import CreateTaskForm from '@components/create-task-form';
-import Footer from '@components/footer';
 
 export type ShowModal = {
   type: 'details' | 'delete';
@@ -126,54 +122,44 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <title>{t('page-title')}</title>
       </Head>
 
-      <div className="outer_container">
-        <Toaster position="top-center" reverseOrder={false} toastOptions={toastOptions} />
+      {showCreateForm ? (
+        <CreateTaskForm
+          inputText={createInputText}
+          handleChange={handleCreateChange}
+          handleForm={handleCreateForm}
+        />
+      ) : (
+        <button
+          type="button"
+          className={taskStyles.task + ' ' + styles.add_button}
+          onClick={handleCreateForm}
+          aria-label={t('a11y:aria.label.open-create')}
+          title={t('a11y:title.add')}
+        >
+          <div className={taskStyles.task_icons}>
+            <div className={taskStyles.task_icon}>
+              <i className="ri-add-box-line"></i>
+            </div>
+          </div>
 
-        <Header />
+          <div className={taskStyles.task_text + ' ' + styles.add_text}>{t('add-button')}</div>
+        </button>
+      )}
 
-        <main>
-          {showCreateForm ? (
-            <CreateTaskForm
-              inputText={createInputText}
-              handleChange={handleCreateChange}
-              handleForm={handleCreateForm}
-            />
-          ) : (
-            <button
-              type="button"
-              className={taskStyles.task + ' ' + styles.add_button}
-              onClick={handleCreateForm}
-              aria-label={t('a11y:aria.label.open-create')}
-              title={t('a11y:title.add')}
-            >
-              <div className={taskStyles.task_icons}>
-                <div className={taskStyles.task_icon}>
-                  <i className="ri-add-box-line"></i>
-                </div>
-              </div>
-
-              <div className={taskStyles.task_text + ' ' + styles.add_text}>{t('add-button')}</div>
-            </button>
-          )}
-
-          <ul className={styles.tasklist}>
-            <SWRConfig value={{ fallback }}>
-              <TaskList
-                showModal={showModal}
-                showTaskOptions={showTaskOptions}
-                taskToUpdate={taskToUpdate}
-                updateInputText={updateInputText}
-                handleShowModal={handleShowModal}
-                handleShowOptions={handleShowOptions}
-                handleUpdateChange={handleUpdateChange}
-                handleUpdateForm={handleUpdateForm}
-              />
-            </SWRConfig>
-          </ul>
-        </main>
-
-        <Footer />
-      </div>
+      <ul className={styles.tasklist}>
+        <SWRConfig value={{ fallback }}>
+          <TaskList
+            showModal={showModal}
+            showTaskOptions={showTaskOptions}
+            taskToUpdate={taskToUpdate}
+            updateInputText={updateInputText}
+            handleShowModal={handleShowModal}
+            handleShowOptions={handleShowOptions}
+            handleUpdateChange={handleUpdateChange}
+            handleUpdateForm={handleUpdateForm}
+          />
+        </SWRConfig>
+      </ul>
     </>
   );
 }

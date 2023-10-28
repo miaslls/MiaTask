@@ -1,5 +1,5 @@
 import styles from './styles/modal.module.css';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@hooks/useFocusTrapping';
 
