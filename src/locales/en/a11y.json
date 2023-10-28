@@ -19,7 +19,7 @@
       "error-alert": "Error alert",
       "close-alert": "Close alert",
       "change-locale": "Change page language: ${locale}",
-      "go-home": "Go back to homepage"
+      "go-home": "Go to homepage"
     }
   },
   "title": {

@@ -19,7 +19,7 @@
       "error-alert": "Alerta de erro",
       "close-alert": "Fechar alerta",
       "change-locale": "Alterar idioma da página: ${locale}",
-      "go-home": "Voltar para a página inicial"
+      "go-home": "Ir para a página inicial"
     }
   },
   "title": {

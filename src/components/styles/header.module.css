@@ -2,8 +2,15 @@
   display: flex;
   gap: 0.5rem;
   font-size: 2rem;
+  color: var(--white);
 }
 
 .title_logo {
   width: 2rem;
+}
+
+@media screen and (orientation: landscape) {
+  .title:hover {
+    color: var(--white);
+  }
 }
