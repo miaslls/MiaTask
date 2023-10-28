@@ -1,0 +1,10 @@
+{
+  "404": {
+    "page-title": "404: Página não encontrada",
+    "link-text": "voltar para home"
+  },
+  "500": {
+    "page-title": "500: Ocorreu um erro no servidor",
+    "instructions": "tente novamente mais tarde"
+  }
+}

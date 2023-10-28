@@ -8,12 +8,6 @@
 
 ---
 
-- ⬛ error pages
-  - 404
-  - 500
-
----
-
 - ⬛ a11y best practices
 
   - dark mode ✔️
@@ -30,6 +24,7 @@
 
 ### ✔️ COMPLETED
 
+- ✅ custom error pages: 404, 500
 - ✅ rename `data`
 - ✅ component prop types
 - ✅ esc closes task options (task-item)

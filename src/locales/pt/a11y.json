@@ -18,7 +18,8 @@
       "close-update": "Fechar",
       "error-alert": "Alerta de erro",
       "close-alert": "Fechar alerta",
-      "change-locale": "Alterar idioma da página: ${locale}"
+      "change-locale": "Alterar idioma da página: ${locale}",
+      "go-home": "Voltar para a página inicial"
     }
   },
   "title": {
@@ -40,6 +41,7 @@
     "update-input": "Tarefa atualizada",
     "link-github": "Link externo: Github de miaslls",
     "link-font": "Link externo: Roboto Mono",
-    "link-icon": "Link externo: Remix Icon"
+    "link-icon": "Link externo: Remix Icon",
+    "home": "Página Inicial"
   }
 }

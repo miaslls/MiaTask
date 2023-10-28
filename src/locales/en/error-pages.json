@@ -1,0 +1,10 @@
+{
+  "404": {
+    "page-title": "404: Page Not Found",
+    "link-text": "back to homepage"
+  },
+  "500": {
+    "page-title": "500: Server-side Error Occurred",
+    "instructions": "try again later"
+  }
+}

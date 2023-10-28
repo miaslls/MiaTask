@@ -18,7 +18,8 @@
       "close-update": "Close update task form",
       "error-alert": "Error alert",
       "close-alert": "Close alert",
-      "change-locale": "Change page language: ${locale}"
+      "change-locale": "Change page language: ${locale}",
+      "go-home": "Go back to homepage"
     }
   },
   "title": {
@@ -40,6 +41,7 @@
     "update-input": "Updated task text",
     "link-github": "External link: miaslls' Github page",
     "link-font": "External link: Roboto Mono",
-    "link-icon": "External link: Remix Icon"
+    "link-icon": "External link: Remix Icon",
+    "home": "Homepage"
   }
 }
