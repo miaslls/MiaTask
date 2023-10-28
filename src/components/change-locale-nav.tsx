@@ -8,7 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 export default function ChangeLocaleNav() {
   const { t } = useTranslation('a11y');
-  const { locales: availableLocales, locale: currentLocale } = useRouter();
+  const { locales: availableLocales, locale: currentLocale, asPath } = useRouter();
 
   useEffect(() => {
     const setLocaleCookie = (locale: string | undefined) => {
@@ -29,7 +29,7 @@ export default function ChangeLocaleNav() {
             <Link
               key={`change-lang-link--${locale}`}
               className={locale === currentLocale ? styles.current_locale : undefined}
-              href="/"
+              href={asPath}
               locale={locale}
               title={ISO6391.getNativeName(locale)}
               aria-label={t('aria.label.change-locale', {
