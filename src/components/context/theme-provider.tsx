@@ -15,7 +15,7 @@ export function useTheme(): ThemeState {
   const context = useContext(ThemeContext);
 
   if (!context) {
-    throw new Error('Please, use ThemeProvider in a parent component');
+    throw new Error('Use ThemeProvider in a parent component');
   }
 
   return context;
@@ -28,6 +28,14 @@ export default function ThemeProvider(props: PropsWithChildren) {
     const cookieString = document.cookie;
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
+    function handleMediaQuery(query: MediaQueryList | MediaQueryListEvent) {
+      if (query.matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    }
+
     if (cookieString.includes('theme')) {
       const themeCookie = getThemeCookie(cookieString);
 
@@ -35,20 +43,14 @@ export default function ThemeProvider(props: PropsWithChildren) {
         setTheme(themeCookie.value);
       }
     } else {
-      if (mediaQuery.matches) {
-        console.log('User prefers Dark Mode');
-
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
+      handleMediaQuery(mediaQuery);
     }
 
-    mediaQuery.addEventListener('change', (e) => {
-      setTheme(e.matches ? 'dark' : 'light');
+    mediaQuery.addEventListener('change', handleMediaQuery);
 
-      console.log('Theme changed to match system');
-    });
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaQuery);
+    };
   }, []);
 
   useEffect(() => {
@@ -60,8 +62,6 @@ export default function ThemeProvider(props: PropsWithChildren) {
       } else {
         body.classList.remove('dark');
       }
-
-      console.log(`Theme set to "${theme}"`);
 
       const date = new Date();
       const expireMs = 100 * 24 * 60 * 60 * 1000;
