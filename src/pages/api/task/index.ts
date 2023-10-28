@@ -29,7 +29,7 @@ async function handleGET(
 ) {
   try {
     const tasks = await prisma.task.findMany({
-      orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { createdAt: 'desc' }],
+      orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { updatedAt: 'desc' }],
     });
 
     res.status(201).send({ tasks });

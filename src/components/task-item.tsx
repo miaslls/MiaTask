@@ -61,6 +61,12 @@ export default function TaskItem({
 }: TaskItemProps) {
   const { t, lang } = useTranslation('common');
 
+  const taskDate = new Date(task.updatedAt);
+  const dateString = taskDate.toLocaleDateString(lang, {
+    day: 'numeric',
+    month: '2-digit',
+  });
+
   if (task.id === taskToUpdate) {
     return (
       <UpdateTaskForm
@@ -140,14 +146,15 @@ export default function TaskItem({
         </div>
       )}
 
-      <div
-        className={styles.task_text}
+      {/* <div
+        className={styles.text_date_wrapper}
         onClick={() => handleShowModal({ type: 'details', task })}
         aria-label={t('a11y:aria.label.details')}
         title={t('a11y:title.details')}
-      >
-        {task.text}
-      </div>
+      > */}
+      <div className={styles.task_text}>{task.text}</div>
+      <div className={styles.task_date}>{dateString}</div>
+      {/* </div> */}
 
       {task.starred && (
         <button

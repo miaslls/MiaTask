@@ -1,6 +1,7 @@
 .task {
   width: 100%;
   display: flex;
+  align-items: baseline;
   gap: 0.5rem;
 }
 
@@ -15,10 +16,22 @@
   color: var(--gray-04);
 }
 
+/* .text_date_wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  cursor: pointer;
+} */
+
 .task_text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.task_date {
+  font-size: x-small;
+  color: var(--gray-04);
 }
 
 .task_starred {

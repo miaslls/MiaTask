@@ -19,7 +19,7 @@ export type ShowModal = {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const tasks = await prisma.task.findMany({
-    orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { createdAt: 'desc' }],
+    orderBy: [{ completed: 'asc' }, { starred: 'desc' }, { updatedAt: 'desc' }],
   });
 
   return {
