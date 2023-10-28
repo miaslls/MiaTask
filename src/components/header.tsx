@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import ToggleThemeButton from './toggle-theme-button';
 
 export default function Header() {
-  // const { locale: currentLocale } = useRouter();
   const { t, lang } = useTranslation();
 
   return (

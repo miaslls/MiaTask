@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 export default function Custom404() {
-  const { t } = useTranslation('error-pages');
+  const { t, lang } = useTranslation('error-pages');
 
   return (
     <>
@@ -21,6 +21,7 @@ export default function Custom404() {
       <Link
         className={styles.link}
         href="/"
+        locale={lang}
         aria-label={t('a11y:aria.label.go-home')}
         title={t('a11y:title.home')}
       >
