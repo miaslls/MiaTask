@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { dismissableErrorToast } from '@components/dismissable-error-toast';
 import UpdateTaskForm from './update-task-form';
 import useTranslation from 'next-translate/useTranslation';
+import useDeviceOrientation from '@hooks/useDeviceOrientation';
 
 import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
@@ -60,12 +61,30 @@ export default function TaskItem({
   handleForm,
 }: TaskItemProps) {
   const { t, lang } = useTranslation('common');
+  const orientation = useDeviceOrientation();
 
   const taskDate = new Date(task.updatedAt);
-  const dateString = taskDate.toLocaleDateString(lang, {
-    day: 'numeric',
+  const dateStringShort = taskDate.toLocaleDateString(lang, {
+    day: '2-digit',
     month: '2-digit',
   });
+
+  const dateStringLong = taskDate.toLocaleDateString(lang, {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+  });
+
+  const timeString = taskDate
+    .toLocaleTimeString(lang, {
+      hour12: true,
+      hour: 'numeric',
+      minute: '2-digit',
+    })
+    .toLowerCase()
+    .split(' ')
+    .join('');
 
   if (task.id === taskToUpdate) {
     return (
@@ -88,29 +107,17 @@ export default function TaskItem({
         (task.completed && styles.task_completed)
       }
     >
-      <div className={styles.task_icons}>
-        <button
-          type="button"
-          className={styles.task_icon}
-          onClick={() => toggleTaskAction(task.id, 'complete', handleShowOptions, t, lang)}
-          aria-label={t('a11y:aria.label.toggle-complete')}
-          title={t('a11y:title.toggle-complete')}
-        >
-          <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
-        </button>
+      <button
+        type="button"
+        className={styles.task_icon + ' ' + styles.checkbox_icon}
+        onClick={() => toggleTaskAction(task.id, 'complete', handleShowOptions, t, lang)}
+        aria-label={t('a11y:aria.label.toggle-complete')}
+        title={t('a11y:title.toggle-complete')}
+      >
+        <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
+      </button>
 
-        <button
-          type="button"
-          className={styles.task_icon}
-          onClick={() => handleShowOptions(task)}
-          aria-label={t('a11y:aria.label.options')}
-          title={t('a11y:title.options')}
-        >
-          <i className="ri-more-2-fill"></i>
-        </button>
-      </div>
-
-      {showTaskOptions === task && (
+      {/* {showTaskOptions === task && (
         <div className={styles.task_options}>
           <button
             type="button"
@@ -144,22 +151,25 @@ export default function TaskItem({
             </button>
           )}
         </div>
-      )}
+      )} */}
 
-      {/* <div
-        className={styles.text_date_wrapper}
+      <div
+        className={styles.task_preview}
         onClick={() => handleShowModal({ type: 'details', task })}
         aria-label={t('a11y:aria.label.details')}
         title={t('a11y:title.details')}
-      > */}
-      <div className={styles.task_text}>{task.text}</div>
-      <div className={styles.task_date}>{dateString}</div>
-      {/* </div> */}
+      >
+        <div className={styles.task_text}>{task.text}</div>
+
+        <div className={styles.task_date}>
+          {orientation === 'landscape' ? dateStringLong : dateStringShort} @ {timeString}
+        </div>
+      </div>
 
       {task.starred && (
         <button
           type="button"
-          className={styles.task_icon}
+          className={styles.task_icon + ' ' + styles.star_icon}
           onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t, lang)}
           aria-label={t('a11y:aria.label.unstar')}
           title={t('a11y:title.unstar')}

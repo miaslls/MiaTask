@@ -52,6 +52,12 @@ export default function TaskModal({ showModal, handleShowModal }: TaskModalProps
           </div>
         </div>
 
+        <div className={styles.icons}>
+          <i className="ri-edit-line"></i>
+          <i className="ri-delete-bin-2-line"></i>
+          <i className="ri-star-line"></i>
+        </div>
+
         {showModal.type === 'delete' && (
           <>
             <div className={styles.confirm_delete}>

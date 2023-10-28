@@ -1,27 +1,27 @@
 .task {
   width: 100%;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.task_icons,
-.task_options {
-  display: flex;
-  gap: 0.1rem;
-}
-
 .task_icon {
-  width: 1rem;
   color: var(--gray-04);
 }
 
-/* .text_date_wrapper {
+.checkbox_icon {
+  width: 2rem;
+  height: 2rem;
+  margin-left: -6px;
+  font-size: 1.5rem;
+}
+
+.task_preview {
+  width: calc(100% - 4rem);
   display: flex;
-  align-items: baseline;
-  gap: 0.25rem;
+  flex-direction: column;
   cursor: pointer;
-} */
+}
 
 .task_text {
   white-space: nowrap;
@@ -29,9 +29,15 @@
   text-overflow: ellipsis;
 }
 
+.star_icon {
+  width: 1rem;
+  align-self: flex-start;
+}
+
 .task_date {
   font-size: x-small;
   color: var(--gray-04);
+  text-transform: capitalize;
 }
 
 .task_starred {
@@ -42,7 +48,7 @@
   color: var(--gray-03);
 }
 
-.task_completed > .task_text {
+.task_completed .task_text {
   text-decoration: line-through solid var(--gray-03) 1px;
 }
 

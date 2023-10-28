@@ -136,10 +136,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
           aria-label={t('a11y:aria.label.open-create')}
           title={t('a11y:title.add')}
         >
-          <div className={taskStyles.task_icons}>
-            <div className={taskStyles.task_icon}>
-              <i className="ri-add-box-line"></i>
-            </div>
+          <div className={taskStyles.task_icon + ' ' + taskStyles.checkbox_icon}>
+            <i className="ri-add-box-line"></i>
           </div>
 
           <div className={taskStyles.task_text + ' ' + styles.add_text}>{t('add-button')}</div>

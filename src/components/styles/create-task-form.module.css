@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   gap: 0.25rem;
-  margin-top: -4px;
+  /* margin-top: -4px; */
 }
 
 .task_input {
@@ -11,10 +11,11 @@
   font-family: var(--default-font);
   font-weight: var(--default-regular);
   color: var(--gray-04);
+  padding: 0 0.25rem;
 }
 
 .task_input_icon {
-  font-size: larger;
+  font-size: 1.5rem;
   color: var(--gray-04);
 }
 

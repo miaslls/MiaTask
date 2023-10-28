@@ -18,12 +18,11 @@ function Overlay({
 }
 
 export type ModalProps = {
-  title: string;
   children: React.JSX.Element;
   closeModal(): void;
 };
 
-export default function Modal({ title, children, closeModal }: ModalProps) {
+export default function Modal({ children, closeModal }: ModalProps) {
   const { t } = useTranslation('common');
 
   const modalRef = useRef<HTMLDivElement | null>(null);
@@ -49,8 +48,6 @@ export default function Modal({ title, children, closeModal }: ModalProps) {
         onClick={(e) => handleClick(e, { canClose: false })}
         ref={modalRef}
       >
-        <div className={styles.title}>{t(`modal-${title}`)}</div>
-
         <button
           className={styles.close}
           onClick={(e) => handleClick(e, { canClose: true })}

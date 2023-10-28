@@ -151,6 +151,22 @@ a {
   color: var(--gray-04);
 }
 
+.tasklist_alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alert_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: -6px;
+  font-size: 1.35rem;
+}
+
 @media screen and (orientation: landscape) {
   a:hover,
   .toast_dismissable > button:hover {

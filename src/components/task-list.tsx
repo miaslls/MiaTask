@@ -44,7 +44,11 @@ export default function TaskList({
   if (error) {
     return (
       <div className="tasklist_alert">
-        <i className="ri-alert-line"></i> {t('tasklist-fail')}
+        <div className="alert_icon">
+          <i className="ri-alert-line"></i>
+        </div>
+
+        <div>{t('tasklist-fail')}</div>
       </div>
     );
   }
@@ -52,7 +56,11 @@ export default function TaskList({
   if (isLoading) {
     return (
       <div className="tasklist_alert">
-        <i className="ri-loop-right-fill"></i> {t('loading')}
+        <div className="alert_icon">
+          <i className="ri-loop-right-fill"></i>
+        </div>
+
+        <div>{t('loading')}</div>
       </div>
     );
   }
@@ -61,7 +69,11 @@ export default function TaskList({
     <>
       {tasklist.tasks.length === 0 ? (
         <div className="tasklist_alert">
-          <i className="ri-alert-line"></i> {t('tasklist-empty')}
+          <div className="alert_icon">
+            <i className="ri-alert-line"></i>
+          </div>
+
+          <div>{t('tasklist-empty')}</div>
         </div>
       ) : (
         tasklist.tasks.map((task: Task) => (
@@ -80,7 +92,7 @@ export default function TaskList({
       )}
 
       {showModal && (
-        <Modal closeModal={() => handleShowModal(null)} title={showModal.type}>
+        <Modal closeModal={() => handleShowModal(null)}>
           <TaskModal showModal={showModal} handleShowModal={handleShowModal} />
         </Modal>
       )}
