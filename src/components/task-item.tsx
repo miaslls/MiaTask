@@ -3,22 +3,18 @@ import styles from './styles/task-item.module.css';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
 import { dismissableErrorToast } from '@components/dismissable-error-toast';
-import UpdateTaskForm from './update-task-form';
 import useTranslation from 'next-translate/useTranslation';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';
 
 import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
-import type { ShowModal } from '@pages/index';
 
 async function toggleTaskAction(
   id: string,
   action: 'complete' | 'star',
-  handleShowOptions: CallableFunction,
   translate: CallableFunction,
   lang: string,
 ) {
-  handleShowOptions();
   const toastId = toast.loading(translate('loading'));
 
   const tasklist = '/api/task';
@@ -41,25 +37,9 @@ async function toggleTaskAction(
 
 export type TaskItemProps = {
   task: Task;
-  showTaskOptions: Task | null;
-  handleShowOptions(task?: Task): void;
-  handleShowModal(showModal: ShowModal): void;
-  inputText: string;
-  taskToUpdate: string | null;
-  handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleForm(task?: Task): void;
 };
 
-export default function TaskItem({
-  task,
-  showTaskOptions,
-  handleShowOptions,
-  handleShowModal,
-  inputText,
-  taskToUpdate,
-  handleChange,
-  handleForm,
-}: TaskItemProps) {
+export default function TaskItem({ task }: TaskItemProps) {
   const { t, lang } = useTranslation('common');
   const orientation = useDeviceOrientation();
 
@@ -86,16 +66,16 @@ export default function TaskItem({
     .split(' ')
     .join('');
 
-  if (task.id === taskToUpdate) {
-    return (
-      <UpdateTaskForm
-        taskId={task.id}
-        inputText={inputText}
-        handleChange={handleChange}
-        handleForm={handleForm}
-      />
-    );
-  }
+  // if (task.id === taskToUpdate) {
+  //   return (
+  //     <UpdateTaskForm
+  //       taskId={task.id}
+  //       inputText={inputText}
+  //       handleChange={handleChange}
+  //       handleForm={handleForm}
+  //     />
+  //   );
+  // }
 
   return (
     <li
@@ -110,52 +90,15 @@ export default function TaskItem({
       <button
         type="button"
         className={styles.task_icon + ' ' + styles.checkbox_icon}
-        onClick={() => toggleTaskAction(task.id, 'complete', handleShowOptions, t, lang)}
+        onClick={() => toggleTaskAction(task.id, 'complete', t, lang)}
         aria-label={t('a11y:aria.label.toggle-complete')}
         title={t('a11y:title.toggle-complete')}
       >
         <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
       </button>
 
-      {/* {showTaskOptions === task && (
-        <div className={styles.task_options}>
-          <button
-            type="button"
-            className={styles.task_icon}
-            onClick={() => handleForm(task)}
-            aria-label={t('a11y:aria.label.edit')}
-            title={t('a11y:title.edit')}
-          >
-            <i className="ri-edit-line"></i>
-          </button>
-
-          <button
-            type="button"
-            className={styles.task_icon}
-            onClick={() => handleShowModal({ type: 'delete', task })}
-            aria-label={t('a11y:aria.label.delete')}
-            title={t('a11y:title.delete')}
-          >
-            <i className="ri-delete-bin-2-line"></i>
-          </button>
-
-          {!task.starred && (
-            <button
-              type="button"
-              className={styles.task_icon}
-              onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t, lang)}
-              aria-label={t('a11y:aria.label.star')}
-              title={t('a11y:title.star')}
-            >
-              <i className="ri-star-line"></i>
-            </button>
-          )}
-        </div>
-      )} */}
-
       <div
         className={styles.task_preview}
-        onClick={() => handleShowModal({ type: 'details', task })}
         aria-label={t('a11y:aria.label.details')}
         title={t('a11y:title.details')}
       >
@@ -170,7 +113,7 @@ export default function TaskItem({
         <button
           type="button"
           className={styles.task_icon + ' ' + styles.star_icon}
-          onClick={() => toggleTaskAction(task.id, 'star', handleShowOptions, t, lang)}
+          onClick={() => toggleTaskAction(task.id, 'star', t, lang)}
           aria-label={t('a11y:aria.label.unstar')}
           title={t('a11y:title.unstar')}
         >

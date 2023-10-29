@@ -1,21 +1,21 @@
 import styles from './styles/create-task-form.module.css';
 
-import { ChangeEvent, FormEvent, useRef } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
 import { dismissableErrorToast } from '@components/dismissable-error-toast';
+import { ChangeEvent, FormEvent, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@hooks/useFocusTrapping';
 
 async function submitPostData(
   e: FormEvent<HTMLFormElement>,
   inputText: string,
-  handleForm: CallableFunction,
+  closeForm: CallableFunction,
   translate: CallableFunction,
   lang: string,
 ) {
   e.preventDefault();
-  handleForm();
+  closeForm();
 
   const toastId = toast.loading(translate('loading'));
 
@@ -40,24 +40,24 @@ async function submitPostData(
 export type CreateTaskFormProps = {
   inputText: string;
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleForm(): void;
+  closeForm(): void;
 };
 
 export default function CreateTaskForm({
   inputText,
   handleChange,
-  handleForm,
+  closeForm,
 }: CreateTaskFormProps) {
   const { t, lang } = useTranslation('common');
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  useFocusTrapping({ elementRef: formRef, escapeHatchFunc: handleForm });
+  useFocusTrapping({ elementRef: formRef, escapeHatchFunc: closeForm });
 
   return (
     <form
       className={styles.task_form}
-      onSubmit={(e) => submitPostData(e, inputText, handleForm, t, lang)}
+      onSubmit={(e) => submitPostData(e, inputText, closeForm, t, lang)}
       ref={formRef}
     >
       <input
@@ -76,15 +76,15 @@ export default function CreateTaskForm({
 
       <button
         type="button"
-        className={styles.task_input_icon}
-        onClick={handleForm}
+        className={styles.input_icon}
+        onClick={closeForm}
         aria-label={t('a11y:aria.label.close-create')}
         title={t('a11y:title.close')}
       >
         <i className="ri-close-line"></i>
       </button>
 
-      <button className={styles.task_input_icon} type="submit" title={t('a11y:title.submit')}>
+      <button className={styles.input_icon} type="submit" title={t('a11y:title.submit')}>
         <i className="ri-arrow-right-s-line"></i>
       </button>
     </form>
