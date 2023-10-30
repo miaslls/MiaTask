@@ -1,11 +1,11 @@
 import toast from 'react-hot-toast';
 import useTranslation from 'next-translate/useTranslation';
 
-export const dismissableErrorToast = (message: string) => {
+export function dismissableErrorToast(message: string) {
   return toast.error((toast) => <DismissableErrorToast message={message} toastId={toast.id} />, {
     duration: 5000,
   });
-};
+}
 
 export type DismissableErrorToastProps = {
   message: string;

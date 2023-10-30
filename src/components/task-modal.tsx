@@ -20,7 +20,7 @@ export type TaskModalProps = {
 };
 
 export default function TaskModal({ handleOpenElement, activeTask: task }: TaskModalProps) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const orientation = useDeviceOrientation();
 

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 export default function Footer() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <footer>

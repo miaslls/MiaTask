@@ -8,7 +8,7 @@ import { useTheme } from './context/theme-provider';
 export default function ToggleThemeButton() {
   const { theme, toggleTheme } = useTheme();
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <label

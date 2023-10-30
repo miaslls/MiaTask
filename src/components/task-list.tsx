@@ -15,7 +15,7 @@ export type TaskListProps = {
 };
 
 export default function TaskList({ handleOpenElement, openElement, activeTask }: TaskListProps) {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
 
   const url = '/api/task';
 

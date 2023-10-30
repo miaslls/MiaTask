@@ -11,12 +11,12 @@ export default function ChangeLocaleNav() {
   const { locales: availableLocales, locale: currentLocale, asPath } = useRouter();
 
   useEffect(() => {
-    const setLocaleCookie = (locale: string | undefined) => {
+    function setLocaleCookie(locale: string | undefined) {
       const date = new Date();
       const expireMs = 100 * 24 * 60 * 60 * 1000;
       date.setTime(date.getTime() + expireMs);
       document.cookie = `NEXT_LOCALE=${locale};expires=${date.toUTCString()};path=/`;
-    };
+    }
 
     setLocaleCookie(currentLocale);
   }, [currentLocale]);

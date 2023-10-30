@@ -48,7 +48,7 @@ export default function CreateTaskForm({
   handleChange,
   closeForm,
 }: CreateTaskFormProps) {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
 
   const formRef = useRef<HTMLFormElement | null>(null);
 

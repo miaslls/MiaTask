@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 //   timeString: string;
 // };
 //
-// export type ExtendedTask = Task & TaskDateTime;
+// export type ExtendedTask = Task & TaskDateTime; // ❓
 
 export type OpenElement = 'create' | 'update' | 'modal' | null;
 
@@ -43,7 +43,7 @@ export type ExtendedTask = Task & {
 };
 
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   const [openElement, setOpenElement] = useState<OpenElement>(null);
   const [activeTask, setActiveTask] = useState<ExtendedTask | null>(null);

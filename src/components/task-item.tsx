@@ -9,7 +9,7 @@ import useDeviceOrientation from '@hooks/useDeviceOrientation';
 import { Task } from '@prisma/client';
 import type { ExtendedTask, OpenElement } from '@src/pages/index';
 
-async function toggleTaskAction(
+export async function toggleTaskAction(
   id: string,
   action: 'complete' | 'star',
   translate: CallableFunction,
@@ -41,7 +41,7 @@ export type TaskItemProps = {
 };
 
 export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
   const orientation = useDeviceOrientation();
 
   // TODO: getExtendedTask()

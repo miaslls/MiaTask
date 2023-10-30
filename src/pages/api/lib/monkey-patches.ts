@@ -4,7 +4,7 @@
 import getT from 'next-translate/getT';
 import i18n from '@root/i18n';
 
-export const ensureGetTAvailability = () => {
+export function ensureGetTAvailability() {
   global.i18nConfig = i18n;
   return getT;
-};
+}
