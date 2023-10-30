@@ -26,18 +26,43 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
+// export type TaskDateTime = {
+//   dateStringShort: string;
+//   dateStringLong: string;
+//   timeString: string;
+// };
+//
+// export type ExtendedTask = Task & TaskDateTime;
+
 export type OpenElement = 'create' | 'update' | 'modal' | null;
+
+export type ExtendedTask = Task & {
+  dateStringShort: string;
+  dateStringLong: string;
+  timeString: string;
+};
 
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
   const { t } = useTranslation('common');
 
   const [openElement, setOpenElement] = useState<OpenElement>(null);
-  const [activeTask, setActiveTask] = useState<Task | null>(null);
+  const [activeTask, setActiveTask] = useState<ExtendedTask | null>(null);
   const [inputText, setInputText] = useState<string>('');
 
-  // FIXME:
-  function handleOpenElement(element?: OpenElement, task?: Task) {
+  function handleOpenElement(element?: OpenElement, task?: ExtendedTask) {
     if (element) {
+      if (element === 'create') {
+        setInputText('');
+      }
+
+      if (task) {
+        setActiveTask(task);
+
+        if (element === 'update') {
+          setInputText(task.text);
+        }
+      }
+
       setOpenElement(element);
     } else {
       setOpenElement(null);
@@ -88,7 +113,11 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
 
       <ul className={styles.tasklist}>
         <SWRConfig value={{ fallback }}>
-          <TaskList />
+          <TaskList
+            handleOpenElement={handleOpenElement}
+            openElement={openElement}
+            activeTask={activeTask}
+          />
         </SWRConfig>
       </ul>
     </>

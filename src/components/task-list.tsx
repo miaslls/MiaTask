@@ -3,9 +3,18 @@ import useTranslation from 'next-translate/useTranslation';
 import { fetcher } from '@src/lib/fetcher';
 
 import { Task } from '@prisma/client';
-import TaskItem from './task-item';
+import type { OpenElement, ExtendedTask } from '@src/pages/index';
 
-export default function TaskList() {
+import TaskItem from './task-item';
+import TaskModal from './task-modal';
+
+export type TaskListProps = {
+  handleOpenElement(element?: OpenElement, task?: ExtendedTask): void;
+  openElement: OpenElement;
+  activeTask: ExtendedTask | null;
+};
+
+export default function TaskList({ handleOpenElement, openElement, activeTask }: TaskListProps) {
   const { t, lang } = useTranslation('common');
 
   const url = '/api/task';
@@ -51,7 +60,17 @@ export default function TaskList() {
           <div>{t('tasklist-empty')}</div>
         </div>
       ) : (
-        tasklist.tasks.map((task: Task) => <TaskItem task={task} key={`task-item-${task.id}`} />)
+        tasklist.tasks.map((task: Task) => (
+          <TaskItem
+            task={task}
+            handleOpenElement={handleOpenElement}
+            key={`task-item-${task.id}`}
+          />
+        ))
+      )}
+
+      {openElement === 'modal' && (
+        <TaskModal handleOpenElement={handleOpenElement} activeTask={activeTask} />
       )}
     </>
   );

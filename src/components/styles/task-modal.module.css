@@ -1,60 +1,62 @@
+.overlay {
+  width: 100%;
+  height: 100%;
+  padding-top: 10rem;
+  background: var(--gray-translucent);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 .container {
+  width: 90%;
+  padding: 1rem 1.25rem 1.5rem 1.75rem;
+  background: var(--bg-color-translucent);
+  box-shadow: 0.25rem 0.25rem var(--fg-color-translucent);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 2rem;
+  gap: 1rem;
 }
 
-.text {
-  width: 100%;
+.button {
   display: flex;
   align-items: center;
-  text-align: left;
-  gap: 0.5rem;
-}
-
-.quote {
-  color: var(--gray-03);
+  justify-content: center;
   font-size: 1.25rem;
-}
-
-.quote:first-of-type {
-  align-self: flex-start;
-}
-
-.quote:last-of-type {
-  align-self: flex-end;
-}
-
-.confirm_delete {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-}
-
-.delete_text {
-  display: flex;
-  font-weight: var(--default-bold);
-  gap: 0.25rem;
-}
-
-.delete_buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.delete_button {
   color: var(--gray-04);
-  font-size: 1.25rem;
 }
 
-.delete_button:focus {
-  background: var(--gray-02);
+.content {
+  width: 100%;
+}
+
+.date {
+  font-size: small;
+  color: var(--gray-04);
+  text-transform: capitalize;
+}
+
+.options_nav {
+  display: flex;
+}
+
+.nav_button {
+  width: 2rem;
+  height: 2rem;
 }
 
 @media screen and (orientation: landscape) {
-  .delete_button:hover {
+  .container {
+    width: calc(var(--landscape-width) * 0.9);
+    min-width: 18rem;
+  }
+
+  .button:hover {
     color: var(--gray-03);
   }
 }

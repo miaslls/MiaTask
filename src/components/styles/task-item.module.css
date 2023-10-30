@@ -35,7 +35,7 @@
 }
 
 .task_date {
-  font-size: x-small;
+  font-size: small;
   color: var(--gray-04);
   text-transform: capitalize;
 }

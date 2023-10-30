@@ -6,8 +6,8 @@ import { dismissableErrorToast } from '@components/dismissable-error-toast';
 import useTranslation from 'next-translate/useTranslation';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';
 
-import { ChangeEvent } from 'react';
 import { Task } from '@prisma/client';
+import type { ExtendedTask, OpenElement } from '@src/pages/index';
 
 async function toggleTaskAction(
   id: string,
@@ -37,14 +37,17 @@ async function toggleTaskAction(
 
 export type TaskItemProps = {
   task: Task;
+  handleOpenElement(element?: OpenElement, task?: ExtendedTask): void;
 };
 
-export default function TaskItem({ task }: TaskItemProps) {
+export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
   const { t, lang } = useTranslation('common');
   const orientation = useDeviceOrientation();
 
+  // TODO: getExtendedTask()
   const taskDate = new Date(task.updatedAt);
   const dateStringShort = taskDate.toLocaleDateString(lang, {
+    weekday: 'short',
     day: '2-digit',
     month: '2-digit',
   });
@@ -65,6 +68,13 @@ export default function TaskItem({ task }: TaskItemProps) {
     .toLowerCase()
     .split(' ')
     .join('');
+
+  const extendedTask: ExtendedTask = {
+    ...task,
+    dateStringShort,
+    dateStringLong,
+    timeString,
+  };
 
   // if (task.id === taskToUpdate) {
   //   return (
@@ -99,6 +109,7 @@ export default function TaskItem({ task }: TaskItemProps) {
 
       <div
         className={styles.task_preview}
+        onClick={() => handleOpenElement('modal', extendedTask)}
         aria-label={t('a11y:aria.label.details')}
         title={t('a11y:title.details')}
       >
