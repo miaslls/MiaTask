@@ -6,9 +6,11 @@ import { dismissableErrorToast } from '@components/dismissable-error-toast';
 import useTranslation from 'next-translate/useTranslation';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';
 
-import { Task } from '@prisma/client';
+import type { Task } from '@prisma/client';
 import type { ExtendedTask, OpenElement } from '@src/pages/index';
+import { extendTask } from '../lib/format';
 
+// extract to lib/actions ❓
 export async function toggleTaskAction(
   id: string,
   action: 'complete' | 'star',
@@ -43,49 +45,7 @@ export type TaskItemProps = {
 export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
   const { t, lang } = useTranslation();
   const orientation = useDeviceOrientation();
-
-  // TODO: getExtendedTask()
-  const taskDate = new Date(task.updatedAt);
-  const dateStringShort = taskDate.toLocaleDateString(lang, {
-    weekday: 'short',
-    day: '2-digit',
-    month: '2-digit',
-  });
-
-  const dateStringLong = taskDate.toLocaleDateString(lang, {
-    weekday: 'long',
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit',
-  });
-
-  const timeString = taskDate
-    .toLocaleTimeString(lang, {
-      hour12: true,
-      hour: 'numeric',
-      minute: '2-digit',
-    })
-    .toLowerCase()
-    .split(' ')
-    .join('');
-
-  const extendedTask: ExtendedTask = {
-    ...task,
-    dateStringShort,
-    dateStringLong,
-    timeString,
-  };
-
-  // if (task.id === taskToUpdate) {
-  //   return (
-  //     <UpdateTaskForm
-  //       taskId={task.id}
-  //       inputText={inputText}
-  //       handleChange={handleChange}
-  //       handleForm={handleForm}
-  //     />
-  //   );
-  // }
+  const extendedTask = extendTask(task, lang);
 
   return (
     <li
@@ -116,7 +76,8 @@ export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
         <div className={styles.task_text}>{task.text}</div>
 
         <div className={styles.task_date}>
-          {orientation === 'landscape' ? dateStringLong : dateStringShort} @ {timeString}
+          {orientation === 'landscape' ? extendedTask.dateStringLong : extendedTask.dateStringShort}{' '}
+          @ {extendedTask.timeString}
         </div>
       </div>
 
