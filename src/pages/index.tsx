@@ -1,5 +1,5 @@
 import styles from '@src/styles/index.module.css';
-import taskStyles from '@components/styles/task-item.module.css';
+import taskStyles from '@components/task-list/styles/task-item.module.css';
 
 import Head from 'next/head';
 import prisma from '@src/lib/prisma';
@@ -10,7 +10,7 @@ import { ChangeEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import TaskList from '@components/task-list';
-import CreateTaskForm from '@components/create-task-form';
+import CreateTaskForm from '@components/forms/create-task-form';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const tasks = await prisma.task.findMany({

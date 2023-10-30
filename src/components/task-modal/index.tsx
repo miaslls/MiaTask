@@ -5,8 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@hooks/useFocusTrapping';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';
 
-import { toggleTaskAction } from './task-item';
-import type { ToggleTaskActionParams } from './task-item';
+import { toggleTaskAction } from '../task-list/task-item';
+import type { ToggleTaskActionParams } from '../task-list/task-item';
 import type { ExtendedTask, OpenElement } from '@src/pages/index';
 
 function Overlay({ children, closeModal }: { children: React.JSX.Element; closeModal(): void }) {

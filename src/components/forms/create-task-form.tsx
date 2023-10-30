@@ -2,7 +2,7 @@ import styles from './styles/create-task-form.module.css';
 
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
-import { dismissableErrorToast } from '@components/dismissable-error-toast';
+import { dismissableErrorToast } from '@src/lib/toast';
 import { ChangeEvent, FormEvent, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@hooks/useFocusTrapping';

@@ -2,7 +2,7 @@ import styles from './styles/task-item.module.css';
 
 import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
-import { dismissableErrorToast } from '@components/dismissable-error-toast';
+import { dismissableErrorToast } from '@src/lib/toast';
 import { extendTask } from '@src/lib/format';
 import useTranslation from 'next-translate/useTranslation';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';

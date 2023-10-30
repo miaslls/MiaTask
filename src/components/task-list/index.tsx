@@ -2,11 +2,11 @@ import useSWR from 'swr';
 import useTranslation from 'next-translate/useTranslation';
 import { fetcher } from '@src/lib/fetcher';
 
-import { Task } from '@prisma/client';
+import type { Task } from '@prisma/client';
 import type { OpenElement, ExtendedTask } from '@src/pages/index';
 
 import TaskItem from './task-item';
-import TaskModal from './task-modal';
+import TaskModal from '../task-modal';
 
 export type TaskListProps = {
   handleOpenElement(element?: OpenElement, task?: ExtendedTask): void;
