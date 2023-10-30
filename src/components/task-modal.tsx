@@ -1,9 +1,12 @@
 import styles from './styles/task-modal.module.css';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@hooks/useFocusTrapping';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';
+
+import { toggleTaskAction } from './task-item';
+import type { ToggleTaskActionParams } from './task-item';
 import type { ExtendedTask, OpenElement } from '@src/pages/index';
 
 function Overlay({ children, closeModal }: { children: React.JSX.Element; closeModal(): void }) {
@@ -19,8 +22,10 @@ export type TaskModalProps = {
   activeTask: ExtendedTask | null;
 };
 
-export default function TaskModal({ handleOpenElement, activeTask: task }: TaskModalProps) {
-  const { t } = useTranslation();
+export default function TaskModal({ handleOpenElement, activeTask }: TaskModalProps) {
+  const [task, setTask] = useState<ExtendedTask | null>(activeTask);
+
+  const { t, lang } = useTranslation();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const orientation = useDeviceOrientation();
 
@@ -36,6 +41,14 @@ export default function TaskModal({ handleOpenElement, activeTask: task }: TaskM
 
     if (closeIsAllowed) {
       handleOpenElement();
+    }
+  }
+
+  async function handleModalAction(actionParams: ToggleTaskActionParams) {
+    const responseTask = await toggleTaskAction(actionParams);
+
+    if (responseTask) {
+      setTask(responseTask);
     }
   }
 
@@ -70,25 +83,27 @@ export default function TaskModal({ handleOpenElement, activeTask: task }: TaskM
           </div>
 
           <nav className={styles.options_nav}>
-            {task.starred ? (
-              <button
-                type="button"
-                className={styles.button + ' ' + styles.nav_button}
-                aria-label={t('a11y:aria.label.unstar')}
-                title={t('a11y:title.unstar')}
-              >
-                <i className="ri-star-fill"></i>
-              </button>
-            ) : (
-              <button
-                type="button"
-                className={styles.button + ' ' + styles.nav_button}
-                aria-label={t('a11y:aria.label.star')}
-                title={t('a11y:title.star')}
-              >
-                <i className="ri-star-line"></i>
-              </button>
-            )}
+            <button
+              type="button"
+              className={styles.button + ' ' + styles.nav_button}
+              onClick={() =>
+                handleModalAction({ id: task.id, action: 'complete', translate: t, lang })
+              }
+              aria-label={t('a11y:aria.label.toggle-complete')}
+              title={t('a11y:title.toggle-complete')}
+            >
+              <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
+            </button>
+
+            <button
+              type="button"
+              className={styles.button + ' ' + styles.nav_button}
+              onClick={() => handleModalAction({ id: task.id, action: 'star', translate: t, lang })}
+              aria-label={t('a11y:aria.label.star')}
+              title={t('a11y:title.star')}
+            >
+              <i className={task.starred ? 'ri-star-fill' : 'ri-star-line'}></i>
+            </button>
 
             <button
               type="button"
