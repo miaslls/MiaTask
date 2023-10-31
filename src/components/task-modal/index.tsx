@@ -8,6 +8,7 @@ import useDeviceOrientation from '@hooks/useDeviceOrientation';
 import { toggleTaskAction } from '../task-list/task-item';
 import type { ToggleTaskActionParams } from '../task-list/task-item';
 import type { ExtendedTask, OpenElement } from '@src/pages/index';
+import OptionsNav from './options-nav';
 
 function Overlay({ children, closeModal }: { children: React.JSX.Element; closeModal(): void }) {
   return (
@@ -82,47 +83,7 @@ export default function TaskModal({ handleOpenElement, activeTask }: TaskModalPr
             </div>
           </div>
 
-          <nav className={styles.options_nav}>
-            <button
-              type="button"
-              className={styles.button + ' ' + styles.nav_button}
-              onClick={() =>
-                handleModalAction({ id: task.id, action: 'complete', translate: t, lang })
-              }
-              aria-label={t('a11y:aria.label.toggle-complete')}
-              title={t('a11y:title.toggle-complete')}
-            >
-              <i className={task.completed ? 'ri-checkbox-line' : 'ri-checkbox-blank-line'}></i>
-            </button>
-
-            <button
-              type="button"
-              className={styles.button + ' ' + styles.nav_button}
-              onClick={() => handleModalAction({ id: task.id, action: 'star', translate: t, lang })}
-              aria-label={t('a11y:aria.label.star')}
-              title={t('a11y:title.star')}
-            >
-              <i className={task.starred ? 'ri-star-fill' : 'ri-star-line'}></i>
-            </button>
-
-            <button
-              type="button"
-              className={styles.button + ' ' + styles.nav_button}
-              aria-label={t('a11y:aria.label.edit')}
-              title={t('a11y:title.edit')}
-            >
-              <i className="ri-edit-line"></i>
-            </button>
-
-            <button
-              type="button"
-              className={styles.button + ' ' + styles.nav_button}
-              aria-label={t('a11y:aria.label.delete')}
-              title={t('a11y:title.delete')}
-            >
-              <i className="ri-delete-bin-2-line"></i>
-            </button>
-          </nav>
+          <OptionsNav task={task} handleModalAction={handleModalAction} />
         </div>
       </Overlay>
     )

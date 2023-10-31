@@ -1,0 +1,19 @@
+.options_nav {
+  display: flex;
+}
+
+.button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--gray-04);
+}
+
+@media screen and (orientation: landscape) {
+  .button:hover {
+    color: var(--gray-03);
+  }
+}
