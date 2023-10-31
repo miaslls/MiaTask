@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 //
 // export type ExtendedTask = Task & TaskDateTime; // ❓
 
-export type OpenElement = 'create' | 'update' | 'modal' | null;
+export type OpenElement = 'create' | 'modal' | null;
 
 export type ExtendedTask = Task & {
   dateStringShort: string;
@@ -51,16 +51,8 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
 
   function handleOpenElement(element?: OpenElement, task?: ExtendedTask) {
     if (element) {
-      if (element === 'create') {
-        setInputText('');
-      }
-
       if (task) {
         setActiveTask(task);
-
-        if (element === 'update') {
-          setInputText(task.text);
-        }
       }
 
       setOpenElement(element);

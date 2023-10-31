@@ -10,15 +10,14 @@
       "star": "Star/Unstar task",
       "details": "Show task details",
       "modal-close": "Close modal",
-      "cancel-delete": "Cancel delete",
-      "confirm-delete": "Confirm delete",
       "create-input": "Enter new task",
       "update-input": "Enter updated task",
       "close-update": "Close update task form",
       "error-alert": "Error alert",
       "close-alert": "Close alert",
       "change-locale": "Change page language: ${locale}",
-      "go-home": "Go to homepage"
+      "go-home": "Go to homepage",
+      "go-back": "Go back"
     }
   },
   "title": {
@@ -40,6 +39,7 @@
     "link-github": "External link: miaslls' Github page",
     "link-font": "External link: Roboto Mono",
     "link-icon": "External link: Remix Icon",
-    "home": "Homepage"
+    "home": "Homepage",
+    "back": "Back"
   }
 }

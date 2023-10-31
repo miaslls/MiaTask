@@ -10,15 +10,14 @@
       "star": "Favoritar/Remover dos favoritos",
       "details": "Ver detalhes",
       "modal-close": "Fechar",
-      "cancel-delete": "Cencelar",
-      "confirm-delete": "Remover",
       "create-input": "Digite a nova tarefa",
       "update-input": "Digite a tarefa atualizada",
       "close-update": "Fechar",
       "error-alert": "Alerta de erro",
       "close-alert": "Fechar alerta",
       "change-locale": "Alterar idioma da página: ${locale}",
-      "go-home": "Ir para a página inicial"
+      "go-home": "Ir para a página inicial",
+      "go-back": "Voltar"
     }
   },
   "title": {
@@ -40,6 +39,7 @@
     "link-github": "Link externo: Github de miaslls",
     "link-font": "Link externo: Roboto Mono",
     "link-icon": "Link externo: Remix Icon",
-    "home": "Página Inicial"
+    "home": "Página Inicial",
+    "back": "Voltar"
   }
 }

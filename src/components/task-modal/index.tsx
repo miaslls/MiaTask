@@ -4,11 +4,13 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@hooks/useFocusTrapping';
 import useDeviceOrientation from '@hooks/useDeviceOrientation';
+import { toggleTaskAction } from '@src/lib/actions';
 
-import { toggleTaskAction } from '../task-list/task-item';
-import type { ToggleTaskActionParams } from '../task-list/task-item';
+import type { ToggleTaskActionParams } from '@src/lib/actions';
 import type { ExtendedTask, OpenElement } from '@src/pages/index';
+
 import OptionsNav from './options-nav';
+import ModalDelete from './modal-delete';
 
 function Overlay({ children, closeModal }: { children: React.JSX.Element; closeModal(): void }) {
   return (
@@ -23,10 +25,13 @@ export type TaskModalProps = {
   activeTask: ExtendedTask | null;
 };
 
+export type OpenModalElement = 'task' | 'update' | 'delete';
+
 export default function TaskModal({ handleOpenElement, activeTask }: TaskModalProps) {
   const [task, setTask] = useState<ExtendedTask | null>(activeTask);
+  const [openModalElement, setOpenModalElement] = useState<OpenModalElement>('task');
 
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const orientation = useDeviceOrientation();
 
@@ -43,6 +48,10 @@ export default function TaskModal({ handleOpenElement, activeTask }: TaskModalPr
     if (closeIsAllowed) {
       handleOpenElement();
     }
+  }
+
+  function handleOpenModalElement(element: OpenModalElement) {
+    setOpenModalElement(element);
   }
 
   async function handleModalAction(actionParams: ToggleTaskActionParams) {
@@ -64,26 +73,42 @@ export default function TaskModal({ handleOpenElement, activeTask }: TaskModalPr
           onClick={(e) => handleClick({ e, closeIsAllowed: false })}
         >
           <button
-            className={styles.button}
+            className={styles.button + ' ' + styles.close_button}
             onClick={(e) => handleClick({ e, closeIsAllowed: true })}
             aria-label={t('a11y:aria.label.modal-close')}
             title={t('a11y:title.close')}
+            autoFocus
           >
             <i className="ri-close-line"></i>
           </button>
 
-          <div className={styles.content}>
-            <div className={styles.task}>
-              <div className={styles.text}>{task.text}</div>
+          {openModalElement === 'task' && (
+            <div className={styles.task_view}>
+              <div className={styles.task}>
+                <div className={styles.text}>{task.text}</div>
 
-              <div className={styles.date}>
-                {orientation === 'landscape' ? task.dateStringLong : task.dateStringShort} @{' '}
-                {task.timeString}
+                <div className={styles.date}>
+                  {orientation === 'landscape' ? task.dateStringLong : task.dateStringShort} @{' '}
+                  {task.timeString}
+                </div>
               </div>
-            </div>
-          </div>
 
-          <OptionsNav task={task} handleModalAction={handleModalAction} />
+              <OptionsNav
+                task={task}
+                handleModalAction={handleModalAction}
+                handleOpenModalElement={handleOpenModalElement}
+              />
+            </div>
+          )}
+
+          {openModalElement === 'delete' && (
+            <ModalDelete
+              taskId={task.id}
+              modalRef={modalRef}
+              closeModal={handleOpenElement}
+              handleOpen={handleOpenModalElement}
+            />
+          )}
         </div>
       </Overlay>
     )
