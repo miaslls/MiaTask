@@ -71,7 +71,7 @@ export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
     >
       <button
         type="button"
-        className={styles.task_icon + ' ' + styles.checkbox_icon}
+        className={styles.task_icon}
         onClick={() => toggleTaskAction({ id: task.id, action: 'complete', translate: t, lang })}
         aria-label={t('a11y:aria.label.toggle-complete')}
         title={t('a11y:title.toggle-complete')}
@@ -80,30 +80,19 @@ export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
       </button>
 
       <div
-        className={styles.task_preview}
+        className={styles.task_preview + ' tabbable'}
         onClick={() => handleOpenElement('modal', extendedTask)}
         aria-label={t('a11y:aria.label.details')}
         title={t('a11y:title.details')}
+        tabIndex={0}
       >
         <div className={styles.task_text}>{task.text}</div>
 
         <div className={styles.task_date}>
-          {orientation === 'landscape' ? extendedTask.dateStringLong : extendedTask.dateStringShort}{' '}
-          @ {extendedTask.timeString}
+          {orientation === 'landscape' ? extendedTask.dateStringLong : extendedTask.dateStringShort}
+          @ {extendedTask.timeString} {task.starred && <i className="ri-star-fill"></i>}
         </div>
       </div>
-
-      {task.starred && (
-        <button
-          type="button"
-          className={styles.task_icon + ' ' + styles.star_icon}
-          onClick={() => toggleTaskAction({ id: task.id, action: 'star', translate: t, lang })}
-          aria-label={t('a11y:aria.label.star')}
-          title={t('a11y:title.star')}
-        >
-          <i className="ri-star-fill"></i>
-        </button>
-      )}
     </li>
   );
 }
