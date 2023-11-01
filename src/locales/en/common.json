@@ -5,6 +5,8 @@
     "keywords": "Task List, Task Management, Add Tasks, Update Tasks, Delete Tasks, Complete Tasks, Stay Organized, Boost Productivity, Task Tracker, To-Do List, Task Organizer, Web App"
   },
   "add-button": "Add task",
+  "update-task": "Update task",
+  "update-description": "Enter updated task below",
   "loading": "Loading",
   "error": "Error",
   "tasklist-fail": "Failed to load tasklist",

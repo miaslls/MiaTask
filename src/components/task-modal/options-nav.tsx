@@ -34,8 +34,8 @@ export default function OptionsNav({
         type="button"
         className={styles.button + ' ' + styles.nav_button}
         onClick={() => handleOpenModalElement('update')}
-        aria-label={t('a11y:aria.label.edit')}
-        title={t('a11y:title.edit')}
+        aria-label={t('a11y:aria.label.update')}
+        title={t('a11y:title.update')}
       >
         <i className="ri-edit-line"></i>
       </button>

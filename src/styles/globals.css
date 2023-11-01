@@ -140,6 +140,10 @@ a {
   color: var(--gray-04);
 }
 
+input {
+  caret-color: var(--gray-04);
+}
+
 .toast_dismissable {
   display: flex;
   align-items: flex-start;

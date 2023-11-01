@@ -10,7 +10,7 @@ import { ChangeEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import TaskList from '@components/task-list';
-import CreateTaskForm from '@components/forms/create-task-form';
+import CreateForm from '@components/forms/create-form';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const tasks = await prisma.task.findMany({
@@ -82,7 +82,7 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       </Head>
 
       {openElement === 'create' ? (
-        <CreateTaskForm
+        <CreateForm
           inputText={inputText}
           handleChange={handleInputChange}
           closeForm={handleOpenElement}

@@ -5,6 +5,8 @@
     "keywords": "Lista de Tarefas, Gerenciamento de Tarefas, Adicionar Tarefas, Atualizar Tarefas, Excluir Tarefas, Completar Tarefas, Manter-se Organizado, Aumentar a Produtividade, Rastreador de Tarefas, Lista de Afazeres, Organizador de Tarefas, Aplicação Web"
   },
   "add-button": "Nova tarefa",
+  "update-task": "Editar tarefa",
+  "update-description": "Digite a tarefa atualizada abaixo",
   "loading": "Carregando",
   "error": "Erro",
   "tasklist-fail": "Falha ao carregar lista de tarefas",

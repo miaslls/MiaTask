@@ -1,11 +1,10 @@
-.task_form {
+.create_form {
   width: 100%;
   display: flex;
   gap: 0.25rem;
-  /* margin-top: -4px; */
 }
 
-.task_input {
+.create_input {
   flex: 1;
   border-bottom: 1px solid var(--gray-03);
   font-family: var(--default-font);
@@ -14,13 +13,13 @@
   padding: 0 0.25rem;
 }
 
-.input_icon {
+.create_button {
   font-size: 1.5rem;
   color: var(--gray-04);
 }
 
 @media screen and (orientation: landscape) {
-  .task_input:hover {
+  .create_input:hover {
     cursor: text;
   }
 }

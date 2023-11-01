@@ -11,6 +11,7 @@ import type { ExtendedTask, OpenElement } from '@src/pages/index';
 
 import OptionsNav from './options-nav';
 import ModalDelete from './modal-delete';
+import ModalUpdate from './modal-update';
 
 function Overlay({ children, closeModal }: { children: React.JSX.Element; closeModal(): void }) {
   return (
@@ -99,6 +100,15 @@ export default function TaskModal({ handleOpenElement, activeTask }: TaskModalPr
                 handleOpenModalElement={handleOpenModalElement}
               />
             </div>
+          )}
+
+          {openModalElement === 'update' && (
+            <ModalUpdate
+              task={task}
+              modalRef={modalRef}
+              closeModal={handleOpenElement}
+              handleOpen={handleOpenModalElement}
+            />
           )}
 
           {openModalElement === 'delete' && (
