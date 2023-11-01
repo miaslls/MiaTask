@@ -13,4 +13,8 @@
   .title:hover {
     color: var(--white);
   }
+
+  .title:focus-visible {
+    background: var(--gray-01);
+  }
 }

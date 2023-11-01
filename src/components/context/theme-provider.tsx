@@ -70,9 +70,9 @@ export default function ThemeProvider(props: PropsWithChildren) {
     }
   }, [theme]);
 
-  const toggleTheme = () => {
+  function toggleTheme() {
     setTheme(theme === 'light' ? 'dark' : 'light');
-  };
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>

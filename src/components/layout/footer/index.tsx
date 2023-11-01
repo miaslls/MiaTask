@@ -1,11 +1,11 @@
 import styles from './styles/footer.module.css';
-import ChangeLocaleNav from './change-locale-nav';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import ChangeLocaleNav from './change-locale-nav';
 
 export default function Footer() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <footer>

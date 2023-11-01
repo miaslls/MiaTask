@@ -1,14 +1,14 @@
 import styles from './styles/toggle-theme-button.module.css';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useTheme } from './context/theme-provider';
+import { useTheme } from '@components/context/theme-provider';
 
 // html and styles adapted from https://webtips.dev/toggle-buttons-in-react ❗
 
 export default function ToggleThemeButton() {
   const { theme, toggleTheme } = useTheme();
 
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
 
   return (
     <label

@@ -1,21 +1,16 @@
 import styles from '@src/styles/index.module.css';
-import taskStyles from '@components/styles/task-item.module.css';
+import taskStyles from '@components/task-list/styles/task-item.module.css';
 
 import Head from 'next/head';
 import prisma from '@src/lib/prisma';
 import { Task } from '@prisma/client';
-import { ChangeEvent, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { SWRConfig } from 'swr';
+import { ChangeEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import TaskList from '@components/task-list';
-import CreateTaskForm from '@components/create-task-form';
-
-export type ShowModal = {
-  type: 'details' | 'delete';
-  task: Task;
-} | null;
+import CreateForm from '@components/forms/create-form';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const tasks = await prisma.task.findMany({
@@ -31,81 +26,45 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
+// export type TaskDateTime = {
+//   dateStringShort: string;
+//   dateStringLong: string;
+//   timeString: string;
+// };
+//
+// export type ExtendedTask = Task & TaskDateTime; // ❓
+
+export type OpenElement = 'create' | 'modal' | null;
+
+export type ExtendedTask = Task & {
+  dateStringShort: string;
+  dateStringLong: string;
+  timeString: string;
+};
+
 export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
-  const [showModal, setShowModal] = useState<ShowModal>(null);
-  const [showTaskOptions, setshowTaskOptions] = useState<Task | null>(null);
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [createInputText, setCreateInputText] = useState('');
-  const [taskToUpdate, setTaskToUpdate] = useState<string | null>(null);
-  const [updateInputText, setUpdateInputText] = useState<string>('');
+  const { t } = useTranslation();
 
-  const { t } = useTranslation('common');
+  const [openElement, setOpenElement] = useState<OpenElement>(null);
+  const [activeTask, setActiveTask] = useState<ExtendedTask | null>(null);
+  const [inputText, setInputText] = useState<string>('');
 
-  const handleShowModal = (showModal: ShowModal) => {
-    if (showCreateForm) {
-      handleCreateForm();
-    }
-
-    if (taskToUpdate) {
-      handleUpdateForm();
-    }
-
-    handleShowOptions();
-    setShowModal(showModal);
-  };
-
-  const handleShowOptions = (task?: Task) => {
-    if (task && task !== showTaskOptions) {
-      setshowTaskOptions(task);
-
-      if (showCreateForm) {
-        handleCreateForm();
+  function handleOpenElement(element?: OpenElement, task?: ExtendedTask) {
+    if (element) {
+      if (task) {
+        setActiveTask(task);
       }
 
-      if (taskToUpdate) {
-        handleUpdateForm();
-      }
+      setOpenElement(element);
     } else {
-      setshowTaskOptions(null);
-    }
-  };
-
-  function handleCreateForm() {
-    if (showTaskOptions) {
-      handleShowOptions();
-    }
-
-    if (taskToUpdate) {
-      handleUpdateForm();
-    }
-
-    if (showCreateForm) {
-      setCreateInputText('');
-    }
-
-    setShowCreateForm(!showCreateForm);
-  }
-
-  function handleCreateChange(e: ChangeEvent<HTMLInputElement>) {
-    setCreateInputText(e.target.value);
-  }
-
-  function handleUpdateForm(task?: Task) {
-    if (showTaskOptions) {
-      handleShowOptions();
-    }
-
-    if (task) {
-      setTaskToUpdate(task.id);
-      setUpdateInputText(task.text);
-    } else {
-      setTaskToUpdate(null);
-      setUpdateInputText('');
+      setOpenElement(null);
+      setActiveTask(null);
+      setInputText('');
     }
   }
 
-  function handleUpdateChange(e: ChangeEvent<HTMLInputElement>) {
-    setUpdateInputText(e.target.value);
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    setInputText(e.target.value);
   }
 
   return (
@@ -122,17 +81,17 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
         <title>{t('page-title')}</title>
       </Head>
 
-      {showCreateForm ? (
-        <CreateTaskForm
-          inputText={createInputText}
-          handleChange={handleCreateChange}
-          handleForm={handleCreateForm}
+      {openElement === 'create' ? (
+        <CreateForm
+          inputText={inputText}
+          handleChange={handleInputChange}
+          closeForm={handleOpenElement}
         />
       ) : (
         <button
           type="button"
           className={taskStyles.task + ' ' + styles.add_button}
-          onClick={handleCreateForm}
+          onClick={() => handleOpenElement('create')}
           aria-label={t('a11y:aria.label.open-create')}
           title={t('a11y:title.add')}
         >
@@ -147,14 +106,9 @@ export default function Home({ fallback }: { fallback: { tasks: Task[] } }) {
       <ul className={styles.tasklist}>
         <SWRConfig value={{ fallback }}>
           <TaskList
-            showModal={showModal}
-            showTaskOptions={showTaskOptions}
-            taskToUpdate={taskToUpdate}
-            updateInputText={updateInputText}
-            handleShowModal={handleShowModal}
-            handleShowOptions={handleShowOptions}
-            handleUpdateChange={handleUpdateChange}
-            handleUpdateForm={handleUpdateForm}
+            handleOpenElement={handleOpenElement}
+            openElement={openElement}
+            activeTask={activeTask}
           />
         </SWRConfig>
       </ul>

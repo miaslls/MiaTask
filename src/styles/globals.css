@@ -140,6 +140,10 @@ a {
   color: var(--gray-04);
 }
 
+input {
+  caret-color: var(--gray-04);
+}
+
 .toast_dismissable {
   display: flex;
   align-items: flex-start;
@@ -182,7 +186,8 @@ a {
 
   button:focus-visible,
   a:focus-visible,
-  .force_focus:focus {
+  .force_focus:focus,
+  .tabbable:focus-visible {
     background: var(--gray-02);
   }
 

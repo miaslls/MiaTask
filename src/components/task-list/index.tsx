@@ -2,36 +2,20 @@ import useSWR from 'swr';
 import useTranslation from 'next-translate/useTranslation';
 import { fetcher } from '@src/lib/fetcher';
 
-import { ChangeEvent } from 'react';
-import { Task } from '@prisma/client';
-import type { ShowModal } from '@pages/index';
+import type { Task } from '@prisma/client';
+import type { OpenElement, ExtendedTask } from '@src/pages/index';
 
-import Modal from './modal';
-import TaskModal from './task-modal';
 import TaskItem from './task-item';
+import TaskModal from '../task-modal';
 
 export type TaskListProps = {
-  showModal: ShowModal;
-  showTaskOptions: Task | null;
-  taskToUpdate: string | null;
-  updateInputText: string;
-  handleShowModal(showmodal: ShowModal): void;
-  handleShowOptions(task?: Task): void;
-  handleUpdateChange(e: ChangeEvent<HTMLInputElement>): void;
-  handleUpdateForm(task?: Task): void;
+  handleOpenElement(element?: OpenElement, task?: ExtendedTask): void;
+  openElement: OpenElement;
+  activeTask: ExtendedTask | null;
 };
 
-export default function TaskList({
-  showModal,
-  showTaskOptions,
-  taskToUpdate,
-  updateInputText,
-  handleShowModal,
-  handleShowOptions,
-  handleUpdateChange,
-  handleUpdateForm,
-}: TaskListProps) {
-  const { t, lang } = useTranslation('common');
+export default function TaskList({ handleOpenElement, openElement, activeTask }: TaskListProps) {
+  const { t, lang } = useTranslation();
 
   const url = '/api/task';
 
@@ -79,22 +63,14 @@ export default function TaskList({
         tasklist.tasks.map((task: Task) => (
           <TaskItem
             task={task}
-            showTaskOptions={showTaskOptions}
-            handleShowOptions={handleShowOptions}
-            handleShowModal={handleShowModal}
-            inputText={updateInputText}
-            taskToUpdate={taskToUpdate}
-            handleChange={handleUpdateChange}
-            handleForm={handleUpdateForm}
+            handleOpenElement={handleOpenElement}
             key={`task-item-${task.id}`}
           />
         ))
       )}
 
-      {showModal && (
-        <Modal closeModal={() => handleShowModal(null)}>
-          <TaskModal showModal={showModal} handleShowModal={handleShowModal} />
-        </Modal>
+      {openElement === 'modal' && (
+        <TaskModal handleOpenElement={handleOpenElement} activeTask={activeTask} />
       )}
     </>
   );

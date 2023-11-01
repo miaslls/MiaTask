@@ -3,35 +3,32 @@
     "label": {
       "open-create": "Criar tarefa",
       "close-create": "Fechar",
-      "toggle-complete": "Completar tarefa",
+      "toggle-complete": "Completar/Descompletar tarefa",
       "options": "Mostrar/Ocultar opções",
-      "edit": "Editar tarefa",
+      "update": "Editar tarefa",
       "delete": "Remover tarefa",
-      "star": "Favoritar tarefa",
-      "unstar": "Remover favorito",
+      "star": "Favoritar/Remover dos favoritos",
       "details": "Ver detalhes",
       "modal-close": "Fechar",
-      "cancel-delete": "Cencelar",
-      "confirm-delete": "Remover",
       "create-input": "Digite a nova tarefa",
       "update-input": "Digite a tarefa atualizada",
       "close-update": "Fechar",
       "error-alert": "Alerta de erro",
       "close-alert": "Fechar alerta",
       "change-locale": "Alterar idioma da página: ${locale}",
-      "go-home": "Ir para a página inicial"
+      "go-home": "Ir para a página inicial",
+      "go-back": "Voltar"
     }
   },
   "title": {
     "add": "Nova tarefa",
     "toggle-dark": "Ativar/Desativar modo noturno",
-    "toggle-complete": "Completar",
+    "toggle-complete": "Completar/Descompletar",
     "error": "Erro",
     "options": "Opções",
-    "edit": "Editar",
+    "update": "Editar",
     "delete": "Remover",
-    "star": "Favoritar",
-    "unstar": "Remover dos favoritos",
+    "star": "Favoritar/Remover dos favoritos",
     "details": "Detalhes",
     "close": "Fechar",
     "cancel": "Cancelar",
@@ -42,6 +39,7 @@
     "link-github": "Link externo: Github de miaslls",
     "link-font": "Link externo: Roboto Mono",
     "link-icon": "Link externo: Remix Icon",
-    "home": "Página Inicial"
+    "home": "Página Inicial",
+    "back": "Voltar"
   }
 }
