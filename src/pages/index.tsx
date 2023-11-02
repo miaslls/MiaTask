@@ -9,7 +9,7 @@ import { SWRConfig } from 'swr';
 import { ChangeEvent, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
-import TaskList from '@components/task-list';
+import TaskList from '@components/task-list/task-list';
 import CreateForm from '@components/forms/create-form';
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -25,14 +25,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   };
 };
-
-// export type TaskDateTime = {
-//   dateStringShort: string;
-//   dateStringLong: string;
-//   timeString: string;
-// };
-//
-// export type ExtendedTask = Task & TaskDateTime; // ❓
 
 export type OpenElement = 'create' | 'modal' | null;
 

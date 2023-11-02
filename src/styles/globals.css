@@ -186,8 +186,7 @@ input {
 
   button:focus-visible,
   a:focus-visible,
-  .force_focus:focus,
-  .tabbable:focus-visible {
+  .force_focus:focus {
     background: var(--gray-02);
   }
 

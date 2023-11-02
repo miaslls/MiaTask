@@ -6,7 +6,7 @@ import { dismissableErrorToast } from '@src/lib/toast';
 import useTranslation from 'next-translate/useTranslation';
 import useFocusTrapping from '@root/src/hooks/useFocusTrapping';
 
-import type { OpenModalElement } from '@components/task-modal';
+import type { OpenModalElement } from '@root/src/components/task-modal/task-modal';
 
 type RemoveTaskParams = {
   id: string;
