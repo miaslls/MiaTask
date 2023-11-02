@@ -2,9 +2,19 @@
 
 ## 📃 backlog
 
-### FIXME: remove ALL markers: ❗ ❓ ⚠️ 🐞 + `//` or `/* */`)
-
 - ⬛ README
+
+- ✅ update
+  - robots.txt
+  - sitemap.xml
+
+---
+
+## 🚀 for the future (maybe) 👩‍🚀
+
+- ⬛ sort
+- ⬛ serch
+- ⬛ filter ❓
 
 ---
 
@@ -17,20 +27,11 @@
   - https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Guides
   - https://www.udacity.com/course/web-accessibility--ud891
 
-  - dark mode ✔️
-  - touch target sizes ✔️
-
-  - store in cookies : lang, theme ✔️
-
-  - i18n
-    - change lang button ✔️
-    - update sitemap (`/pt`) ✔️
-    - update metadata ✔️
-
 ---
 
 ### ✔️ COMPLETED
 
+- ✅ remove irrelevant markers: ❗ ❓ ⚠️ 🐞 + `//` or `/* */`
 - ✅ custom error pages: 404, 500
 - ✅ rename `data`
 - ✅ component prop types
@@ -51,3 +52,13 @@
 - ❎ extract repository (prisma functions) ❌
 - ❎ redo color scheme ❌
 - ❎ useTask() ❌
+
+  - dark mode ✔️
+  - touch target sizes ✔️
+
+  - store in cookies : lang, theme ✔️
+
+  - i18n
+    - change lang button ✔️
+    - update sitemap (`/pt`) ✔️
+    - update metadata ✔️
