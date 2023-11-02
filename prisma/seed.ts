@@ -1,6 +1,5 @@
 // ⚠️ FILE DEPRECATED
-
-// ❗ npx prisma db seed
+// npx prisma db seed
 
 import { PrismaClient } from '@prisma/client';
 

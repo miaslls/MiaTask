@@ -3,7 +3,7 @@ import '@src/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Roboto_Mono } from 'next/font/google';
 import ThemeProvider from '@components/context/theme-provider';
-import Layout from '@components/layout';
+import Layout from '@components/layout/layout';
 
 const roboto_mono = Roboto_Mono({ subsets: ['latin'] });
 

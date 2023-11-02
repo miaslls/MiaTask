@@ -5,7 +5,8 @@ import { mutate } from 'swr';
 import { toast } from 'react-hot-toast';
 import { dismissableErrorToast } from '@src/lib/toast';
 import useTranslation from 'next-translate/useTranslation';
-import type { OpenModalElement } from '@components/task-modal';
+
+import type { OpenModalElement } from '@root/src/components/task-modal/task-modal';
 
 type submitPatchDataParams = {
   e: FormEvent<HTMLFormElement>;

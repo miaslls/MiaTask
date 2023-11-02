@@ -3,7 +3,7 @@ import styles from './styles/modal-element.module.css';
 import useTranslation from 'next-translate/useTranslation';
 import type { ExtendedTask } from '@src/pages/index';
 import type { ToggleTaskActionParams } from '@src/lib/actions';
-import type { OpenModalElement } from '@components/task-modal';
+import type { OpenModalElement } from '@root/src/components/task-modal/task-modal';
 
 export type OptionsNavProps = {
   task: ExtendedTask;
