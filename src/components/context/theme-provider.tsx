@@ -36,9 +36,9 @@ export default function ThemeProvider(props: PropsWithChildren) {
       }
     }
 
-    if (cookieString.includes('theme')) {
-      const themeCookie = getThemeCookie(cookieString);
+    const themeCookie = getThemeCookie(cookieString);
 
+    if (themeCookie) {
       if (themeCookie.value === 'dark' || themeCookie.value === 'light') {
         setTheme(themeCookie.value);
       }
