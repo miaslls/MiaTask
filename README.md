@@ -3,7 +3,7 @@ Para visualizar essa página em <img src="public/img/flag-pt-br.png" width="14" 
 
 ---
 
-# ![✅](public/img/logo-24.svg#gb-dark-mode-only)![✅](public/img/logo-24_white.svg#gb-light-mode-only) MiaTask
+# ![✅](public/img/logo-24.svg) MiaTask
 
 ![Static Badge: Version - 1.0.0](https://img.shields.io/badge/version-1.0.0-green)
 ![Static Badge: React](https://img.shields.io/badge/React-5a5a5a?logo=react)
