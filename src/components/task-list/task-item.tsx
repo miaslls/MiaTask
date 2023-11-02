@@ -48,7 +48,7 @@ export default function TaskItem({ task, handleOpenElement }: TaskItemProps) {
         <div className={styles.task_text}>{task.text}</div>
 
         <div className={styles.task_date}>
-          {orientation === 'landscape' ? extendedTask.dateStringLong : extendedTask.dateStringShort}
+          {orientation === 'landscape' ? extendedTask.dateStringLong : extendedTask.dateStringShort}{' '}
           @ {extendedTask.timeString} {task.starred && <i className="ri-star-fill"></i>}
         </div>
       </button>
