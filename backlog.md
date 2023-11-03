@@ -20,6 +20,7 @@
 
 - ⬛ a11y best practices
 
+  - https://color.review/
   - https://guia-wcag.com/
   - https://web.dev/articles/accessibility
   - https://web.dev/articles/using-tabindex#modals_and_keyboard_traps
