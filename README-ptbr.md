@@ -14,7 +14,7 @@ Aplicativo de lista de tarefas simples e intuitivo onde você pode criar/atualiz
 
 ## 🔗 Demo
 
-- [miatask.vercel.app](https://miatask.vercel.app/pt)
+- [miatask.camilasalles.dev](https://miatask.camilasalles.dev/pt)
 
 ## 🧮 Tecnologias / Dependências
 

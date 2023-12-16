@@ -14,7 +14,7 @@ Simple and intuitive tasklist application where you can create / update / remove
 
 ## 🔗 Demo
 
-- [miatask.vercel.app](https://miatask.vercel.app/)
+- [miatask.camilasalles.dev](https://miatask.camilasalles.dev/)
 
 ## 🧮 Technologies / Dependencies
 
