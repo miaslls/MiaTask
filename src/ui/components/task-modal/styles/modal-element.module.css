@@ -1,0 +1,84 @@
+.options_nav {
+  display: flex;
+  align-self: flex-end;
+}
+
+.button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--gray-04);
+}
+
+.title {
+  font-weight: var(--default-bold);
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: small;
+  text-transform: lowercase;
+  color: var(--gray-04);
+}
+
+.delete_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.delete_buttons {
+  display: flex;
+  align-self: flex-end;
+}
+
+.update_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.update_form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.update_input {
+  width: 100%;
+  border-bottom: 1px solid var(--gray-03);
+  font-family: var(--default-font);
+  font-weight: var(--default-regular);
+  color: var(--gray-04);
+  padding: 0 0.25rem;
+}
+
+.update_buttons {
+  display: flex;
+}
+
+.update_button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--gray-04);
+}
+
+@media screen and (orientation: landscape) {
+  .button:hover,
+  .update_button:hover {
+    color: var(--gray-03);
+  }
+
+  .update_input:hover {
+    cursor: text;
+  }
+}
