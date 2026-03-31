@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.locales {
+  display: flex;
+  font-size: small;
+  gap: 0.25rem;
+}
+
+.current_locale {
+  color: var(--gray-03);
+  text-decoration: underline;
+}
+
+.icon {
+  color: var(--gray-04);
+}

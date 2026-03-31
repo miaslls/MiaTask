@@ -1,0 +1,24 @@
+.add_button {
+  max-width: fit-content;
+}
+
+.add_text {
+  padding: 0 0.2rem;
+  background: var(--gray-02);
+  color: var(--gray-05);
+  font-weight: var(--default-bold);
+}
+
+.tasklist {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@media screen and (orientation: landscape) {
+  .add_text:hover {
+    font-weight: var(--default-regular);
+    color: var(--gray-03);
+  }
+}

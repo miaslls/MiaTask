@@ -1,0 +1,11 @@
+.title {
+  display: flex;
+  align-items: baseline;
+  font-size: larger;
+  gap: 0.5rem;
+}
+
+.link,
+.instructions {
+  font-size: smaller;
+}

@@ -1,0 +1,24 @@
+import styles from './styles/toggle-theme-button.module.css';
+
+import useTranslation from '../../../stubs/use-translation';
+import { useTheme } from '../../context/theme-provider';
+
+export default function ToggleThemeButton() {
+  const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
+
+  return (
+    <label
+      className={styles.toggle_theme_button}
+      aria-label={t('a11y:title.toggle-dark')}
+      title={t('a11y:title.toggle-dark')}
+    >
+      <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} />
+      <span></span>
+      <strong>
+        <i className={theme === 'dark' ? 'ri-moon-line' : 'ri-sun-line'}></i>
+      </strong>
+    </label>
+  );
+}
+
